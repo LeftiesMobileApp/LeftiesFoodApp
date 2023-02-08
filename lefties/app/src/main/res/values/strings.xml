@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">week3BillSplit</string>
+    <string name="app_name">Lefties</string>
     <string name="userEmail">Email</string>
     <string name="userpass">Password</string>
     <string name="loginBtn">Login</string>
