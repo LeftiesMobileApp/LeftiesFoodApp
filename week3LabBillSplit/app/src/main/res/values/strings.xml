@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">week3BillSplit</string>
+    <string name="userEmail">Email</string>
+    <string name="userpass">Password</string>
+    <string name="loginBtn">Login</string>
+    <string name="backgroundImg">Background Image</string>
+    <string name="checkBoxRest">I manage a restaurant</string>
+    <string name="appName">Lefties</string>
+    <string name="logoImg">logo Image</string>
+
+
+</resources>
