@@ -1,4 +1,4 @@
-package com.example.week3billsplit;
+package com.example.lefties;
 
 import org.junit.Test;
 

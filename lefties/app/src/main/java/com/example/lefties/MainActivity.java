@@ -1,8 +1,10 @@
-package com.example.week3billsplit;
+package com.example.lefties;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
