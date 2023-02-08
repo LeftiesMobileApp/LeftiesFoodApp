@@ -8,4 +8,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="loginBtn">#8E0144</color>
+    <!--    LEFTIES COLORS ARE HERE-->
+    <color name="maroon">#8E0144</color>
+    <color name="gold">#F8B444</color>
+    <color name="salmon">#EF6E6C</color>
+    <color name="dark">#2F2F37</color>
+    <color name="light">#light</color>
+    <color name="mid_gray">#666666</color>
 </resources>
