@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class RestaurantHomeActivity extends AppCompatActivity {
     RecyclerView inventoryList;
-    String[] someArray = {"hello", "there"};
+    String[] someArray = {"hello", "there", "hi", "again", "once more"};
     ArrayList<HashMap<String, String>> inventoryMapper = new ArrayList<>();
 
 
