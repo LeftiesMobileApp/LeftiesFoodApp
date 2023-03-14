@@ -13,10 +13,9 @@ Otherwise... chaos.
 
 ## Apply your change to your branch
 1. `git add .` - This will stage all your changes
-1.1. Check that files with the changes are in green `git status`
-2. Commit message should be a statement that follows "This commit will...".
-`git commit -m "Apply recycler view"`
-3. `git push`
+2. Check that files with the changes are in green `git status`
+3. Commit message should be a statement that follows "This commit will..."  example: `git commit -m "Apply recycler view"`
+4. `git push`
 
 
 
