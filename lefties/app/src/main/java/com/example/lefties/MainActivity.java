@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //                if (isRestaurant) goToRestoHome();
-                goToRestoHome();
+//                goToRestoHome();
+                goToCart();
             }
         });
     }
@@ -37,5 +38,13 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(),RestaurantHomeActivity.class);
         startActivity(i);
         setContentView(R.layout.activity_restaurant_home);
+    }
+
+    public void goToCart()
+    {
+        // TODO Auto-generated method stub
+        Intent i = new Intent(getApplicationContext(),Cart.class);
+        startActivity(i);
+        setContentView(R.layout.activity_cart);
     }
 }

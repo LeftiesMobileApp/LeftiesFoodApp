@@ -9,4 +9,14 @@
     <string name="logoImg">logo Image</string>
 
 
+    <string name="btn">Cart</string>
+    <string name="btnBack"><![CDATA[<- BACK TO HOME PAGE]]></string>
+    <string name="btnPlaceOrder">Place Order</string>
+    <string name="txtTotal">Total</string>
+    <string name="btnOrderMore">ORDER MORE FOOD</string>
+    <string name="chipDelivery">DELIVERY</string>
+    <string name="chipPickup">PICKUP</string>
+    <string name="imgCart">image</string>
+
+
 </resources>

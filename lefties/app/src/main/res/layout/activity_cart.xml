@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Cart">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="411dp"
+        android:layout_height="194dp"
+        android:layout_marginTop="194dp"
+        android:layout_marginBottom="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtAmount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="208dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="6dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="@string/btnBack"
+        android:textAlignment="textStart"
+        android:textColor="#EF6E6C"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/btnPlaceOrder"
+        android:layout_width="331dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="1dp"
+        android:backgroundTint="#EF6E6C"
+        android:text="@string/btnPlaceOrder"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnOrderMore"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTotal"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/btnOrderMore"
+        android:layout_width="329dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="#FDFFFFFF"
+        android:text="@string/btnOrderMore"
+        android:textColor="#EF6E6C"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnPlaceOrder"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/txtAddress"
+        android:layout_width="344dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#8E0144"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup"
+        tools:background="@drawable/rounded_edittext" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="358dp"
+        android:layout_height="61dp"
+        android:layout_marginBottom="13dp"
+        android:background="@drawable/rounded_edittext"
+        app:checkedChip="@id/chipDelivery"
+        app:layout_constraintBottom_toTopOf="@+id/txtAddress"
+        app:layout_constraintEnd_toEndOf="@+id/btnBack"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toEndOf="@+id/btnBack"
+        app:layout_constraintTop_toBottomOf="@+id/btnBack">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipDelivery"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#F8B444"
+            android:checked="true"
+            android:text="@string/chipDelivery"
+            android:textAlignment="center"
+            android:textColor="#8E0144"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:chipBackgroundColor="#00000000" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipPickup"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:text="@string/chipPickup"
+            android:textAlignment="center"
+            android:textColor="#8E0144"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:chipBackgroundColor="#001C1C1C" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <TextView
+        android:id="@+id/txtTotal"
+        android:layout_width="0dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginBottom="26dp"
+        android:text="@string/txtTotal"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnPlaceOrder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+    <TextView
+        android:id="@+id/txtAmount"
+        android:layout_width="147dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="145dp"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintStart_toEndOf="@+id/txtTotal"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
