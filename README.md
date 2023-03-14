@@ -2,7 +2,7 @@
 
 # Git Commands
 
-## Updating your code to reflect else's work
+## Updating your code to reflect everybody else's work
 We do this often to ensure that our changes work in peace and harmony.
 Otherwise... chaos.
 
