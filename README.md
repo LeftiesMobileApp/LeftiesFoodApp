@@ -14,8 +14,8 @@ Otherwise... chaos.
 ## II. Apply your change to your branch
 1. `git add .` - This will stage all your changes
 2. Check that files with the changes are in green `git status`
-3. Commit message should be a statement that follows "This commit will..."  example: `git commit -m "Apply recycler view"`
-4. `git push`
+3. Commit your code `git commit -m "Apply recycler view"` -- We use the message to identify what changed in this group of changes.
+5. `git push`
 
 ## III. Making a pull request
 (Requesting the team to add your changes to the main branch)
