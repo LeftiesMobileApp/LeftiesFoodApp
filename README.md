@@ -2,7 +2,7 @@
 
 # Git Commands
 
-## Updating your code to reflect everybody else's work
+## I. Updating your code to reflect everybody else's work
 We do this often to ensure that our changes work in peace and harmony.
 Otherwise... chaos.
 
@@ -11,11 +11,23 @@ Otherwise... chaos.
 3. Go back to your branch `git branch <YOUR BRANCH NAME>` example: `git branch Raiyan`
 4. Time to combine! `git merge main`  -- this combines the 'main' branch of the group in step 1 to your branch in step 3
 
-## Apply your change to your branch
+## II. Apply your change to your branch
 1. `git add .` - This will stage all your changes
 2. Check that files with the changes are in green `git status`
 3. Commit message should be a statement that follows "This commit will..."  example: `git commit -m "Apply recycler view"`
 4. `git push`
 
-
+## III. Making a pull request
+(Requesting the team to add your changes to the main branch)
+### Option A: Quick way
+1. After you push your changes, you will find this popup in the github link. Click `Compare and pull request` 
+![image](https://user-images.githubusercontent.com/35404436/225159941-010c5b80-7bda-48ee-a025-fa7aeedd9673.png)
+2. It will being you to this page. 
+![image](https://user-images.githubusercontent.com/35404436/225160835-74597a82-e16d-4ccc-9369-1b1535e0d1d5.png)
+- Make sure that it says `base: main` and `compare: <your-branch-name>`.
+- Hopefully on the right hand it says "Able to merge". (If it says otherwise, merge main branch to your branch. See step `I. Updating your code...`
+3. Click button `Create pull request` from lower right corner
+4. You will see this page. Select the button `Merge pull request`
+![image](https://user-images.githubusercontent.com/35404436/225161255-4f654ecc-2efd-4eed-8acd-5fe1bf47f2dd.png)
+5. Let the team know so they can update their code with your changes.
 
