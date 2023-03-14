@@ -19,15 +19,15 @@ Otherwise... chaos.
 
 ## III. Making a pull request
 (Requesting the team to add your changes to the main branch)
-### Option A: Quick way
-1. After you push your changes, you will find this popup in the github link. Click `Compare and pull request` 
+1. After you push your changes, you will find this popup in the github link. Click **'Compare and pull request'** 
 ![image](https://user-images.githubusercontent.com/35404436/225159941-010c5b80-7bda-48ee-a025-fa7aeedd9673.png)
 2. It will being you to this page. 
 ![image](https://user-images.githubusercontent.com/35404436/225160835-74597a82-e16d-4ccc-9369-1b1535e0d1d5.png)
 - Make sure that it says `base: main` and `compare: <your-branch-name>`.
-- Hopefully on the right hand it says "Able to merge". (If it says otherwise, merge main branch to your branch. See step `I. Updating your code...`
-3. Click button `Create pull request` from lower right corner
-4. You will see this page. Select the button `Merge pull request`
+- Hopefully on the right hand it says **'Able to merg'**. (If it says otherwise, merge main branch to your branch. See step  above _I. Updating your code..._
+3. Click button **'Create pull request'** at lower right corner
+4. You will see this page. Select the button **'Merge pull request'**
 ![image](https://user-images.githubusercontent.com/35404436/225161255-4f654ecc-2efd-4eed-8acd-5fe1bf47f2dd.png)
-5. Let the team know so they can update their code with your changes.
+5. Click **'Confirm'**
+6.  Let the team know so they can update their code with your changes.
 
