@@ -1,3 +1,22 @@
 # LeftiesFoodApp
 
-Open Android Studio and load LeftiesV1 directory.
+# Git Commands
+
+## Updating your code to reflect else's work
+We do this often to ensure that our changes work in peace and harmony.
+Otherwise... chaos.
+
+1. Go to main branch `git checkout main` -- This is where everybody's work is saved
+2. Pull the changes `git pull` -- This downloads everybody's work to your machine
+3. Go back to your branch `git branch <YOUR BRANCH NAME>` example: `git branch Raiyan`
+4. Time to combine! `git merge main`  -- this combines the 'main' branch in step 1 to your branch in step 3
+
+## Apply your change to your branch
+1. `git add .` - This will stage all your changes
+1.1. Check that files with the changes are in green `git status`
+2. Commit message should be a statement that follows "This commit will...".
+`git commit -m "Apply recycler view"`
+3. `git push`
+
+
+
