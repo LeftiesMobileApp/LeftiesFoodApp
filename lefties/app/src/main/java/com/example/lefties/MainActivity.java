@@ -20,14 +20,17 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnLogin = findViewById(R.id.loginBtn);
         CheckBox checkBoxRestaurant = findViewById(R.id.checkboxRestaurant);
-        boolean isRestaurant = checkBoxRestaurant.isChecked();
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (isRestaurant) goToRestoHome();
-//                goToRestoHome();
-                goToCustomerHome();
+                if (checkBoxRestaurant.isChecked()){
+                    goToRestoHome();
+                }else{
+                    goToCustomerHome();
+                }
+
+
             }
         });
     }
@@ -37,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         // TODO Auto-generated method stub
         Intent i = new Intent(getApplicationContext(),RestaurantHomeActivity.class);
         startActivity(i);
-        setContentView(R.layout.activity_restaurant_home);
     }
 
     public void goToCart()
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         // TODO Auto-generated method stub
         Intent i = new Intent(getApplicationContext(),Cart.class);
         startActivity(i);
-        setContentView(R.layout.activity_cart);
+
     }
 
     public void goToCustomerHome()
@@ -53,6 +55,5 @@ public class MainActivity extends AppCompatActivity {
         // TODO Auto-generated method stub
         Intent i = new Intent(getApplicationContext(),CustomerPage.class);
         startActivity(i);
-        setContentView(R.layout.activity_customer_page);
     }
 }

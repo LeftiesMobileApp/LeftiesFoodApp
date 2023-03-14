@@ -40,7 +40,7 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
         }
         @Override
         public void onClick(View v) {
-            //
+
         }
     }
 
