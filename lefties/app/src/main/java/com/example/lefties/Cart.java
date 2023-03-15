@@ -8,10 +8,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Cart extends AppCompatActivity {
 
@@ -20,6 +25,8 @@ public class Cart extends AppCompatActivity {
 //    String[] item = {};
 //    String[] itemPrice = {};
     CartAdapterClass adapter;
+    String[] food = {"Paasta With Seafood", "Bruschetta"};
+    int[] images = {R.drawable.placeholder, R.drawable.bgimg};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +42,13 @@ public class Cart extends AppCompatActivity {
         Button btnPlaceOrder = findViewById(R.id.btnPlaceOrder);
         Button btnOrderMoreFood = findViewById(R.id.btnOrderMore);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        int numOfCol = 1;
-        recyclerView.setLayoutManager(new GridLayoutManager(this, numOfCol));
-        adapter = new CartAdapterClass(this); //images, item, itemPrice, restName
-        recyclerView.setAdapter(adapter);
+//        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+//        int numOfCol = 1;
+//        recyclerView.setLayoutManager(new GridLayoutManager(this, numOfCol));
+//        adapter = new CartAdapterClass(this); //images, item, itemPrice, restName
+//        recyclerView.setAdapter(adapter);
+
+        applyListView();
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,5 +57,27 @@ public class Cart extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void applyListView(){
+        ArrayList<HashMap<String, String>> aList = new ArrayList<HashMap<String, String>>();
+
+        for(int i=0; i<food.length; i++)
+        {
+            HashMap<String, String> hashMap =new HashMap<>();
+            hashMap.put("txt", food[i]);
+            hashMap.put("images", Integer.toString(images[i]));
+            aList.add(hashMap);
+        }
+
+        String[] from ={"images", "txt"};
+        int[] to ={R.id.imageFood, R.id.FoodText};
+
+        SimpleAdapter adapter = new SimpleAdapter(Cart.this,
+                aList,R.layout.cart_recycler_layout,from,to);
+
+        ListView listView = findViewById(R.id.listViewSummary);
+
+        listView.setAdapter(adapter);
     }
 }
