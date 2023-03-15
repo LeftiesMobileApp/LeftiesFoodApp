@@ -33,6 +33,7 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
         ImageView imgCompanyLogo;
         TextView txtCompanyName;
         Button edit;
+        Button placeholder;
 
         // THIS MAPS ATTRIBUTES PER ITEM
         public ViewHolder(@NonNull View itemView) {
@@ -45,6 +46,8 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
         @Override
         public void onClick(View v) {
 //            System.out.println("clicked");
+//            Intent i = new Intent(context.getApplicationContext(), Cart.class);
+//                context.startActivity(i);
 
 
 
@@ -67,6 +70,17 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
                 context.startActivity(i);
             }
         });
+
+        Button order = view.findViewById(R.id.btnPlaceOrder);
+        order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context.getApplicationContext(), Cart.class);
+                context.startActivity(i);
+            }
+        });
+
+
 
 
         return viewHolder;
