@@ -1,5 +1,8 @@
 # LeftiesFoodApp
 
+## Figma Link
+https://www.figma.com/file/pv5wiiEsC0jYM6q2fQevBO/Mobile-App-Food-Thing?node-id=58%3A1099&t=rPSklHOc2he20zIn-1
+
 # Git Commands
 
 ## I. Updating your code to reflect everybody else's work
