@@ -11,7 +11,7 @@ Otherwise... chaos.
 
 1. Go to main branch `git checkout main` -- This is where everybody's work is saved
 2. Pull the changes `git pull` -- This downloads everybody's work to your machine
-3. Go back to your branch `git branch <YOUR BRANCH NAME>` example: `git branch Raiyan`
+3. Go back to your branch `git checkout <YOUR BRANCH NAME>` example: `git branch Raiyan`
 4. Time to combine! `git merge main`  -- this combines the 'main' branch of the group in step 1 to your branch in step 3
 
 ## II. Apply your change to your branch
