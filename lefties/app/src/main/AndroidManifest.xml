@@ -20,6 +20,20 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".OrderConfirmation"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".RestaurantAddAnItemActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".CustomerPage"
             android:exported="false">
             <meta-data

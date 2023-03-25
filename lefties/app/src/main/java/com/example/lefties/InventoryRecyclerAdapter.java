@@ -1,9 +1,11 @@
 package com.example.lefties;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
+import java.lang.reflect.AccessibleObject;
 import java.util.HashMap;
 
 public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
@@ -29,6 +32,8 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView imgCompanyLogo;
         TextView txtCompanyName;
+        Button edit;
+        Button placeholder;
 
         // THIS MAPS ATTRIBUTES PER ITEM
         public ViewHolder(@NonNull View itemView) {
@@ -40,6 +45,11 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
         }
         @Override
         public void onClick(View v) {
+//            System.out.println("clicked");
+//            Intent i = new Intent(context.getApplicationContext(), Cart.class);
+//                context.startActivity(i);
+
+
 
         }
     }
@@ -51,6 +61,28 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view =  layoutInflater.inflate(R.layout.recyler_food_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view); // viewHolder holds the layoutInflater
+
+        Button edit = view.findViewById(R.id.itemBtnEdit);
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context.getApplicationContext(), RestaurantAddAnItemActivity.class);
+                context.startActivity(i);
+            }
+        });
+
+        Button order = view.findViewById(R.id.btnPlaceOrder);
+        order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context.getApplicationContext(), Cart.class);
+                context.startActivity(i);
+            }
+        });
+
+
+
+
         return viewHolder;
 
     }
