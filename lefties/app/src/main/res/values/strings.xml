@@ -61,5 +61,7 @@
     <string name="textView20">pasta</string>
     <string name="signUpBtn">Sign Up</string>
     <string name="signUpScroll">SignUpView</string>
+    <string name="signUpAssetOne">SignUpAssetOne</string>
+    <string name="signUpAssetTwo">SignUpAssetTwo</string>
 
 </resources>

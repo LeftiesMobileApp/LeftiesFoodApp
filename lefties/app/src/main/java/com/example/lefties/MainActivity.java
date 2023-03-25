@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         Button btnLogin = findViewById(R.id.loginBtn);
+        Button btnSignUp = findViewById(R.id.btnSignUp);
         CheckBox checkBoxRestaurant = findViewById(R.id.checkboxRestaurant);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -33,12 +34,24 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToSignUpPage();
+            }
+        });
     }
 
     public void goToRestoHome()
     {
         // TODO Auto-generated method stub
         Intent i = new Intent(getApplicationContext(),RestaurantHomeActivity.class);
+        startActivity(i);
+    }
+
+    public void goToSignUpPage() {
+        Intent i = new Intent(getApplicationContext(),SignUpActivity.class);
         startActivity(i);
     }
 
