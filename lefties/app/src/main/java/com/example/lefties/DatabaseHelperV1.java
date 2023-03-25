@@ -1,3 +1,51 @@
+
+/*
+HI EVERYONE, HERE ARE THE AGREED UPON DATABASE TABLE AND FIELDS
+
+## Account_Table
+
+- account_ID (PK)
+- account_Name - ******************************is restaurant name or customer name******************************
+- account_Type  `CUSTOMER`  `RESTAURANT`
+- account_Email
+- account_Phone
+- account_Address
+- account_City
+
+## Restaurant_Table
+
+- account_ID (FK)
+- restaurant_Type `CHINESE` `INDIAN` `GREEK` `MEXICAN`
+
+## Food_Table
+
+- food_ID (PK)
+- account_ID (FK) - *account id connected to the restaurant*
+- food_Name
+- food_Regular_Price
+- food_Discount_Price
+- food_Expiry_Date
+- food_Qty
+
+## Cart_Table
+
+(This table holds the order items)
+
+- order_id (FK)
+- food_ID (FK)
+- food_Qty_Ordered
+- checkout_Status `TRUE`
+
+## Order_Table
+
+- order_ID
+- order_Status `PROCESSING` `COMPLETED` `CANCELLED`
+- order_Date
+- order_Total
+
+
+ */
+
 package com.example.lefties;
 
 import android.content.ContentValues;
@@ -11,14 +59,28 @@ import androidx.annotation.Nullable;
 // 0.
 public class DatabaseHelperV1 extends SQLiteOpenHelper {
 
-    final static  String  DATABASE_NAME = "Information.db";
-    final static int DATABASE_VERSION = 6;
+    final static  String  DATABASE_NAME = "Lefties.db";
+    final static int DATABASE_VERSION = 1;
+    // TABLE 1: Account
     final static String TABLE1_NAME = "Student_table";
     final static String T1COL_1 = "Id";
     final static String T1COL_2 = "name";
     final static String T1COL_3 = "student_id";
     final static String T1COL_4 = "mobile";
     final static String T1COL_5 = "course_id";
+
+
+    // TABLE 2: Restaurant
+
+    // TABLE 3: Food
+    final static String TABLE3_NAME = "Food_table";
+    final static String T3COL_1 = "food_id";
+    final static String T3COL_2 = "account_id";
+    final static String T3COL_3 = "food_name";
+    final static String T3COL_4 = "food_regular_price";
+    final static String T3COL_5 = "food_discounted_price";
+    final static String T3COL_6 = "food_qty";
+
 
 
     // 1. this is automatically generated using alt + enter
@@ -38,14 +100,17 @@ public class DatabaseHelperV1 extends SQLiteOpenHelper {
         String query = "CREATE TABLE " + TABLE1_NAME + "(" + T1COL_1 + " INTEGER PRIMARY KEY, "  + T1COL_2 + " TEXT, "  + T1COL_3 + " TEXT, "  + T1COL_4 + " TEXT,"  + T1COL_5 + " TEXT)";
 
 
-//        String query = "CREATE TABLE " + TABLE1_NAME + "("
-//                + T1COL_1 + "INTEGER PRIMARY KEY, " // this will be auto generated id
-//                + T1COL_2 + " TEXT, "
-//                + T1COL_3 + " TEXT, "
-//                + T1COL_4 + " TEXT,"
-//                + T1COL_5 + " TEXT" ;
+        // Createa
+        String query3 = "CREATE TABLE " + TABLE3_NAME + "("
+                + T3COL_1 + "INTEGER PRIMARY KEY, " // this will be auto generated id
+                + T3COL_2 + " INTEGER, "
+                + T3COL_3 + " TEXT, "
+                + T3COL_4 + " REAL,"
+                + T3COL_5 + " REAL"
+                + T3COL_6 + " INTEGER"
+                    +  " TEXT)";
         // execute query
-        sqLiteDatabase.execSQL(query);
+        sqLiteDatabase.execSQL(query3);
 
     }
 
