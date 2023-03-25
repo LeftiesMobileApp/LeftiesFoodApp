@@ -19,9 +19,17 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
-            android:name=".OrderConfirmation"
+            android:name=".OrderHistoryActivity"
             android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".OrderConfirmation">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
