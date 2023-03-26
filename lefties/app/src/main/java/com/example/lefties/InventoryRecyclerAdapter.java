@@ -14,30 +14,33 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import java.lang.reflect.AccessibleObject;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
     LayoutInflater layoutInflater;
     Context context;
     String[] strArr;
+    ArrayList<HashMap> foods;
 
-    public InventoryRecyclerAdapter(@NonNull Context context, String[] strArr ) {
+    public InventoryRecyclerAdapter(@NonNull Context context, ArrayList<HashMap> foods ) {
 //        super(context);
 //        this.companies = companies;
         this.context = context;
-        this.strArr = strArr;
+        this.foods = foods;
         layoutInflater = LayoutInflater.from(context);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView imgCompanyLogo;
-        TextView txtCompanyName;
+        TextView foodName;
         Button edit;
         Button placeholder;
 
         // THIS MAPS ATTRIBUTES PER ITEM
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            foodName = itemView.findViewById(R.id.itemFoodName);
 //            imgCompanyLogo = itemView.findViewById(R.id.imgCompanyLogo);
 //            txtCompanyName = itemView.findViewById(R.id.txtCompanyName);
 //            itemView.setOnClickListener(this);
@@ -48,9 +51,6 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
 //            System.out.println("clicked");
 //            Intent i = new Intent(context.getApplicationContext(), Cart.class);
 //                context.startActivity(i);
-
-
-
         }
     }
 
@@ -79,22 +79,18 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
                 context.startActivity(i);
             }
         });
-
-
-
-
         return viewHolder;
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
+        
     }
 
 
     @Override
     public int getItemCount() {
-        return strArr.length ;
+        return foods.size() ;
     }
 }
