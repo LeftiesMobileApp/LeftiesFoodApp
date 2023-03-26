@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         dbh = new DatabaseHelperV1(this);
+        dbh.seedFoodTable();
 
         Button btnLogin = findViewById(R.id.loginBtn);
         Button btnSignUp = findViewById(R.id.btnSignUp);

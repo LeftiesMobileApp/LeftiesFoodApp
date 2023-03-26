@@ -22,9 +22,8 @@ HI EVERYONE, HERE ARE THE AGREED UPON DATABASE TABLE AND FIELDS
 - food_ID (PK)
 - account_ID (FK) - *account id connected to the restaurant*
 - food_Name
-- food_Regular_Price
 - food_Discount_Price
-- food_Expiry_Date
+- food_Regular_Price
 - food_Qty
 
 ## Cart_Table
@@ -40,6 +39,7 @@ HI EVERYONE, HERE ARE THE AGREED UPON DATABASE TABLE AND FIELDS
 
 - order_ID
 - order_Status `PROCESSING` `COMPLETED` `CANCELLED`
+- order_type `DELIVERY`, `PICKUP`
 - order_Date
 - order_Total
 
@@ -56,11 +56,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 // 0.
 public class DatabaseHelperV1 extends SQLiteOpenHelper {
 
     final static  String  DATABASE_NAME = "Lefties.db";
-    final static int DATABASE_VERSION = 1;
+    final static int DATABASE_VERSION = 3;
     // TABLE 1: Account
     final static String TABLE1_NAME = "Student_table";
     final static String T1COL_1 = "Id";
@@ -99,19 +101,16 @@ public class DatabaseHelperV1 extends SQLiteOpenHelper {
 //        String query = String.format("CREATE TABLE %s(%sINTEGER PRIMARY KEY, %s TEXT, %s TEXT, %s TEXT,%s TEXT", TABLE1_NAME, T1COL_1, T1COL_2, T1COL_3, T1COL_4, T1COL_5);
         String query = "CREATE TABLE " + TABLE1_NAME + "(" + T1COL_1 + " INTEGER PRIMARY KEY, "  + T1COL_2 + " TEXT, "  + T1COL_3 + " TEXT, "  + T1COL_4 + " TEXT,"  + T1COL_5 + " TEXT)";
 
-
-        // Createa
         String query3 = "CREATE TABLE " + TABLE3_NAME + "("
-                + T3COL_1 + "INTEGER PRIMARY KEY, " // this will be auto generated id
+                + T3COL_1 + " INTEGER PRIMARY KEY, "
                 + T3COL_2 + " INTEGER, "
                 + T3COL_3 + " TEXT, "
                 + T3COL_4 + " REAL,"
-                + T3COL_5 + " REAL"
+                + T3COL_5 + " REAL,"
                 + T3COL_6 + " INTEGER"
-                    +  " TEXT)";
+                    +  ")";
         // execute query
         sqLiteDatabase.execSQL(query3);
-
     }
 
     @Override
@@ -153,6 +152,42 @@ public class DatabaseHelperV1 extends SQLiteOpenHelper {
 //        String query = "SELECT * FROM " + TABLE1_NAME + "WHERE ID = ?";
 //        Cursor cursor = database.rawQuery(query, new String[2]); // `?` is replaced by selection arg
         return cursor;
+    }
+
+    public Cursor viewFood(){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME;
+        Cursor cursor = database.rawQuery(query, null); // this cursor allows
+        return cursor;
+    }
+
+    public boolean createFoodItem(
+            Integer accountId,
+            String name,
+            double discountPrice,
+            double regularPrice,
+            Integer qty
+    ){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(T3COL_2, accountId);
+        values.put(T3COL_3, name);
+        values.put(T3COL_4, discountPrice);
+        values.put(T3COL_5, regularPrice);
+        values.put(T3COL_6, qty);
+
+        long l =  sqLiteDatabase.insert(TABLE3_NAME, null, values);
+        if(l > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public void seedFoodTable(){
+        createFoodItem(1, "Tandoori Chicken", 30, 25, 3);
+        createFoodItem(1, "Mamon", 4, 10, 16);
+        createFoodItem(1, "Iced Coffee", 3, 8, 160);
     }
 
     // 10.
