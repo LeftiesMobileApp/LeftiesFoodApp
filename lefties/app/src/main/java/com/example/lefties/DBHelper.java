@@ -12,22 +12,21 @@ import androidx.annotation.Nullable;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    final static  String  DATABASE_NAME = "Leftie.db";
+    final static  String  DATABASE_NAME = "Lefties.db";
     final static int DATABASE_VERSION = 1;
 
     // TABLE 1: Account_Table
-    final static String TABLE1_NAME = "Account_table";
+    final static String TABLE1_NAME = "account_table";
     final static String T1COL_1 = "account_Id";
     final static String T1COL_2 = "account_name";
     final static String T1COL_3 = "account_type";
     final static String T1COL_4 = "account_email";
     final static String T1COL_5 = "account_phone";
-    final static String T1COL_6 = "account_Address";
+    final static String T1COL_6 = "account_address";
     final static String T1COL_7 = "account_city";
 
 
     //TABLE 2 : Restaurant
-
     final static String TABLE2_NAME = "restaurant_table";
     final static String T2COL_1 = "restaurant_Id";
     final static String T2COL_2 = "restaurant_type";
@@ -42,7 +41,7 @@ public class DBHelper extends SQLiteOpenHelper {
     final static String T3COL_5 = "food_discount_price";
     final static String T3COL_6 = "food_qty";
 
-    //Table 4 : Cart Table
+    //Table 4 : Order Table
 
     final static String TABLE4_NAME = "order_table";
     final static String T4COL_1 = "order_Id";
@@ -51,6 +50,7 @@ public class DBHelper extends SQLiteOpenHelper {
     final static String T4COL_4 = "order_type";
     final static String T4COL_5 = "order_total";
 
+    //Table5.  Cart table
 
 
     public DBHelper(@Nullable Context context) {
@@ -85,9 +85,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL(query3);
 
-
-
-
     }
 
 
@@ -105,7 +102,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     //Adding for account table
-
     public boolean addAccount(String aid, String aname, String atype, String aemail, String aphone,
                               String aaddress, String acity)
     {
@@ -140,6 +136,10 @@ public class DBHelper extends SQLiteOpenHelper {
         else
             return false;
 
+    }
+
+    public void seedRestaurant(){
+        //
     }
 
     //Adding Food
@@ -286,10 +286,6 @@ public class DBHelper extends SQLiteOpenHelper {
         else
             return false;
     }
-
-
-
-
 
 
 

@@ -11,15 +11,15 @@ import android.widget.CheckBox;
 
 public class MainActivity extends AppCompatActivity {
 
-    DatabaseHelperV1 dbh;
+    DBHelper dbh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        dbh = new DatabaseHelperV1(this);
-        dbh.seedFoodTable();
+        dbh = new DBHelper(this);
+//        dbh.seedFoodTable();
 
         Button btnLogin = findViewById(R.id.loginBtn);
         Button btnSignUp = findViewById(R.id.btnSignUp);
