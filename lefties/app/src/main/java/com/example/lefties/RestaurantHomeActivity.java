@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 public class RestaurantHomeActivity extends AppCompatActivity {
     RecyclerView inventoryList;
-    DatabaseHelperV1 dbh;
+    DBHelper dbh;
     String[] someArray = {"hello", "there", "hi", "again", "once more"};
     ArrayList<HashMap<String, String>> inventoryMapper = new ArrayList<>();
     Button addItem;
@@ -31,13 +31,15 @@ public class RestaurantHomeActivity extends AppCompatActivity {
 
         headline = findViewById(R.id.txtRestoHomeWelcome);
 
-        dbh = new DatabaseHelperV1(this);
+        dbh = new DBHelper(this);
         dbh.seedFoodTable();
 
         inventoryList = findViewById(R.id.recyclerInventory);
         int columnCount = 2;
         inventoryList.setLayoutManager(
                 new GridLayoutManager(this, columnCount));
+
+        displayFoodItemFromRecycler();
 
         addItem = findViewById(R.id.btnAddItem);
         addItem.setOnClickListener(new View.OnClickListener() {
@@ -61,13 +63,11 @@ public class RestaurantHomeActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void foodItemToRecycler(){
+    public void displayFoodItemFromRecycler(){
 
         // CREATE ARRAYLIST of HashMap FROM DB
         foods = new ArrayList<HashMap>();
-
-        Cursor c = dbh.viewFood();
-        StringBuilder str = new StringBuilder();
+        Cursor c = dbh.viewDataFood();
 
         if(c.getCount() > 0){
             while(c.moveToNext()){ // while there is still line left
@@ -78,10 +78,8 @@ public class RestaurantHomeActivity extends AppCompatActivity {
                 foodTableColumns.put("food_discounted_price", c.getString(3));
                 foodTableColumns.put("food_regular_price", c.getString(4));
                 foodTableColumns.put("food_qty", c.getString(5));
-
                 foods.add(foodTableColumns);
             }
-            headline.setText(str);
         }
 
         InventoryRecyclerAdapter adapter = new InventoryRecyclerAdapter(this, foods);
@@ -89,7 +87,7 @@ public class RestaurantHomeActivity extends AppCompatActivity {
     }
 
     public void retrieveFoodItem(){
-        Cursor c = dbh.viewFood();
+        Cursor c = dbh.viewDataFood();
         StringBuilder str = new StringBuilder();
         if(c.getCount() > 0){
 

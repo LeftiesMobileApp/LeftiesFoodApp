@@ -42,7 +42,7 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
             super(itemView);
             foodName = itemView.findViewById(R.id.itemFoodName);
 //            imgCompanyLogo = itemView.findViewById(R.id.imgCompanyLogo);
-//            txtCompanyName = itemView.findViewById(R.id.txtCompanyName);
+//            foodNameLabel = itemView.findViewById(R.id.txtCompanyName);
 //            itemView.setOnClickListener(this);
             return;
         }
@@ -58,7 +58,7 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int position) {
         View view =  layoutInflater.inflate(R.layout.recyler_food_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view); // viewHolder holds the layoutInflater
 
@@ -85,7 +85,13 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        
+
+        HashMap<String, String> foodItem = foods.get(position);
+        String name = foodItem.get("food_name");
+//        int logoId = Integer.parseInt(company.get("logoId"));
+        ((ViewHolder)holder).foodName.setText(name);
+//        ((ViewHolder)holder).imgCompanyLogo.setImageResource(logoId);
+//        viewHolder.findViewById(R.id.itemFoodName)
     }
 
 
