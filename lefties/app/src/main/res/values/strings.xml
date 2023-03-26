@@ -59,18 +59,21 @@
     <string name="textView18">pasta</string>
     <string name="textView19">pasta</string>
     <string name="textView20">pasta</string>
-<<<<<<< HEAD
     <string name="signUpBtn">Sign Up</string>
     <string name="signUpScroll">SignUpView</string>
     <string name="signUpAssetOne">SignUpAssetOne</string>
     <string name="signUpAssetTwo">SignUpAssetTwo</string>
-=======
     <string name="txtCongratulations">Congratulations!</string>
     <string name="txtOrderPlaced">Your order is placed</string>
     <string name="txtMore">Sit back, relax while we get your order ready!!!</string>
     <string name="txtOrderNumber">Your order number is #00876</string>
     <string name="btnHome"> BACK TO HOME PAGE</string>
+    <string name="signUpText">Sign up</string>
 
->>>>>>> ef34a570da625ebdd84fd620159321a2f5232dae
+    <string-array name="accountType">
+        <item>Customer</item>
+        <item>Restaurant</item>
+    </string-array>
+
 
 </resources>
