@@ -25,6 +25,7 @@
 
         <Button
             android:id="@+id/itemBtnDelete"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:height="12dp"
@@ -39,6 +40,7 @@
 
         <Button
             android:id="@+id/itemBtnEdit"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:height="12dp"

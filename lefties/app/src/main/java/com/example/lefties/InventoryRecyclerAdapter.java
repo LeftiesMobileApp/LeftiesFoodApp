@@ -37,6 +37,7 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
         TextView foodName;
         TextView discountedPrice;
         TextView regularPrice;
+        ImageView foodImg;
         Button btnEdit;
         Button btnDelete;
         Button btnAddToCart;
@@ -47,8 +48,8 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
             foodName = itemView.findViewById(R.id.itemFoodName);
             discountedPrice = itemView.findViewById(R.id.itemDiscountedPrice);
             regularPrice = itemView.findViewById(R.id.itemRegularPrice);
-
             regularPrice.setPaintFlags(regularPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            foodImg = itemView.findViewById(R.id.imgFood);
 
             btnDelete = itemView.findViewById(R.id.itemBtnDelete);
             btnEdit= itemView.findViewById(R.id.itemBtnEdit);
@@ -94,22 +95,27 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         HashMap<String, String> foodItem = foods.get(position);
-        int foodId = Integer.parseInt(foodItem.get("food_id"));
+        String foodIdString = foodItem.get("food_id");
+        int foodId = Integer.parseInt(foodIdString);
         String name = foodItem.get("food_name");
         String regularPrice = foodItem.get("food_regular_price");
         String discountPrice = foodItem.get("food_discounted_price");
 
         ((ViewHolder)holder).foodName.setText(name);
+
         ((ViewHolder)holder).discountedPrice.setText("$ "+discountPrice);
         ((ViewHolder)holder).regularPrice.setText("$ "+regularPrice);
+
+        // get image from drawable with id name
+        int resID = context.getResources().getIdentifier("food_" + foodIdString , "drawable", context.getPackageName());
+        ((ViewHolder)holder).foodImg.setImageResource(resID);
+
         if(isRestaurant){
             ((ViewHolder)holder).btnAddToCart.setVisibility(GONE);
         }else{
             ((ViewHolder)holder).btnEdit.setVisibility(GONE);
             ((ViewHolder)holder).btnDelete.setVisibility(GONE);
         }
-
-
     }
 
 

@@ -166,7 +166,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void seedFoodTable(){
         addFood(1, "Tandoori Chicken", 30.0, 25.0, 3);
-        addFood(1, "Mamon", 4.0, 10.0, 16);
+        addFood(1, "Bread", 4.0, 10.0, 16);
         addFood(1, "Iced Coffee", 3.0, 8.0, 160);
     }
 
@@ -181,7 +181,6 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(T4COL_3, odate);
         values.put(T4COL_4, otype);
         values.put(T4COL_5, ototal);
-
 
 
         long l = sqLiteDatabase.insert(TABLE4_NAME,null,values);
