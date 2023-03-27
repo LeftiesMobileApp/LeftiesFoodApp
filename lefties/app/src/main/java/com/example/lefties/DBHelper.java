@@ -147,11 +147,13 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //Adding Restaurant
-    public boolean addRestaurant(String Rtype , String aid)
+    public boolean addRestaurant(String rid, String Rtype, String aid)
     {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(T2COL_1, rid);
         values.put(T2COL_2, Rtype);
+        values.put(T2COL_3, aid);
 
 
         long l = sqLiteDatabase.insert(TABLE2_NAME,null,values);
@@ -163,11 +165,12 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //Adding Food
-    public boolean addFood(String fname, String fregularprice ,String fdiscountprice,
+    public boolean addFood(String aid, String fname, String fregularprice ,String fdiscountprice,
                            String fqty)
     {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(T3COL_2, aid)
         values.put(T3COL_3, fname);
         values.put(T3COL_4, fregularprice);
         values.put(T3COL_5, fdiscountprice);
@@ -206,10 +209,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //Adding Order
 
-    public boolean addCart(String foodqtyOrd, String checkoutstatus)
+    public boolean addCart(String fid,String foodqtyOrd, String checkoutstatus)
     {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(T5COL_3, fid);
         values.put(T5COL_3, foodqtyOrd);
         values.put(T5COL_4,checkoutstatus);
 
