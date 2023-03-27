@@ -32,7 +32,10 @@ public class RestaurantHomeActivity extends AppCompatActivity {
         headline = findViewById(R.id.txtRestoHomeWelcome);
 
         dbh = new DBHelper(this);
-        dbh.seedFoodTable();
+        if(dbh.viewDataFood().getCount() < 1){
+            dbh.seedFoodTable();
+        }
+
 
         inventoryList = findViewById(R.id.recyclerInventory);
         int columnCount = 2;
@@ -81,8 +84,8 @@ public class RestaurantHomeActivity extends AppCompatActivity {
                 foods.add(foodTableColumns);
             }
         }
-
-        InventoryRecyclerAdapter adapter = new InventoryRecyclerAdapter(this, foods);
+        Boolean isRestaurant = true;
+        InventoryRecyclerAdapter adapter = new InventoryRecyclerAdapter(this, foods, isRestaurant);
         inventoryList.setAdapter(adapter);
     }
 
