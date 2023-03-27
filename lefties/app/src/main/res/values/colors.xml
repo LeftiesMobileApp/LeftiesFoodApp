@@ -17,4 +17,5 @@
     <color name="mid_gray">#666666</color>
     <color name="gold_darker">#E18D03</color>
     <color name="my_spinner_tint">#000000</color>
+    <color name="light_gray">#999999</color>
 </resources>

@@ -27,6 +27,11 @@
     At:
     BC,Ca
     </string>
+    <string-array name="cities">
+        <item>Vancouver</item>
+        <item>Surrey</item>
+        <item>Burnaby</item>
+    </string-array>
     <string name="total">total</string>
     <string name="PlaceOrder">Place Order</string>
     <string name="btnPlaceOrder">Place order</string>
@@ -84,6 +89,5 @@
         <item>Restaurant</item>
     </string-array>
 
-
-
+    <string name="labelSearchCity">Search your city</string>
 </resources>
