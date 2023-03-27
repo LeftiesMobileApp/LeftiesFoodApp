@@ -20,7 +20,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/sign_up_sset_one" />
+            app:srcCompat="@drawable/sign_up_sset_one"
+            tools:ignore="ImageContrastCheck"
+            android:contentDescription="@string/signUpTwo" />
 
         <ImageView
             android:id="@+id/imageView6"
@@ -28,9 +30,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="191dp"
             android:layout_marginTop="3dp"
+            android:contentDescription="@string/signUpRes1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/accountPassword"
-            app:srcCompat="@drawable/sign_up_asset_two" />
+            app:srcCompat="@drawable/sign_up_asset_two"
+            tools:ignore="ImageContrastCheck" />
 
         <TextView
             android:id="@+id/textView7"
@@ -54,6 +58,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="18dp"
+            android:contentDescription="@string/Lefties"
             app:layout_constraintEnd_toStartOf="@+id/textView4"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,13 +72,17 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="18dp"
-            android:background="@color/white"
-            android:hint="Name"
+            android:background="@drawable/my_spinner_background"
+            android:hint="@string/acnName"
+            android:importantForAutofill="no"
+            android:inputType="text"
             android:padding="10dp"
+            android:textColorHint="#757575"
             app:layout_constraintBottom_toTopOf="@+id/accontType"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <Spinner
             android:id="@+id/accontType"
@@ -82,13 +91,15 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="15dp"
-            android:backgroundTint="@color/black"
+            android:background="@drawable/my_spinner_background"
+            android:contentDescription="@string/accountType"
             android:minHeight="45dp"
             android:spinnerMode="dialog"
             app:layout_constraintBottom_toTopOf="@+id/accountEmail"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/accountName" />
+            app:layout_constraintTop_toBottomOf="@+id/accountName"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
             android:id="@+id/accountEmail"
@@ -97,15 +108,18 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="11dp"
-            android:background="@color/white"
+            android:background="@drawable/my_spinner_background"
             android:ems="10"
-            android:hint="Email"
+            android:hint="@string/acnEmail"
             android:inputType="textEmailAddress"
             android:padding="10dp"
+            android:textColorHint="#757575"
             app:layout_constraintBottom_toTopOf="@+id/accountPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/accontType" />
+            app:layout_constraintTop_toBottomOf="@+id/accontType"
+            tools:ignore="TouchTargetSizeCheck"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/accountPassword"
@@ -115,15 +129,18 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="12dp"
-            android:background="@color/white"
+            android:background="@drawable/my_spinner_background"
             android:ems="10"
-            android:hint="Password"
+            android:hint="@string/acnPass"
             android:inputType="textPassword"
             android:padding="10dp"
+            android:textColorHint="#757575"
             app:layout_constraintBottom_toTopOf="@+id/textView5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/accountEmail" />
+            app:layout_constraintTop_toBottomOf="@+id/accountEmail"
+            tools:ignore="TouchTargetSizeCheck"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/textView5"
@@ -132,13 +149,17 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="14dp"
-            android:background="@color/white"
-            android:hint="Phone Number"
+            android:background="@drawable/my_spinner_background"
+            android:hint="@string/acnNumber"
+            android:inputType="number"
             android:padding="10dp"
+            android:textColorHint="#757575"
             app:layout_constraintBottom_toTopOf="@+id/editTextTextMultiLine"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/accountPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/accountPassword"
+            tools:ignore="TouchTargetSizeCheck"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/editTextTextMultiLine"
@@ -147,16 +168,18 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="12dp"
-            android:background="@color/white"
+            android:background="@drawable/my_spinner_background"
             android:ems="10"
-            android:hint="Address"
+            android:hint="@string/acnAddress"
             android:inputType="textMultiLine"
             android:minHeight="55dp"
             android:padding="10dp"
+            android:textColorHint="#757575"
             app:layout_constraintBottom_toTopOf="@+id/accountCity"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/accountCity"
@@ -165,13 +188,17 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="17dp"
-            android:background="@color/white"
-            android:hint="City"
+            android:background="@drawable/my_spinner_background"
+            android:hint="@string/acnCity"
+            android:inputType="text"
             android:padding="10dp"
+            android:textColorHint="#757575"
             app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine"
+            tools:ignore="TouchTargetSizeCheck"
+            android:importantForAutofill="no" />
 
         <Button
             android:id="@+id/button"
@@ -186,7 +213,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/accountCity" />
+            app:layout_constraintTop_toBottomOf="@+id/accountCity"
+            tools:ignore="DuplicateSpeakableTextCheck" />
 
         <TextView
             android:id="@+id/textView4"
