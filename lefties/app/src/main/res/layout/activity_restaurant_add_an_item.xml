@@ -38,7 +38,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editName"
         android:layout_width="0dp"
         android:layout_height="64dp"
         android:layout_marginTop="24dp"
@@ -58,7 +58,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName">
+        app:layout_constraintTop_toBottomOf="@+id/editName">
 
         <EditText
             android:id="@+id/editSalePrice"
@@ -104,6 +104,7 @@
             android:ems="10"
             android:hint="Stocks"
             android:inputType="number"
+            android:maxWidth="64dp"
             android:outlineProvider="background" />
 
         <EditText
@@ -116,6 +117,7 @@
             android:hint="Date time"
             android:inputType="datetime"
             android:outlineProvider="background"
+            android:visibility="gone"
             tools:hint="Date Time" />
     </LinearLayout>
 

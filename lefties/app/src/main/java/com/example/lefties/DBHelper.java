@@ -168,6 +168,9 @@ public class DBHelper extends SQLiteOpenHelper {
         addFood(1, "Tandoori Chicken", 30.0, 25.0, 3);
         addFood(1, "Bread", 4.0, 10.0, 16);
         addFood(1, "Iced Coffee", 3.0, 8.0, 160);
+        addFood(2, "Beef Stir-fry", 30.0, 25.0, 3);
+        addFood(2, "Cookies", 4.0, 10.0, 16);
+
     }
 
     //Adding cart
@@ -217,6 +220,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor viewDataFood(){
         SQLiteDatabase database = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE3_NAME;
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+    public Cursor viewDataFoodByRestaurant(int acctId){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME
+                + " WHERE " + T3COL_2 + "=" + acctId;
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }
