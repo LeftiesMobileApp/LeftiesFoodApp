@@ -11,14 +11,14 @@ import android.widget.CheckBox;
 
 public class MainActivity extends AppCompatActivity {
 
-    DatabaseHelperV1 dbh;
+
+    DBHelper dbh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        dbh = new DatabaseHelperV1(this);
+        dbh = new DBHelper(this);
 
         Button btnLogin = findViewById(R.id.loginBtn);
         Button btnSignUp = findViewById(R.id.btnSignUp);
@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     goToCustomerHome();
                 }
-
-
             }
         });
 
@@ -47,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToRestoHome()
     {
-        // TODO Auto-generated method stub
         Intent i = new Intent(getApplicationContext(),RestaurantHomeActivity.class);
         startActivity(i);
     }
@@ -59,15 +56,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToCart()
     {
-        // TODO Auto-generated method stub
         Intent i = new Intent(getApplicationContext(),Cart.class);
         startActivity(i);
-
     }
 
     public void goToCustomerHome()
     {
-        // TODO Auto-generated method stub
         Intent i = new Intent(getApplicationContext(),CustomerPage.class);
         startActivity(i);
     }

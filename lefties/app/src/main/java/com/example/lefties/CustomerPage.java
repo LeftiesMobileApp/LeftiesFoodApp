@@ -26,25 +26,14 @@ public class CustomerPage extends AppCompatActivity {
         setContentView(R.layout.activity_customer_page);
 
         inventoryList = findViewById(R.id.recyclerInventory);
-//        listCompanies = findViewById(R.id.listviewCompanies);
 
         int columnCount = 2;
         inventoryList.setLayoutManager(
                 new GridLayoutManager(this, columnCount));
-//        companies = prepareCompanies(companiesStringArr);
-//
-        InventoryRecyclerAdapter adapter = new InventoryRecyclerAdapter(this, someArray);
-        inventoryList.setAdapter(adapter);
 
-
-//        LinearLayout partOfPage = findViewById(R.id.itemsAvailableList);
-//        inventoryList.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(getApplicationContext(), Cart.class);
-//                startActivity(i);
-//            }
-//        });
+        // BRING ME BACK WHEN RECYCLER IS FIXED
+//        InventoryRecyclerAdapter adapter = new InventoryRecyclerAdapter(this, someArray);
+//        inventoryList.setAdapter(adapter);
 
 
     }
