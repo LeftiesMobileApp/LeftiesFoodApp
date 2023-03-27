@@ -12,18 +12,21 @@ import androidx.annotation.Nullable;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    final static  String  DATABASE_NAME = "Leftie.db";
-    final static int DATABASE_VERSION = 2;
+    final static  String  DATABASE_NAME = "Lefties.db";
+    final static int DATABASE_VERSION = 4;
+
 
     // TABLE 1: Account_Table
+    //Raiyan, added password field
     final static String TABLE1_NAME = "account_table";
     final static String T1COL_1 = "account_Id";
     final static String T1COL_2 = "account_name";
     final static String T1COL_3 = "account_type";
     final static String T1COL_4 = "account_email";
-    final static String T1COL_5 = "account_phone";
-    final static String T1COL_6 = "account_address";
-    final static String T1COL_7 = "account_city";
+    final static String T1COL_5 = "account_password";
+    final static String T1COL_6 = "account_phone";
+    final static String T1COL_7 = "account_address";
+    final static String T1COL_8 = "account_city";
 
 
     //TABLE 2 : Restaurant
@@ -70,13 +73,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        //Raiyan, added Password field, changed name from query1 to queryAccountTable
+        String queryAccountTable = "CREATE TABLE " + TABLE1_NAME + "(" + T1COL_1 +
+                " INTEGER PRIMARY KEY, " + T1COL_2 + " TEXT, " + T1COL_3 + " TEXT, " +
+                T1COL_4 + " TEXT, "+ T1COL_5 + " TEXT, " + T1COL_6 + " TEXT, " + T1COL_7 + " TEXT, " + T1COL_8 + " TEXT)";
 
-        // Account
-        String query = "CREATE TABLE " + TABLE1_NAME + "(" + T1COL_1 +
-                " INTEGER PRIMARY KEY, " + T2COL_2 + " TEXT, " + T1COL_3 + " TEXT, " +
-                T1COL_4 + " TEXT, "+ T1COL_5 + "TEXT, " + T1COL_6 + "TEXT, " + T1COL_7 + " TEXT)";
 
-        sqLiteDatabase.execSQL(query);
+        sqLiteDatabase.execSQL(queryAccountTable);
 
         // Restaurant
         String query1 = "CREATE TABLE " + TABLE2_NAME + "(" + T2COL_1 +
@@ -123,8 +126,32 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     //Adding for account table
+    //Minor Changes made by Raiyan, removing aid, it should be generated automatically
+    //To see the original one look below
+    public boolean addAccount(String aname, String atype, String aemail, String apassword, String aphone,
+                              String aaddress, String acity)
+    {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(T1COL_2, aname);
+        values.put(T1COL_3, atype);
+        values.put(T1COL_4, aemail);
+        values.put(T1COL_5, apassword);
+        values.put(T1COL_6, aphone);
+        values.put(T1COL_7, aaddress);
+        values.put(T1COL_8, acity);
 
-    public boolean addAccount(String aname, String atype, String aemail, String aphone,
+        long l = sqLiteDatabase.insert(TABLE1_NAME,null,values);
+        if(l > 0)
+            return true;
+        else
+            return false;
+
+    }
+
+    //Original addAccount
+    /*
+    public boolean addAccount(String aid, String aname, String atype, String aemail, String aphone,
                               String aaddress, String acity)
     {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -142,7 +169,7 @@ public class DBHelper extends SQLiteOpenHelper {
         else
             return false;
 
-    }
+    }*/
 
     //Adding Restaurant
     public boolean addRestaurant(String Rtype , String aid)
