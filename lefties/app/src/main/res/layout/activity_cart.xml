@@ -116,7 +116,7 @@
         app:layout_constraintTop_toBottomOf="@+id/listViewSummary" />
 
     <Button
-        android:id="@+id/btnPlaceOrder"
+        android:id="@+id/itemBtnAddToCart"
         android:layout_width="331dp"
         android:layout_height="52dp"
         android:layout_marginStart="40dp"

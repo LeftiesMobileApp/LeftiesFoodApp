@@ -17,7 +17,7 @@ import java.util.HashMap;
 public class RestaurantHomeActivity extends AppCompatActivity {
     RecyclerView inventoryList;
     DBHelper dbh;
-    String[] someArray = {"hello", "there", "hi", "again", "once more"};
+    Integer restaurantAcctId = 1;
     ArrayList<HashMap<String, String>> inventoryMapper = new ArrayList<>();
     Button addItem;
     Button generateReport;
@@ -32,7 +32,10 @@ public class RestaurantHomeActivity extends AppCompatActivity {
         headline = findViewById(R.id.txtRestoHomeWelcome);
 
         dbh = new DBHelper(this);
-        dbh.seedFoodTable();
+        if(dbh.viewDataFood().getCount() < 1){
+            dbh.seedFoodTable();
+        }
+
 
         inventoryList = findViewById(R.id.recyclerInventory);
         int columnCount = 2;
@@ -53,13 +56,14 @@ public class RestaurantHomeActivity extends AppCompatActivity {
         generateReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                retrieveFoodItem();
+
             }
         });
     }
 
     public void goToAddItem(){
         Intent i = new Intent(getApplicationContext(), RestaurantAddAnItemActivity.class);
+        i.putExtra("restaurantAcctId", restaurantAcctId);
         startActivity(i);
     }
 
@@ -67,7 +71,7 @@ public class RestaurantHomeActivity extends AppCompatActivity {
 
         // CREATE ARRAYLIST of HashMap FROM DB
         foods = new ArrayList<HashMap>();
-        Cursor c = dbh.viewDataFood();
+        Cursor c = dbh.viewDataFoodByRestaurant(restaurantAcctId);
 
         if(c.getCount() > 0){
             while(c.moveToNext()){ // while there is still line left
@@ -81,25 +85,11 @@ public class RestaurantHomeActivity extends AppCompatActivity {
                 foods.add(foodTableColumns);
             }
         }
-
-        InventoryRecyclerAdapter adapter = new InventoryRecyclerAdapter(this, foods);
+        Boolean isRestaurant = true;
+        InventoryRecyclerAdapter adapter = new InventoryRecyclerAdapter(this, foods, isRestaurant);
         inventoryList.setAdapter(adapter);
     }
 
-    public void retrieveFoodItem(){
-        Cursor c = dbh.viewDataFood();
-        StringBuilder str = new StringBuilder();
-        if(c.getCount() > 0){
 
-            while(c.moveToNext()){ // while there is still line left
-                str.append("id:  " + c.getString(0));
-                str.append(" / name: " + c.getString(1));
-                str.append(" / student id: " + c.getString(2));
-                str.append(" / mobile: " + c.getString(3));
-                str.append(" / course id: " + c.getString(4));
-                str.append("\n");
-            }
-            headline.setText(str);
-        }
-    }
+
 }

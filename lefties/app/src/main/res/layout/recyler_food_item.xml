@@ -8,7 +8,7 @@
     android:layout_margin="8dp"
     android:background="@color/white"
     android:minWidth="240dp"
-    android:minHeight="360dp"
+    android:minHeight="240dp"
     android:orientation="vertical"
     android:padding="2dp">
 
@@ -25,6 +25,7 @@
 
         <Button
             android:id="@+id/itemBtnDelete"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:height="12dp"
@@ -39,6 +40,7 @@
 
         <Button
             android:id="@+id/itemBtnEdit"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:height="12dp"
@@ -73,6 +75,7 @@
             android:textColor="#3E2723"
             android:textSize="12sp"
             android:translationZ="10dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -131,7 +134,7 @@
             android:gravity="center_horizontal">
 
             <TextView
-                android:id="@+id/itemSalePrice"
+                android:id="@+id/itemDiscountedPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="12dp"
@@ -142,7 +145,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/itemOriginalPrice"
+                android:id="@+id/itemRegularPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -159,7 +162,8 @@
             android:gravity="center"
             android:text="Discontinuation time"
             android:textColor="@color/mid_gray"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -175,6 +179,7 @@
                 android:text="May 09 2023"
                 android:textAlignment="gravity"
                 android:textColor="@color/maroon"
+                android:visibility="gone"
                 tools:textSize="12sp" />
 
             <TextView
@@ -185,14 +190,18 @@
                 android:text="11:59pm"
                 android:textAlignment="gravity"
                 android:textColor="@color/salmon"
+                android:visibility="gone"
                 tools:textSize="12sp" />
         </LinearLayout>
 
     </LinearLayout>
+
     <Button
-        android:id="@+id/btnPlaceOrder"
+        android:id="@+id/itemBtnAddToCart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/PlaceOrder" />
+        android:backgroundTint="@color/maroon"
+        android:text="@string/btnAddToCart"
+        android:textColor="@color/light" />
 
 </LinearLayout>

@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         dbh = new DBHelper(this);
 
         Button btnLogin = findViewById(R.id.loginBtn);
-        Button btnSignUp = findViewById(R.id.btnSignUp);
+        Button btnSignUp = findViewById(R.id.btnGoSignUp);
         CheckBox checkBoxRestaurant = findViewById(R.id.checkboxRestaurant);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
