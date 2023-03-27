@@ -1,8 +1,6 @@
 package com.example.lefties;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -39,7 +37,7 @@ public class Cart extends AppCompatActivity {
         Chip chipPickup = findViewById(R.id.chipPickup);
         TextView address = findViewById(R.id.txtAddress);
         TextView totalAmount = findViewById(R.id.txtAmount);
-        Button btnPlaceOrder = findViewById(R.id.btnPlaceOrder);
+        Button btnPlaceOrder = findViewById(R.id.itemBtnAddToCart);
         Button btnOrderMoreFood = findViewById(R.id.btnOrderMore);
 
 //        RecyclerView recyclerView = findViewById(R.id.recyclerView);

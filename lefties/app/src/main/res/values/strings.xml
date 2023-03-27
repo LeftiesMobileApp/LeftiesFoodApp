@@ -11,7 +11,7 @@
 
     <string name="btn">Cart</string>
     <string name="btnBack"><![CDATA[<- BACK TO HOME PAGE]]></string>
-    <string name="btnPlaceOrder">Place Order</string>
+    <string name="btnAddToCart">Add to cart</string>
     <string name="txtTotal">Total</string>
     <string name="btnOrderMore">ORDER MORE FOOD</string>
     <string name="chipDelivery">DELIVERY</string>
@@ -29,6 +29,7 @@
     </string>
     <string name="total">total</string>
     <string name="PlaceOrder">Place Order</string>
+    <string name="btnPlaceOrder">Place order</string>
     <string name="OrderMore">Order More Food</string>
     <string name="imageFood"></string>
     <string name="FoodText"></string>
@@ -82,6 +83,7 @@
         <item>Customer</item>
         <item>Restaurant</item>
     </string-array>
+
 
 
 </resources>
