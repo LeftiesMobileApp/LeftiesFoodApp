@@ -18,18 +18,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import kotlin.jvm.internal.BooleanCompanionObject;
+
 public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
     LayoutInflater layoutInflater;
     Context context;
     String[] strArr;
     ArrayList<HashMap> foods;
     Boolean isRestaurant;
+    DBHelper dbh;
 
     public InventoryRecyclerAdapter(@NonNull Context context, ArrayList<HashMap> foods, Boolean isRestaurant ) {
         this.context = context;
         this.foods = foods;
         this.isRestaurant = isRestaurant;
         layoutInflater = LayoutInflater.from(context);
+        dbh = new DBHelper(context);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -54,9 +58,10 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
             btnDelete = itemView.findViewById(R.id.itemBtnDelete);
             btnEdit= itemView.findViewById(R.id.itemBtnEdit);
             btnAddToCart = itemView.findViewById(R.id.itemBtnAddToCart);
-
             return;
         }
+
+
         @Override
         public void onClick(View v) {
         }
@@ -70,23 +75,23 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
         View view =  layoutInflater.inflate(R.layout.recyler_food_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view); // viewHolder holds the layoutInflater
 
-        Button edit = view.findViewById(R.id.itemBtnEdit);
-        edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(context.getApplicationContext(), RestaurantAddAnItemActivity.class);
-                context.startActivity(i);
-            }
-        });
-
-        Button order = view.findViewById(R.id.itemBtnAddToCart);
-        order.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(context.getApplicationContext(), Cart.class);
-                context.startActivity(i);
-            }
-        });
+//        Button edit = view.findViewById(R.id.itemBtnEdit);
+//        edit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(context.getApplicationContext(), RestaurantAddAnItemActivity.class);
+//                context.startActivity(i);
+//            }
+//        });
+//
+//        Button order = view.findViewById(R.id.itemBtnAddToCart);
+//        order.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(context.getApplicationContext(), Cart.class);
+//                context.startActivity(i);
+//            }
+//        });
         return viewHolder;
 
     }
@@ -116,6 +121,18 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
             ((ViewHolder)holder).btnEdit.setVisibility(GONE);
             ((ViewHolder)holder).btnDelete.setVisibility(GONE);
         }
+
+
+        ((ViewHolder)holder).btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("delete me");
+                Boolean isDeleted = dbh.deleteRecFood(foodId);
+                System.out.println(isDeleted);
+                Intent i = new Intent(context, RestaurantHomeActivity.class);
+                context.startActivity(i);
+            }
+        });
     }
 
 

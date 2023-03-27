@@ -268,8 +268,11 @@ public class DBHelper extends SQLiteOpenHelper {
     //Food
     public boolean deleteRecFood(int id){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        int d = sqLiteDatabase.delete(TABLE3_NAME,"Id=?",
+        int d = sqLiteDatabase.delete(TABLE3_NAME,T3COL_1 + "=?",
                 new String[]{Integer.toString(id)});
+//        String idStr = String.parseToString(id);
+//        int d = sqLiteDatabase.delete(TABLE3_NAME,"Id=?",
+//                (String) id);
         if(d>0)
             return true;
         else
