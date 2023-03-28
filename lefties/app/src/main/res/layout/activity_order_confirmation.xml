@@ -84,7 +84,7 @@
     <Button
         android:id="@+id/btnHome"
         android:layout_width="184dp"
-        android:layout_height="42dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="61dp"
         android:backgroundTint="#8E0144"
         android:text="@string/btnHome"

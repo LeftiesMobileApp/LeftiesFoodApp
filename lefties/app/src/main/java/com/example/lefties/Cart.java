@@ -18,10 +18,6 @@ import java.util.HashMap;
 
 public class Cart extends AppCompatActivity {
 
-//    Integer[] images = {};
-//    String[] restName = {"PH", "UB", "TJ"};
-//    String[] item = {};
-//    String[] itemPrice = {};
     CartAdapterClass adapter;
     String[] food = {"Paasta With Seafood", "Bruschetta"};
     int[] images = {R.drawable.placeholder, R.drawable.bgimg};
@@ -39,12 +35,6 @@ public class Cart extends AppCompatActivity {
         TextView totalAmount = findViewById(R.id.txtAmount);
         Button btnPlaceOrder = findViewById(R.id.itemBtnAddToCart);
         Button btnOrderMoreFood = findViewById(R.id.btnOrderMore);
-
-//        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-//        int numOfCol = 1;
-//        recyclerView.setLayoutManager(new GridLayoutManager(this, numOfCol));
-//        adapter = new CartAdapterClass(this); //images, item, itemPrice, restName
-//        recyclerView.setAdapter(adapter);
 
         applyListView();
 
