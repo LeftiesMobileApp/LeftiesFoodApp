@@ -17,7 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     // TABLE 1: Account_Table
-    //Raiyan, added password field
+    //Raiyan-added password field
     final static String TABLE1_NAME = "account_table";
     final static String T1COL_1 = "account_Id";
     final static String T1COL_2 = "account_name";
@@ -73,7 +73,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        //Raiyan, added Password field, changed name from query1 to queryAccountTable
+        //Raiyan-added Password field, changed name from query1 to queryAccountTable
         String queryAccountTable = "CREATE TABLE " + TABLE1_NAME + "(" + T1COL_1 +
                 " INTEGER PRIMARY KEY, " + T1COL_2 + " TEXT, " + T1COL_3 + " TEXT, " +
                 T1COL_4 + " TEXT, "+ T1COL_5 + " TEXT, " + T1COL_6 + " TEXT, " + T1COL_7 + " TEXT, " + T1COL_8 + " TEXT)";
@@ -260,14 +260,28 @@ public class DBHelper extends SQLiteOpenHelper {
     // Reading Data
 
     //Account
-    public Cursor viewDataAccount(){
+    //Raiyan-making changes to viewDataAccount method
+    public Cursor viewDataAccount(String userEmail, String userPass){
+        SQLiteDatabase database = this.getReadableDatabase();
+//        String query = "SELECT * FROM " + TABLE1_NAME;
+        String query = "SELECT * FROM " + TABLE1_NAME +
+                " WHERE " + T1COL_4 + "=" + '"' + userEmail + '"' + " AND " +
+                 T1COL_5 + "=" + '"' + userPass + '"';
+        Cursor cursor = database.rawQuery(query,null);
+        //String query = "SELECT * FROM " + TABLE1_NAME + " WHERE Id = ?";
+        //Cursor cursor = database.rawQuery(query,new String[]{"2"});
+        return cursor;
+    }
+
+    //Original viewDataAccount
+    /* public Cursor viewDataAccount(){
         SQLiteDatabase database = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE1_NAME;
         Cursor cursor = database.rawQuery(query,null);
         //String query = "SELECT * FROM " + TABLE1_NAME + " WHERE Id = ?";
         //Cursor cursor = database.rawQuery(query,new String[]{"2"});
         return cursor;
-    }
+    }*/
 
     //Restaurant
     public Cursor viewDataRest(){
