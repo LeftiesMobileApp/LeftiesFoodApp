@@ -36,6 +36,20 @@ public class Cart extends AppCompatActivity {
         Button btnPlaceOrder = findViewById(R.id.itemBtnAddToCart);
         Button btnOrderMoreFood = findViewById(R.id.btnOrderMore);
 
+        btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Cart.this, OrderConfirmation.class));
+            }
+        });
+
+        btnOrderMoreFood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Cart.this, CustomerPage.class));
+            }
+        });
+
         applyListView();
 
         btnBack.setOnClickListener(new View.OnClickListener() {

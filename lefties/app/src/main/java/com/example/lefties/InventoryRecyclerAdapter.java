@@ -2,6 +2,8 @@ package com.example.lefties;
 
 import static android.view.View.GONE;
 
+
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -18,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import kotlin.jvm.internal.BooleanCompanionObject;
+
 
 public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
     LayoutInflater layoutInflater;
@@ -122,6 +124,13 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
             ((ViewHolder)holder).btnDelete.setVisibility(GONE);
         }
 
+        ((ViewHolder)holder).btnAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, Cart.class);
+                context.startActivity(intent);
+            }
+        });
 
         ((ViewHolder)holder).btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override

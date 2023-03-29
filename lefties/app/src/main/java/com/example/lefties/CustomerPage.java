@@ -29,11 +29,17 @@ public class CustomerPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_page);
 
+       // Button btn = findViewById(R.id.itemBtnAddToCart);
+
+
+
         dbh = new DBHelper(this);
         if(dbh.viewDataFood().getCount() < 1){
             dbh.seedFoodTable();
         }
         inventoryList = findViewById(R.id.recyclerInventory);
+
+
 
         int columnCount = 2;
         inventoryList.setLayoutManager(
