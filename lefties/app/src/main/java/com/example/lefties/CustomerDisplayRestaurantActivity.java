@@ -36,9 +36,6 @@ public class CustomerDisplayRestaurantActivity extends AppCompatActivity {
 
 
         dbh = new DBHelper(this);
-        if (dbh.viewDataFood().getCount() < 1) {
-            dbh.seedFoodTable();
-        }
         inventoryList = findViewById(R.id.customerRestaurantRecycler);
 
         int columnCount = 2;

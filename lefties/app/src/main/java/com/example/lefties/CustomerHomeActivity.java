@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+// Macci - Renamed CustomerActivity to CustomerHomeActivity
 public class CustomerHomeActivity extends AppCompatActivity {
 
     DBHelper dbh;
@@ -76,55 +76,25 @@ public class CustomerHomeActivity extends AppCompatActivity {
     }
 
 
+    // Macci - Isolate search functionality
+
     public void setupSearchByCity(){
+        // Rajat - Enable city search
         Spinner spinner = findViewById(R.id.spinner3);
         if (spinner != null && spinner.getSelectedItem() != null && spinner.getSelectedItem().toString().equals("Surrey")) {
-
+            // Macci - Create reusable function updateRecycler that accepts the cursor
             c = dbh.viewDataFoodM();
             updateRecycler(c);
         }
 
         if (spinner != null && spinner.getSelectedItem() != null && spinner.getSelectedItem().toString().equals("Vancouver")) {
-            // your code here
-
             c = dbh.viewDataFood();
-            if(c.getCount() > 0){
-                foods.clear(); // clear the previous list
-                while(c.moveToNext()){
-                    HashMap<String, String> foodTableColumns = new HashMap<>();
-                    foodTableColumns.put("food_id", c.getString(0));
-                    foodTableColumns.put("account_id", c.getString(1));
-                    foodTableColumns.put("food_name", c.getString(2));
-                    foodTableColumns.put("food_discounted_price", c.getString(3));
-                    foodTableColumns.put("food_regular_price", c.getString(4));
-                    foodTableColumns.put("food_qty", c.getString(5));
-                    foods.add(foodTableColumns);
-                }
-                adapter.notifyDataSetChanged(); // update the adapter with the new list
-            }
-
-
+            updateRecycler(c);
         }
 
         if (spinner != null && spinner.getSelectedItem() != null && spinner.getSelectedItem().toString().equals("Burnaby")) {
-            // your code here
-
             c = dbh.viewDataFoodP();
-            if(c.getCount() > 0){
-                foods.clear(); // clear the previous list
-                while(c.moveToNext()){
-                    HashMap<String, String> foodTableColumns = new HashMap<>();
-                    foodTableColumns.put("food_id", c.getString(0));
-                    foodTableColumns.put("account_id", c.getString(1));
-                    foodTableColumns.put("food_name", c.getString(2));
-                    foodTableColumns.put("food_discounted_price", c.getString(3));
-                    foodTableColumns.put("food_regular_price", c.getString(4));
-                    foodTableColumns.put("food_qty", c.getString(5));
-                    foods.add(foodTableColumns);
-                }
-                adapter.notifyDataSetChanged(); // update the adapter with the new list
-            }
-
+            updateRecycler(c);
 
         }
 
