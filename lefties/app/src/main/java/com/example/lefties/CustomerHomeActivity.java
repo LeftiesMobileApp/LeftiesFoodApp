@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -54,6 +55,14 @@ public class CustomerHomeActivity extends AppCompatActivity {
         c = dbh.viewDataFoodWithRestaurantName();
         updateRecycler(c);
 
+        Button orderHistory = findViewById(R.id.btnGoToCart);
+
+        orderHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CustomerHomeActivity.this, OrderHistoryActivity.class));
+            }
+        });
 
     }
 
