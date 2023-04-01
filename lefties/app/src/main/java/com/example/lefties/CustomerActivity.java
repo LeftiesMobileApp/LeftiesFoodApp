@@ -13,6 +13,7 @@ public class CustomerActivity extends AppCompatActivity {
 
     String[] food = {"Paasta With Seafood", "Bruschetta"};
     int[] images = {R.drawable.placeholder, R.drawable.bgimg};
+    long acctId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

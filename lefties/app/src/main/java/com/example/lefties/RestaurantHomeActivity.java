@@ -17,17 +17,20 @@ import java.util.HashMap;
 public class RestaurantHomeActivity extends AppCompatActivity {
     RecyclerView inventoryList;
     DBHelper dbh;
-    Integer restaurantAcctId = 1;
     ArrayList<HashMap<String, String>> inventoryMapper = new ArrayList<>();
     Button addItem;
     Button generateReport;
     TextView headline;
     ArrayList<HashMap> foods;
+    long acctId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_home);
+
+        Bundle extras = getIntent().getExtras();
+        acctId = extras.getInt("acctId");
 
         headline = findViewById(R.id.txtRestoHomeWelcome);
 
@@ -63,7 +66,7 @@ public class RestaurantHomeActivity extends AppCompatActivity {
 
     public void goToAddItem(){
         Intent i = new Intent(getApplicationContext(), RestaurantAddAnItemActivity.class);
-        i.putExtra("restaurantAcctId", restaurantAcctId);
+        i.putExtra("acctId", acctId);
         startActivity(i);
     }
 
@@ -71,7 +74,7 @@ public class RestaurantHomeActivity extends AppCompatActivity {
 
         // CREATE ARRAYLIST of HashMap FROM DB
         foods = new ArrayList<HashMap>();
-        Cursor c = dbh.viewDataFoodByRestaurant(restaurantAcctId);
+        Cursor c = dbh.viewDataFoodByRestaurant(acctId);
 
         if(c.getCount() > 0){
             while(c.moveToNext()){ // while there is still line left
@@ -86,7 +89,7 @@ public class RestaurantHomeActivity extends AppCompatActivity {
             }
         }
         Boolean isRestaurant = true;
-        FoodDisplayAdapterClass adapter = new FoodDisplayAdapterClass(this, foods, isRestaurant);
+        FoodItemAdapterClass adapter = new FoodItemAdapterClass(this, foods, isRestaurant);
         inventoryList.setAdapter(adapter);
     }
 

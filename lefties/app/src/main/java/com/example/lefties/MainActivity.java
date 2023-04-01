@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToCart()
     {
-        Intent i = new Intent(getApplicationContext(),Cart.class);
+        Intent i = new Intent(getApplicationContext(), CartActivity.class);
         startActivity(i);
     }
 

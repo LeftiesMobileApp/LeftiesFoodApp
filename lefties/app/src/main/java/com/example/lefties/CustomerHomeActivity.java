@@ -22,13 +22,15 @@ public class CustomerHomeActivity extends AppCompatActivity {
     ArrayList<HashMap<String, String>> inventoryMapper = new ArrayList<>();
     Button addItem;
     ArrayList<HashMap> foods;
-
+    long acctId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_home);
 
+        Bundle extras = getIntent().getExtras();
+        acctId = extras.getInt("acctId");
         // Button btn = findViewById(R.id.itemBtnAddToCart);
 
         Button featured = findViewById(R.id.Featured);
@@ -72,7 +74,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
                 foods.add(foodTableColumns);
             }
         }
-        FoodDisplayAdapterClass adapter = new FoodDisplayAdapterClass(this, foods, false);
+        FoodItemAdapterClass adapter = new FoodItemAdapterClass(this, foods, false);
         inventoryList.setAdapter(adapter);
 
 

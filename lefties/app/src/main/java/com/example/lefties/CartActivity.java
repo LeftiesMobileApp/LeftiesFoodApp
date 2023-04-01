@@ -16,7 +16,7 @@ import com.google.android.material.chip.ChipGroup;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Cart extends AppCompatActivity {
+public class CartActivity extends AppCompatActivity {
 
     CartAdapterClass adapter;
     String[] food = {"Paasta With Seafood", "Bruschetta"};
@@ -39,14 +39,14 @@ public class Cart extends AppCompatActivity {
         btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Cart.this, OrderConfirmation.class));
+                startActivity(new Intent(CartActivity.this, OrderConfirmation.class));
             }
         });
 
         btnOrderMoreFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Cart.this, CustomerHomeActivity.class));
+                startActivity(new Intent(CartActivity.this, CustomerHomeActivity.class));
             }
         });
 
@@ -55,7 +55,7 @@ public class Cart extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Cart.this, MainActivity.class));
+                startActivity(new Intent(CartActivity.this, MainActivity.class));
             }
         });
 
@@ -75,7 +75,7 @@ public class Cart extends AppCompatActivity {
         String[] from ={"images", "txt"};
         int[] to ={R.id.imageFood, R.id.FoodText};
 
-        SimpleAdapter adapter = new SimpleAdapter(Cart.this,
+        SimpleAdapter adapter = new SimpleAdapter(CartActivity.this,
                 aList,R.layout.recycler_cart_item,from,to);
 
         ListView listView = findViewById(R.id.listViewSummary);

@@ -22,7 +22,7 @@ import java.util.HashMap;
 
 
 
-public class FoodDisplayAdapterClass extends RecyclerView.Adapter {
+public class FoodItemAdapterClass extends RecyclerView.Adapter {
     LayoutInflater layoutInflater;
     Context context;
     String[] strArr;
@@ -30,7 +30,7 @@ public class FoodDisplayAdapterClass extends RecyclerView.Adapter {
     Boolean isRestaurant;
     DBHelper dbh;
 
-    public FoodDisplayAdapterClass(@NonNull Context context, ArrayList<HashMap> foods, Boolean isRestaurant ) {
+    public FoodItemAdapterClass(@NonNull Context context, ArrayList<HashMap> foods, Boolean isRestaurant ) {
         this.context = context;
         this.foods = foods;
         this.isRestaurant = isRestaurant;
@@ -127,7 +127,7 @@ public class FoodDisplayAdapterClass extends RecyclerView.Adapter {
         ((ViewHolder)holder).btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, Cart.class);
+                Intent intent = new Intent(context, CartActivity.class);
                 context.startActivity(intent);
             }
         });
@@ -142,6 +142,15 @@ public class FoodDisplayAdapterClass extends RecyclerView.Adapter {
                 context.startActivity(i);
             }
         });
+    }
+
+
+    public void createOrder(){
+        // find all orders related to user Id
+    }
+    public void addToCart(){
+        // create an order if none
+
     }
 
 

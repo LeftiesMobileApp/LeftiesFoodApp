@@ -14,7 +14,7 @@ import com.google.android.material.textfield.TextInputEditText;
 public class RestaurantAddAnItemActivity extends AppCompatActivity {
 
     Button addItem;
-    int restaurantAcctId;
+    long acctId;
     int foodItemToEditId;
     DBHelper dbh;
 
@@ -30,7 +30,7 @@ public class RestaurantAddAnItemActivity extends AppCompatActivity {
         dbh = new DBHelper(this);
         // Get account id
         Bundle extras = getIntent().getExtras();
-        restaurantAcctId = extras.getInt("restaurantAcctId");
+        acctId = extras.getInt("acctId");
 
         name = findViewById(R.id.editName);
         salePrice = findViewById(R.id.editSalePrice);
@@ -55,10 +55,9 @@ public class RestaurantAddAnItemActivity extends AppCompatActivity {
         int fstock = Integer.valueOf(stock.getText().toString());
 
         dbh.addFood(
-                restaurantAcctId, fname, fDiscPrice, fRegPrice, fstock
+                acctId, fname, fDiscPrice, fRegPrice, fstock
         );
         goToRestaurantHome();
-
 
     }
 
