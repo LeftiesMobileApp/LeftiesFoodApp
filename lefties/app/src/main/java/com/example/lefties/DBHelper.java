@@ -10,10 +10,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class DBHelper extends SQLiteOpenHelper {
 
     final static  String  DATABASE_NAME = "Lefties.db";
-    final static int DATABASE_VERSION = 9;
+    final static int DATABASE_VERSION = 10;
 
 
     // TABLE 1: Account_Table
@@ -54,6 +58,8 @@ public class DBHelper extends SQLiteOpenHelper {
     final static String T4COL_4 = "order_type";
     final static String T4COL_5 = "order_total";
     final static String T4COL_6 = "order_remind";
+    final static String T4COL_7 = "customer_Id";
+    final static String T4COL_8 = "restaurant_Id";
 
 
     //Table 5 : Cart Table
@@ -98,7 +104,8 @@ public class DBHelper extends SQLiteOpenHelper {
         String query3 = "CREATE TABLE " + TABLE4_NAME + "(" + T4COL_1 +
                 " INTEGER PRIMARY KEY, "  + T4COL_2 + " TEXT, " +
                 T4COL_3 + " TEXT, "+ T4COL_4 + " TEXT, "
-                + T4COL_5 + " TEXT, " + T4COL_6 + " BOOLEAN )";
+                + T4COL_5 + " TEXT, " + T4COL_6 + " BOOLEAN, " +
+                T4COL_7 + " TEXT, " + T4COL_8 + " TEXT )";
 
         sqLiteDatabase.execSQL(query3);
 
@@ -187,22 +194,50 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean addOrder(String ostatus, String odate, String otype, String ototal)
+    public long addOrder(String ostatus, String odate, String otype,
+                         Double ototal, boolean oremind,
+                         Long custId, long restId)
     {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(T4COL_2, "PENDING");
+        values.put(T4COL_2, ostatus);
         values.put(T4COL_3, odate);
         values.put(T4COL_4, otype);
         values.put(T4COL_5, ototal);
+        values.put(T4COL_6, oremind);;
+        values.put(T4COL_7, custId);
+        values.put(T4COL_8, restId);
+
 
         long l = sqLiteDatabase.insert(TABLE4_NAME,null,values);
-        if(l > 0)
-            return true;
-        else
-            return false;
+        return l;
     }
+
+    public long createOrder(long custId, long restId, double total){
+        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        long orderId = addOrder(
+                "PENDING",
+                currentDate,
+                "DELIVERY",
+                total,
+                false,
+                custId,
+                restId
+        );
+        return orderId;
+    }
+
+    public void updateCartWithOrder(long orderId, long acctId){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String query = "UPDATE cart_table SET "
+                + " order_id=" + orderId + ", "
+                + " checkout_status=1"
+                + " WHERE "
+                + "( checkout_status=0 AND"
+                + " customer_Id=" + acctId + ")";
+        sqLiteDatabase.execSQL(query);
+    };
 
     //  :: CART ::
 
@@ -274,8 +309,6 @@ public class DBHelper extends SQLiteOpenHelper {
         else
             return false;
     }
-
-
 
 
 
