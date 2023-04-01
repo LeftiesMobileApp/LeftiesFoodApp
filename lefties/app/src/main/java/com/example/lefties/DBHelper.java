@@ -322,6 +322,12 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //Food
+    public Cursor viewDataFoodById(long foodId){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE food_Id=" + foodId;
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
     public Cursor viewDataFood(){
         SQLiteDatabase database = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE3_NAME;

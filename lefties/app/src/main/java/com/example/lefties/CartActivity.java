@@ -27,6 +27,7 @@ public class CartActivity extends AppCompatActivity {
     ArrayList cartItems;
     long acctId;
     RecyclerView cartList;
+    String restaurantName;
 
 
     @Override
@@ -35,6 +36,7 @@ public class CartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
         Bundle extras = getIntent().getExtras();
         acctId = extras.getLong("acctId");
+        restaurantName = extras.getString("restaurantName");
 
         dbh = new DBHelper(this);
         cartItems = new ArrayList<>();
@@ -91,7 +93,7 @@ public class CartActivity extends AppCompatActivity {
                 cartItems.add(cartItem);
             }
 
-        adapter = new CartItemAdapterClass(this, cartItems , acctId);
+        adapter = new CartItemAdapterClass(this, cartItems , acctId, restaurantName);
         cartList.setAdapter(adapter);
         }
     }
