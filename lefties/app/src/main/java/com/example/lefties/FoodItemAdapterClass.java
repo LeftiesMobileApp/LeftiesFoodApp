@@ -36,6 +36,8 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
     public FoodItemAdapterClass(@NonNull Context context, ArrayList<HashMap> foods, long acctId) {
         this.context = context;
         this.foods = foods;
+        this.acctId = acctId;
+        Log.i("acct id long is ", ""+acctId);
         layoutInflater = LayoutInflater.from(context);
         dbh = new DBHelper(context);
     }
@@ -66,7 +68,7 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
             btnDelete = itemView.findViewById(R.id.itemBtnDelete);
             btnEdit= itemView.findViewById(R.id.itemBtnEdit);
             btnGoToRestaurant = itemView.findViewById(R.id.itemBtnGoToRestaurant);
-            btnAddToCart = itemView.findViewById(R.id.itemBtnAddToCart);
+            btnAddToCart = itemView.findViewById(R.id.btnPlaceOrder);
             return;
         }
 
@@ -114,11 +116,7 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
         ((ViewHolder)holder).btnGoToRestaurant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, CustomerDisplayRestaurantActivity.class);
-                intent.putExtra("acctId", acctId);
-                intent.putExtra("restaurantId", restaurantId);
-                intent.putExtra("restaurantName", restaurantNameString);
-                context.startActivity(intent);
+                goToRestaurant(restaurantId, restaurantNameString);
             }
         });
 
@@ -164,10 +162,20 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
         // find all orders related to user Id
     }
     public void addToCart(int foodId){
-        dbh.addFoodToTempCart(foodId);
-        Intent i = new Intent(context, CartActivity.class);
-        context.startActivity(i);
+        Log.i("add to cart acct id", "is "+acctId);
+        dbh.addFoodToTempCart(foodId, acctId);
 
+        Intent i = new Intent(context, CartActivity.class);
+        i.putExtra("acctId", acctId);
+        context.startActivity(i);
+    }
+
+    public void goToRestaurant(long restaurantId, String restaurantNameString){
+        Intent intent = new Intent(context, CustomerDisplayRestaurantActivity.class);
+        intent.putExtra("acctId", acctId);
+        intent.putExtra("restaurantId", restaurantId);
+        intent.putExtra("restaurantName", restaurantNameString);
+        context.startActivity(intent);
     }
 
 

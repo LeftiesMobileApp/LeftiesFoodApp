@@ -31,7 +31,7 @@ public class RestaurantHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_restaurant_home);
 
         Bundle extras = getIntent().getExtras();
-        acctId = extras.getInt("acctId");
+        acctId = extras.getLong("acctId");
         restaurantName = extras.getString("acctName");
 
         headline = findViewById(R.id.txtRestoHomeWelcome);

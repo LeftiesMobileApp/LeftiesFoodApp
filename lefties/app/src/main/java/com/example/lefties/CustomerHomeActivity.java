@@ -36,7 +36,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_customer_home);
 
         Bundle extras = getIntent().getExtras();
-        acctId = extras.getInt("acctId");
+        acctId = extras.getLong("acctId");
 
        TextView name = findViewById(R.id.FromD);
        TextView address = findViewById(R.id.AtD);

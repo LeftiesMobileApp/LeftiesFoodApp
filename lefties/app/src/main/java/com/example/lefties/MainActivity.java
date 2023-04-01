@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                     if (c.moveToFirst()){
                         accountType = c.getString(2);
                         acctName = c.getString(3);
-                        acctId = c.getLong(1);
+                        acctId = Long.parseLong(c.getString(0));
 
                         if(accountType.equals("Customer")){
                             Toast.makeText(MainActivity.this, "Customer", Toast.LENGTH_SHORT).show();

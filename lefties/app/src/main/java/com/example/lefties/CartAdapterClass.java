@@ -16,8 +16,7 @@ public class CartAdapterClass extends RecyclerView.Adapter{
     LayoutInflater mInflator;
     Context context;
 
-
-    public CartAdapterClass(Context context){ //,  String[] strRest, Integer[] imgData, String[] strItem, String[] strPrice){
+    public CartAdapterClass(Context context, long[] cartItems, long acctId){ //,  String[] strRest, Integer[] imgData, String[] strItem, String[] strPrice){
         //img = imgData;
         this.context = context;
 //        restname = strRest;

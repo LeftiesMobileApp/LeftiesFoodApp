@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 public class DBHelper extends SQLiteOpenHelper {
 
     final static  String  DATABASE_NAME = "Lefties.db";
-    final static int DATABASE_VERSION = 7;
+    final static int DATABASE_VERSION = 9;
 
 
     // TABLE 1: Account_Table
@@ -63,6 +63,7 @@ public class DBHelper extends SQLiteOpenHelper {
     final static String T5COL_3 = "food_Id";  //FK
     final static String T5COL_4 = "food_qty_ordered";
     final static String T5COL_5 = "checkout_status";
+    final static String T5COL_6 = "customer_Id";
 
 
     public DBHelper(@Nullable Context context) {
@@ -105,7 +106,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String query4 = "CREATE TABLE " + TABLE5_NAME + "(" + T5COL_1 +
                 " INTEGER PRIMARY KEY, "  + T5COL_2 + " TEXT, " +
                 T5COL_3 + " TEXT, " +
-                T5COL_4 + " TEXT, " + T5COL_5 + " BOOLEAN)";
+                T5COL_4 + " TEXT, " + T5COL_5 + " BOOLEAN, " + T5COL_6 + " TEXT)";
 
         sqLiteDatabase.execSQL(query4);
     }
@@ -166,9 +167,9 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
+
     //Adding Food
-    public boolean addFood(long aid, String fname, Double fdiscountprice, Double fregularprice,
-                              Integer fqty)
+    public boolean addFood(long aid, String fname, Double fdiscountprice, Double fregularprice, Integer fqty)
     {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -204,8 +205,25 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //  :: CART ::
+
+    public Cursor viewDataCart(){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE5_NAME;
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+    public Cursor viewCustomerCart(long acctId){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM cart_table WHERE customer_id=" + acctId + " AND NOT checkout_status";
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+
+
     // Adding cart
-    public long addCart(long orderId, long foodId, int foodQty, boolean checkoutStatus)
+    public long addCart(long orderId, long foodId, int foodQty, boolean checkoutStatus, long acctId)
     {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -213,6 +231,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(T5COL_3, foodId);
         values.put(T5COL_4, foodQty);
         values.put(T5COL_5, checkoutStatus);
+        values.put(T5COL_6, acctId);
 
         long l = sqLiteDatabase.insert(TABLE5_NAME,null,values);
         return l;
@@ -221,9 +240,11 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean validateOnlyOneCart(){
         return false;
     }
-    public long addFoodToTempCart(int foodId){
+    public long addFoodToTempCart(int foodId, long acctId){
         // validate
-        return addCart(0, foodId, 1, false );
+
+        return addCart(0, foodId, 1, false,
+                Long.parseLong((String.valueOf(acctId))));
     }
     public void applyOrderId(Long orderId){
         // apply order Id to all un-checked out items
@@ -396,15 +417,6 @@ public class DBHelper extends SQLiteOpenHelper {
         String query = "SELECT * FROM " + TABLE4_NAME;
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
-    }
-
-    //Cart
-    public Cursor viewDataCart(){
-        SQLiteDatabase database = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE5_NAME;
-        Cursor cursor = database.rawQuery(query,null);
-        return cursor;
-
     }
 
     //Deleting the data
