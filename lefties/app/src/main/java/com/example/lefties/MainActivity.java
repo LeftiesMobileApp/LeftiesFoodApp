@@ -27,17 +27,10 @@ public class MainActivity extends AppCompatActivity {
         EditText userPass = findViewById(R.id.userPass);
         Button btnLogin = findViewById(R.id.loginBtn);
         Button btnSignUp = findViewById(R.id.btnGoSignUp);
-//        CheckBox checkBoxRestaurant = findViewById(R.id.checkboxRestaurant);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Raiyan-Temporary Bypass
-//                if (checkBoxRestaurant.isChecked()){
-//                    goToRestoHome();
-//                }else{
-//                    goToCustomerHome();
-//                }
 
                 Cursor c = dbh.viewDataAccount(userEmail.getText().toString(), userPass.getText().toString());
                 StringBuilder str = new StringBuilder();
@@ -49,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                         acctId = c.getLong(1);
 
                         if(accountType.equals("Customer")){
-//                            Toast.makeText(MainActivity.this, "Customer", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Customer", Toast.LENGTH_SHORT).show();
                             goToCustomerHome()
 ;                        } else {
                             Toast.makeText(MainActivity.this, "Manager", Toast.LENGTH_SHORT).show();
@@ -93,11 +86,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    // Macci - Populate with data. If "Golden Star" restaurant does not exist, populate the tables
     public void seedTable(){
         Cursor c = dbh.viewAccountByName("Golden Star");
         StringBuilder str = new StringBuilder();
         if(c.getCount() == 0){
-            dbh.seedTables();
+            DBSeeder dbs = new DBSeeder(dbh);
+            dbs.seedTables();
         }
     }
 }

@@ -65,12 +65,10 @@ public class DBHelper extends SQLiteOpenHelper {
     final static String T5COL_5 = "checkout_status";
 
 
-
     public DBHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         SQLiteDatabase database =this.getWritableDatabase();
     }
-
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
@@ -152,29 +150,6 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-
-    //Original addAccount
-    /*
-    public boolean addAccount(String aid, String aname, String atype, String aemail, String aphone,
-                              String aaddress, String acity)
-    {
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(T1COL_2, aname);
-        values.put(T1COL_3, atype);
-        values.put(T1COL_4, aemail);
-        values.put(T1COL_5, aphone);
-        values.put(T1COL_6, aaddress);
-        values.put(T1COL_7, acity);
-
-        long l = sqLiteDatabase.insert(TABLE1_NAME,null,values);
-        if(l > 0)
-            return true;
-        else
-            return false;
-
-    }*/
-
     //Adding Restaurant
     public boolean addRestaurant(String Rtype , long aid)
     {
@@ -188,73 +163,8 @@ public class DBHelper extends SQLiteOpenHelper {
             return true;
         else
             return false;
-
     }
 
-    public void seedTables(){
-        // RESTAURANTS
-        long r1 = addAccount(
-                "Dragon City Garden",
-                "Restaurant",
-                "dragon@email.com",
-                "pass123",
-                "0987 654 321",
-                "123 Dragon St, Surrey",
-                "Surrey"
-        );
-        addRestaurant("CHINESE", r1 );
-        addFood(r1, "Fortune Cookies", 2.0, 5.0, 16);
-        long r2 = addAccount(
-                "Golden Star",
-                "Restaurant",
-                "golden@email.com",
-                "pass123",
-                "0987 654 321",
-                "123 Golden St, Surrey",
-                "Surrey"
-        );
-        addFood(r2, "Sweet and Sour", 4.0, 10.0, 16);
-        addFood(r2, "Wanton Noodles", 4.0, 10.0, 16);
-        addRestaurant("CHINESE", r2 );
-        long r3 = addAccount(
-                "Biryani City",
-                "Restaurant",
-                "biryani@email.com",
-                "pass123",
-                "0987 654 321",
-                "123 Biryani St, Surrey",
-                "Surrey"
-        );
-        addRestaurant("INDIAN", r3 );
-        addFood(r3, "Butter Chicken", 4.0, 10.0, 16);
-        addFood(r3, "Goat", 4.0, 10.0, 16);
-        addFood(r3, "Paneer", 4.0, 10.0, 16);
-        addFood(r3, "Dal Makhni", 4.0, 10.0, 16);
-
-        // CUSTOMERS
-        addAccount(
-                "John Smith",
-                "Customer",
-                "john@email.com",
-                "pass123",
-                "0987 654 321",
-                "123 Dragon St, Surrey",
-                "Surrey"
-        );
-        addAccount(
-                "Jane Darling",
-                "Customer",
-                "jane@email.com",
-                "pass123",
-                "0987 654 321",
-                "123 Dragon St, Surrey",
-                "Surrey"
-        );
-    }
-
-    public void seedRestaurant(){
-        //
-    }
 
     //Adding Food
     public boolean addFood(long aid, String fname, Double fdiscountprice, Double fregularprice,
@@ -276,20 +186,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public void seedFoodTable(){
-        addFood(1, "Tandoori Chicken", 30.0, 25.0, 3);
-        addFood(2, "Bread", 4.0, 10.0, 16);
-        addFood(3, "Iced Coffee", 3.0, 8.0, 160);
-        addFood(4, "Beef Stir-fry", 30.0, 25.0, 3);
-        addFood(2, "Burito", 20.0, 25.0, 4);
-        addFood(3, "Cookies", 4.0, 10.0, 16);
-        addFood(3, "Brownie Fudge", 4.0, 10.0, 16);
-        addFood(4, "Kimchi", 4.0, 10.0, 16);
-        addFood(4, "Manchurian", 4.0, 10.0, 16);
-
-    }
-
-
 
 
     //Adding cart
@@ -308,7 +204,6 @@ public class DBHelper extends SQLiteOpenHelper {
             return true;
         else
             return false;
-
     }
 
     //Adding Order
@@ -326,7 +221,7 @@ public class DBHelper extends SQLiteOpenHelper {
             return false;
     }
 
-    // Reading Data
+    // READING DATA
 
     //Account
     //Raiyan-making changes to viewDataAccount method
