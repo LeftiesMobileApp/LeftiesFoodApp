@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 public class DBHelper extends SQLiteOpenHelper {
 
     final static  String  DATABASE_NAME = "Lefties.db";
-    final static int DATABASE_VERSION = 4;
+    final static int DATABASE_VERSION = 6;
 
 
     // TABLE 1: Account_Table
@@ -213,10 +213,18 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void seedFoodTable(){
         addFood(1, "Tandoori Chicken", 30.0, 25.0, 3);
-        addFood(1, "Bread", 4.0, 10.0, 16);
-        addFood(1, "Iced Coffee", 3.0, 8.0, 160);
-        addFood(2, "Beef Stir-fry", 30.0, 25.0, 3);
-        addFood(2, "Cookies", 4.0, 10.0, 16);
+        addFood(2, "Bread", 4.0, 10.0, 16);
+        addFood(3, "Iced Coffee", 3.0, 8.0, 160);
+        addFood(4, "Beef Stir-fry", 30.0, 25.0, 3);
+        addFood(2, "Burito", 20.0, 25.0, 4);
+        addFood(3, "Cookies", 4.0, 10.0, 16);
+        addFood(3, "Brownie Fudge", 4.0, 10.0, 16);
+        addFood(4, "Kimchi", 4.0, 10.0, 16);
+        addFood(4, "Manchurian", 4.0, 10.0, 16);
+        addFood(5, "Butter Chicken", 4.0, 10.0, 16);
+        addFood(5, "Goat", 4.0, 10.0, 16);
+        addFood(6, "Paneer", 4.0, 10.0, 16);
+        addFood(6, "Dal Makhni", 4.0, 10.0, 16);
 
     }
 
@@ -298,6 +306,57 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }
+
+    public Cursor viewDataFoodF(){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 1";
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+    public Cursor viewDataFoodM(){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 2";
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+    public Cursor viewDataFoodP(){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 3";
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+    public Cursor viewDataFoodC(){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 4";
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+    public Cursor viewDataFoodCh(){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 5";
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+    public Cursor viewDataFoodVeg(){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 6";
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+//    public Cursor viewDataFoodByState(){
+//        SQLiteDatabase database = this.getReadableDatabase();
+//        String query = "SELECT * FROM " + TABLE3_NAME + " JOIN " +
+//                TABLE1_NAME + " ON " + TABLE3_NAME + ".account_Id = " + TABLE1_NAME + ".account_Id WHERE " +
+//                TABLE1_NAME + ".CITY = 'SURREY'";
+//        Cursor cursor = database.rawQuery(query, null);
+//        return cursor;
+//    }
 
     public Cursor viewDataFoodByRestaurant(int acctId){
         SQLiteDatabase database = this.getReadableDatabase();
