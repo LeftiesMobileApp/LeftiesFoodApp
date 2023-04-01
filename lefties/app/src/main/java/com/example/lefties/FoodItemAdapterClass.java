@@ -31,7 +31,6 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
     ArrayList<HashMap> foods;
     DBHelper dbh;
     long acctId;
-//    ConstraintSet.Layout rowAdminBtns;
 
 
     public FoodItemAdapterClass(@NonNull Context context, ArrayList<HashMap> foods, long acctId) {
@@ -106,24 +105,11 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
         ((ViewHolder)holder).discountedPrice.setText("$ "+discountPrice);
         ((ViewHolder)holder).regularPrice.setText("$ "+regularPrice);
 
+        showCorrectBtns(holder);
+
         // get image from drawable with id name
         int resID = context.getResources().getIdentifier("food_" + foodIdString , "drawable", context.getPackageName());
         ((ViewHolder)holder).foodImg.setImageResource(resID);
-
-        contextClass = context.getClass().getSimpleName();
-        if(contextClass.equals("RestaurantHomeActivity")){
-            ((ViewHolder)holder).btnAddToCart.setVisibility(GONE);
-            ((ViewHolder)holder).btnGoToRestaurant.setVisibility(GONE);
-
-        }else{
-            ((ViewHolder)holder).btnEdit.setVisibility(GONE);
-            ((ViewHolder)holder).btnDelete.setVisibility(GONE);
-            if(contextClass.equals("CustomerHomeActivity")){
-                ((ViewHolder)holder).btnAddToCart.setVisibility(GONE);
-            }else{
-                ((ViewHolder)holder).btnGoToRestaurant.setVisibility(GONE);
-            }
-        }
 
         ((ViewHolder)holder).btnGoToRestaurant.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,8 +125,7 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
         ((ViewHolder)holder).btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, CartActivity.class);
-                context.startActivity(intent);
+                addToCart(foodId);
             }
         });
 
@@ -157,12 +142,31 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
 
     }
 
+    public void showCorrectBtns(RecyclerView.ViewHolder holder){
+        contextClass = context.getClass().getSimpleName();
+        if(contextClass.equals("RestaurantHomeActivity")){
+            ((ViewHolder)holder).btnAddToCart.setVisibility(GONE);
+            ((ViewHolder)holder).btnGoToRestaurant.setVisibility(GONE);
+
+        }else{
+            ((ViewHolder)holder).btnEdit.setVisibility(GONE);
+            ((ViewHolder)holder).btnDelete.setVisibility(GONE);
+            if(contextClass.equals("CustomerHomeActivity")){
+                ((ViewHolder)holder).btnAddToCart.setVisibility(GONE);
+            }else{
+                ((ViewHolder)holder).btnGoToRestaurant.setVisibility(GONE);
+            }
+        }
+    }
+
 
     public void createOrder(){
         // find all orders related to user Id
     }
-    public void addToCart(){
-        // create an order if none
+    public void addToCart(int foodId){
+        dbh.addFoodToTempCart(foodId);
+        Intent i = new Intent(context, CartActivity.class);
+        context.startActivity(i);
 
     }
 

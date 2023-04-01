@@ -62,15 +62,15 @@ public class CartActivity extends AppCompatActivity {
     }
 
     public void applyListView(){
-        ArrayList<HashMap<String, String>> aList = new ArrayList<HashMap<String, String>>();
-
-        for(int i=0; i<food.length; i++)
-        {
-            HashMap<String, String> hashMap =new HashMap<>();
-            hashMap.put("txt", food[i]);
-            hashMap.put("images", Integer.toString(images[i]));
-            aList.add(hashMap);
-        }
+//        ArrayList<HashMap<String, String>> aList = new ArrayList<HashMap<String, String>>();
+//
+//        for(int i=0; i<food.length; i++)
+//        {
+//            HashMap<String, String> hashMap =new HashMap<>();
+//            hashMap.put("txt", food[i]);
+//            hashMap.put("images", Integer.toString(images[i]));
+//            aList.add(hashMap);
+//        }
 
         String[] from ={"images", "txt"};
         int[] to ={R.id.imageFood, R.id.FoodText};
