@@ -92,4 +92,6 @@
     <string name="labelSearchCity">Search your city</string>
     <string name="btnGoToRestaurant">Order from restaurant</string>
     <string name="labelRestoPlaceholder">Good Restaurant</string>
+    <string name="labelGoToCart">Go to cart</string>
+    <string name="labelBackToCustHome"><![CDATA[< Back To All]]></string>
 </resources>

@@ -29,16 +29,14 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
     String contextClass;
     String[] strArr;
     ArrayList<HashMap> foods;
-    Boolean isRestaurant;
     DBHelper dbh;
+    long acctId;
 //    ConstraintSet.Layout rowAdminBtns;
 
 
-    public FoodItemAdapterClass(@NonNull Context context, ArrayList<HashMap> foods) {
+    public FoodItemAdapterClass(@NonNull Context context, ArrayList<HashMap> foods, long acctId) {
         this.context = context;
-        Log.d("THIS IS YOUR CLASS", "FoodItemAdapterClass: " + contextClass);
         this.foods = foods;
-        this.isRestaurant = isRestaurant;
         layoutInflater = LayoutInflater.from(context);
         dbh = new DBHelper(context);
     }
@@ -66,7 +64,6 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
             regularPrice.setPaintFlags(regularPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             foodImg = itemView.findViewById(R.id.imgFood);
             restaurantName = itemView.findViewById(R.id.itemRestaurantName);
-
             btnDelete = itemView.findViewById(R.id.itemBtnDelete);
             btnEdit= itemView.findViewById(R.id.itemBtnEdit);
             btnGoToRestaurant = itemView.findViewById(R.id.itemBtnGoToRestaurant);
@@ -96,6 +93,7 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
 
         HashMap<String, String> foodItem = foods.get(position);
         String foodIdString = foodItem.get("food_id");
+        long restaurantId = Long.parseLong(foodItem.get("account_id"));
         int foodId = Integer.parseInt(foodIdString);
         String name = foodItem.get("food_name");
         String regularPrice = foodItem.get("food_regular_price");
@@ -127,6 +125,17 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
             }
         }
 
+        ((ViewHolder)holder).btnGoToRestaurant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, CustomerDisplayRestaurantActivity.class);
+                intent.putExtra("acctId", acctId);
+                intent.putExtra("restaurantId", restaurantId);
+                intent.putExtra("restaurantName", restaurantNameString);
+                context.startActivity(intent);
+            }
+        });
+
         ((ViewHolder)holder).btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,6 +154,7 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
                 context.startActivity(i);
             }
         });
+
     }
 
 

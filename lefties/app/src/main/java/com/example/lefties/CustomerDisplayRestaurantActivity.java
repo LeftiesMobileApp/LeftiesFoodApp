@@ -19,7 +19,9 @@ public class CustomerDisplayRestaurantActivity extends AppCompatActivity {
     Button addItem;
     ArrayList<HashMap> foods;
     long acctId;
-    long restaurantIdChosen;
+    long restaurantId;
+    String restaurantName;
+    FoodItemAdapterClass adapter;
 
 
     @Override
@@ -28,22 +30,28 @@ public class CustomerDisplayRestaurantActivity extends AppCompatActivity {
         setContentView(R.layout.activity_customer_display_restaurant);
 
         Bundle extras = getIntent().getExtras();
-        acctId = extras.getInt("acctId");
-        acctId = extras.getInt("restaurantIdChosen");
+        acctId = extras.getLong("acctId");
+        restaurantId = extras.getLong("restaurantId");
+        restaurantName = extras.getString("restaurantName");
+
 
         dbh = new DBHelper(this);
         if (dbh.viewDataFood().getCount() < 1) {
             dbh.seedFoodTable();
         }
-        inventoryList = findViewById(R.id.recyclerInventory);
+        inventoryList = findViewById(R.id.customerRestaurantRecycler);
 
         int columnCount = 2;
         inventoryList.setLayoutManager(
                 new GridLayoutManager(this, columnCount));
 
         foods = new ArrayList<HashMap>();
-        Cursor c = dbh.viewDataFoodByRestaurant(restaurantIdChosen);
+        Cursor c = dbh.viewDataFoodByRestaurant(restaurantId);
+        updateRecycler(c);
 
+    }
+
+    public void updateRecycler(Cursor c){
         if (c.getCount() > 0) {
             while (c.moveToNext()) { // while there is still line left
                 HashMap<String, String> foodTableColumns = new HashMap<>();
@@ -52,12 +60,12 @@ public class CustomerDisplayRestaurantActivity extends AppCompatActivity {
                 foodTableColumns.put("food_name", c.getString(2));
                 foodTableColumns.put("food_discounted_price", c.getString(3));
                 foodTableColumns.put("food_regular_price", c.getString(4));
-                foodTableColumns.put("food_qty", c.getString(8));
+//                foodTableColumns.put("food_qty", c.getString(5));
+                foodTableColumns.put("restaurant_name", restaurantName);
                 foods.add(foodTableColumns);
             }
         }
-        FoodItemAdapterClass adapter = new FoodItemAdapterClass(this, foods);
+        adapter = new FoodItemAdapterClass(this, foods, acctId);
         inventoryList.setAdapter(adapter);
-
     }
 }

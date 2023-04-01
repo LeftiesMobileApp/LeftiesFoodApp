@@ -181,7 +181,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(T2COL_2, Rtype);
-
+        values.put(T2COL_3, aid);
 
         long l = sqLiteDatabase.insert(TABLE2_NAME,null,values);
         if(l > 0)

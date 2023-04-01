@@ -20,8 +20,9 @@ public class CustomerHomeActivity extends AppCompatActivity {
     RecyclerView inventoryList;
     ArrayList<HashMap<String, String>> inventoryMapper = new ArrayList<>();
     Button addItem;
-    ArrayList<HashMap> foods;
     FoodItemAdapterClass adapter;
+    ArrayList<HashMap> foods;
+
     Cursor c;
 
     long acctId;
@@ -43,7 +44,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
 
         dbh = new DBHelper(this);
 
-        inventoryList = findViewById(R.id.recyclerInventory);
+        inventoryList = findViewById(R.id.customerRestaurantRecycler);
 
         int columnCount = 2;
         inventoryList.setLayoutManager(
@@ -66,11 +67,11 @@ public class CustomerHomeActivity extends AppCompatActivity {
                 foodTableColumns.put("food_discounted_price", c.getString(3));
                 foodTableColumns.put("food_regular_price", c.getString(4));
                 foodTableColumns.put("food_qty", c.getString(5));
-                foodTableColumns.put("restaurant_name", c.getString(8));
+                foodTableColumns.put("restaurant_name", c.getString(7));
                 foods.add(foodTableColumns);
             }
         }
-        adapter = new FoodItemAdapterClass(this, foods);
+        adapter = new FoodItemAdapterClass(this, foods, acctId);
         inventoryList.setAdapter(adapter);
     }
 

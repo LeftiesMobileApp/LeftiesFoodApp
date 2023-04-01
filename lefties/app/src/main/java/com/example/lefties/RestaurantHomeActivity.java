@@ -38,7 +38,7 @@ public class RestaurantHomeActivity extends AppCompatActivity {
 
         dbh = new DBHelper(this);
 
-        inventoryList = findViewById(R.id.recyclerInventory);
+        inventoryList = findViewById(R.id.customerRestaurantRecycler);
         int columnCount = 2;
         inventoryList.setLayoutManager(
                 new GridLayoutManager(this, columnCount));
@@ -88,7 +88,7 @@ public class RestaurantHomeActivity extends AppCompatActivity {
             }
         }
         Boolean isRestaurant = true;
-        FoodItemAdapterClass adapter = new FoodItemAdapterClass(this, foods);
+        FoodItemAdapterClass adapter = new FoodItemAdapterClass(this, foods, acctId);
         inventoryList.setAdapter(adapter);
     }
 
