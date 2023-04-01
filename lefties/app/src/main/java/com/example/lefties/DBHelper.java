@@ -17,7 +17,7 @@ import java.util.Locale;
 public class DBHelper extends SQLiteOpenHelper {
 
     final static  String  DATABASE_NAME = "Lefties.db";
-    final static int DATABASE_VERSION = 10;
+    final static int DATABASE_VERSION = 11;
 
 
     // TABLE 1: Account_Table
@@ -176,7 +176,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     //Adding Food
-    public boolean addFood(long aid, String fname, Double fdiscountprice, Double fregularprice, Integer fqty)
+    public long addFood(long aid, String fname, Double fdiscountprice, Double fregularprice, Integer fqty)
     {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -187,10 +187,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(T3COL_6, fqty);
 
         long l = sqLiteDatabase.insert(TABLE3_NAME,null,values);
-        if(l > 0)
-            return true;
-        else
-            return false;
+        return l;
 
     }
 

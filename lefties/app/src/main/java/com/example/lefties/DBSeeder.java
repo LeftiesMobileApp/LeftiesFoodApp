@@ -3,7 +3,9 @@ package com.example.lefties;
 public class DBSeeder {
     DBHelper dbh;
     long r1,r2,r3;
-    long c1,c2;
+    long c1,c2, c3;
+    long f1,f2,f3,f4,f5,f6,f7;
+    long o1,o2,o3;
 
     public DBSeeder(DBHelper dbh){
         this.dbh = dbh;
@@ -13,6 +15,7 @@ public class DBSeeder {
         seedAccounts();
         seedFood();
         seedFoodInit();
+        seedOrders();
     }
 
     public void seedAccounts(){
@@ -50,7 +53,7 @@ public class DBSeeder {
         dbh.addRestaurant("INDIAN", r3 );
 
         // CUSTOMERS
-        dbh.addAccount(
+        c1 = dbh.addAccount(
                 "John Smith",
                 "Customer",
                 "john@email.com",
@@ -59,10 +62,19 @@ public class DBSeeder {
                 "123 Dragon St, Surrey",
                 "Surrey"
         );
-        dbh.addAccount(
+        c2 = dbh.addAccount(
                 "Jane Darling",
                 "Customer",
                 "jane@email.com",
+                "pass123",
+                "0987 654 321",
+                "123 Dragon St, Surrey",
+                "Surrey"
+        );
+        c3 = dbh.addAccount(
+                "Dua Lipa",
+                "Customer",
+                "dua@email.com",
                 "pass123",
                 "0987 654 321",
                 "123 Dragon St, Surrey",
@@ -73,18 +85,42 @@ public class DBSeeder {
     public void seedFood(){
 
         // CHINESE 1
-        dbh.addFood(r1, "Fortune Cookies", 2.0, 5.0, 16);
+        f1 = dbh.addFood(r1, "Fortune Cookies", 2.0, 5.0, 16);
 
         // CHINESE 2
-        dbh.addFood(r2, "Sweet and Sour", 4.0, 10.0, 16);
-        dbh.addFood(r2, "Wanton Noodles", 4.0, 10.0, 16);
+        f2 = dbh.addFood(r2, "Sweet and Sour", 4.0, 10.0, 16);
+        f3 =dbh.addFood(r2, "Wanton Noodles", 4.0, 10.0, 16);
 
         // INDIAN
-        dbh.addFood(r3, "Butter Chicken", 4.0, 10.0, 16);
-        dbh.addFood(r3, "Goat", 4.0, 10.0, 16);
-        dbh.addFood(r3, "Paneer", 4.0, 10.0, 16);
-        dbh.addFood(r3, "Dal Makhni", 4.0, 10.0, 16);
+        f4 = dbh.addFood(r3, "Butter Chicken", 4.0, 10.0, 16);
+        f5 = dbh.addFood(r3, "Goat", 12.0, 20.0, 16);
+        f6 = dbh.addFood(r3, "Paneer", 6.0, 10.0, 16);
+        f7 = dbh.addFood(r3, "Dal Makhni", 4.5, 10.0, 16);
 
+    }
+
+
+    public void seedOrders(){
+        // ORDER 1
+        dbh.addFoodToTempCart((int)f2,c3);
+        dbh.addFoodToTempCart((int)f3,c3);
+        o1 = dbh.createOrder(
+                c3,
+                r2,
+                8.0
+        );
+        dbh.updateCartWithOrder(o1, c3);
+
+        // ORDER 2
+        dbh.addFoodToTempCart((int)f4,c2);
+        dbh.addFoodToTempCart((int)f5,c2);
+        dbh.addFoodToTempCart((int)f6,c2);
+        o2 = dbh.createOrder(
+                c2,
+                r3,
+                18.0
+        );
+        dbh.updateCartWithOrder(o2, c2);
     }
 
     public void seedFoodInit(){

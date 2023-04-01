@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,7 +25,8 @@ public class OrderConfirmation extends AppCompatActivity {
         TextView orderNumLabel= findViewById(R.id.txtOrderNumber);
         TextView orderPlacedLabel= findViewById(R.id.txtOrderPlaced);
         orderNumLabel.setText("Your order number is #00" + orderId);
-        orderPlacedLabel.setText("Your order is placed for " + restaurantName);
+//        orderPlacedLabel.setText("Your order is placed for " + restaurantName);
+        Log.i("resto name", restaurantName);
 
         Button backbtn = findViewById(R.id.btnHome);
         backbtn.setOnClickListener(new View.OnClickListener() {
