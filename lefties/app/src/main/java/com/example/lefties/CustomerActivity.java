@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class CustomerActivity extends AppCompatActivity {
 
-    String[] food = {"Paasta With Seafood", "Bruschetta"};
+    String[] food = {"Pasta With Seafood", "Bruschetta"};
     int[] images = {R.drawable.placeholder, R.drawable.bgimg};
     long acctId;
 
