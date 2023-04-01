@@ -7,11 +7,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -90,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToCustomerHome()
     {
-        Intent i = new Intent(getApplicationContext(),CustomerPage.class);
+        Intent i = new Intent(getApplicationContext(), CustomerHomeActivity.class);
         startActivity(i);
     }
 }

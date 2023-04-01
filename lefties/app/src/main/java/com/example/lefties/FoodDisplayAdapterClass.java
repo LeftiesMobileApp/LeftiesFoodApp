@@ -22,7 +22,7 @@ import java.util.HashMap;
 
 
 
-public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
+public class FoodDisplayAdapterClass extends RecyclerView.Adapter {
     LayoutInflater layoutInflater;
     Context context;
     String[] strArr;
@@ -30,7 +30,7 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter {
     Boolean isRestaurant;
     DBHelper dbh;
 
-    public InventoryRecyclerAdapter(@NonNull Context context, ArrayList<HashMap> foods, Boolean isRestaurant ) {
+    public FoodDisplayAdapterClass(@NonNull Context context, ArrayList<HashMap> foods, Boolean isRestaurant ) {
         this.context = context;
         this.foods = foods;
         this.isRestaurant = isRestaurant;

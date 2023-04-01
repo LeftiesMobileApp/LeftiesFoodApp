@@ -4,22 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CustomerPage extends AppCompatActivity {
+public class CustomerHomeActivity extends AppCompatActivity {
 
     DBHelper dbh;
     RecyclerView inventoryList;
@@ -32,7 +27,7 @@ public class CustomerPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_page);
+        setContentView(R.layout.activity_customer_home);
 
         // Button btn = findViewById(R.id.itemBtnAddToCart);
 
@@ -48,8 +43,6 @@ public class CustomerPage extends AppCompatActivity {
        TextView name = findViewById(R.id.FromD);
        TextView address = findViewById(R.id.AtD);
        TextView city = findViewById(R.id.ToD);
-
-
 
 
 
@@ -79,7 +72,7 @@ public class CustomerPage extends AppCompatActivity {
                 foods.add(foodTableColumns);
             }
         }
-        InventoryRecyclerAdapter adapter = new InventoryRecyclerAdapter(this, foods, false);
+        FoodDisplayAdapterClass adapter = new FoodDisplayAdapterClass(this, foods, false);
         inventoryList.setAdapter(adapter);
 
 

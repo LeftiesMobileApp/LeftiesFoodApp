@@ -36,7 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
         EditText acnPass = findViewById(R.id.accountPassword);
         EditText acnPhoneNumber = findViewById(R.id.accountPhoneNumber);
         EditText acnAddress = findViewById(R.id.accountAddress);
-        EditText acnCity = findViewById(R.id.accountCity);
+        Spinner acnCity = findViewById(R.id.accountCity);
         Button btnSignUpConfirm = findViewById(R.id.btnSignUp);
 
         btnSignUpConfirm.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +52,8 @@ public class SignUpActivity extends AppCompatActivity {
                         acnPass.getText().toString(),
                         acnPhoneNumber.getText().toString(),
                         acnAddress.getText().toString(),
-                        acnCity.getText().toString()
+//                        acnCity.getText().toString()
+                        acnCity.getSelectedItem().toString()
                 );
                 if (isInserted) {
                     Toast.makeText(getApplicationContext(), "Account added successfully", Toast.LENGTH_LONG).show();

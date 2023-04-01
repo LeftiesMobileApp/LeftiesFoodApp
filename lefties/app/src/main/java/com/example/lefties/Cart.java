@@ -46,7 +46,7 @@ public class Cart extends AppCompatActivity {
         btnOrderMoreFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Cart.this, CustomerPage.class));
+                startActivity(new Intent(Cart.this, CustomerHomeActivity.class));
             }
         });
 
@@ -76,7 +76,7 @@ public class Cart extends AppCompatActivity {
         int[] to ={R.id.imageFood, R.id.FoodText};
 
         SimpleAdapter adapter = new SimpleAdapter(Cart.this,
-                aList,R.layout.cart_recycler_layout,from,to);
+                aList,R.layout.recycler_cart_item,from,to);
 
         ListView listView = findViewById(R.id.listViewSummary);
 

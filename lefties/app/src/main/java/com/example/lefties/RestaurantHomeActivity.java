@@ -86,7 +86,7 @@ public class RestaurantHomeActivity extends AppCompatActivity {
             }
         }
         Boolean isRestaurant = true;
-        InventoryRecyclerAdapter adapter = new InventoryRecyclerAdapter(this, foods, isRestaurant);
+        FoodDisplayAdapterClass adapter = new FoodDisplayAdapterClass(this, foods, isRestaurant);
         inventoryList.setAdapter(adapter);
     }
 

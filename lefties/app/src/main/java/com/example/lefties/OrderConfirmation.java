@@ -1,3 +1,4 @@
+// THIS IS DEPRECATED
 package com.example.lefties;
 
 import androidx.appcompat.app.AppCompatActivity;
