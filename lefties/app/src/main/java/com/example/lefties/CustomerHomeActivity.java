@@ -18,11 +18,16 @@ public class CustomerHomeActivity extends AppCompatActivity {
 
     DBHelper dbh;
     RecyclerView inventoryList;
-    Integer customerAcctId = 1;
     ArrayList<HashMap<String, String>> inventoryMapper = new ArrayList<>();
     Button addItem;
     ArrayList<HashMap> foods;
+    FoodItemAdapterClass adapter;
+    Cursor c;
+
     long acctId;
+    long restaurantIdChosen;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,27 +36,13 @@ public class CustomerHomeActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         acctId = extras.getInt("acctId");
-        // Button btn = findViewById(R.id.itemBtnAddToCart);
-
-        Button featured = findViewById(R.id.Featured);
-        Button mexican = findViewById(R.id.typeMexican);
-        Button Pastries = findViewById(R.id.Pastries);
-        Button Chinese = findViewById(R.id.typeChinese);
-        Button Chicken = findViewById(R.id.Chicken);
-        Button Veg = findViewById(R.id.Vegetarian);
-
-        Spinner spinner = findViewById(R.id.spinner3);
 
        TextView name = findViewById(R.id.FromD);
        TextView address = findViewById(R.id.AtD);
        TextView city = findViewById(R.id.ToD);
 
-
-
         dbh = new DBHelper(this);
-        if (dbh.viewDataFood().getCount() < 1) {
-            dbh.seedFoodTable();
-        }
+
         inventoryList = findViewById(R.id.recyclerInventory);
 
         int columnCount = 2;
@@ -59,9 +50,13 @@ public class CustomerHomeActivity extends AppCompatActivity {
                 new GridLayoutManager(this, columnCount));
 
         foods = new ArrayList<HashMap>();
-        Cursor c = dbh.viewDataFood();
+        c = dbh.viewDataFoodWithRestaurantName();
+        updateRecycler(c);
 
 
+    }
+
+    public void updateRecycler(Cursor c){
         if (c.getCount() > 0) {
             while (c.moveToNext()) { // while there is still line left
                 HashMap<String, String> foodTableColumns = new HashMap<>();
@@ -71,33 +66,21 @@ public class CustomerHomeActivity extends AppCompatActivity {
                 foodTableColumns.put("food_discounted_price", c.getString(3));
                 foodTableColumns.put("food_regular_price", c.getString(4));
                 foodTableColumns.put("food_qty", c.getString(5));
+                foodTableColumns.put("restaurant_name", c.getString(8));
                 foods.add(foodTableColumns);
             }
         }
-        FoodItemAdapterClass adapter = new FoodItemAdapterClass(this, foods, false);
+        adapter = new FoodItemAdapterClass(this, foods);
         inventoryList.setAdapter(adapter);
+    }
 
 
+    public void setupSearchByCity(){
+        Spinner spinner = findViewById(R.id.spinner3);
         if (spinner != null && spinner.getSelectedItem() != null && spinner.getSelectedItem().toString().equals("Surrey")) {
-            // your code here
 
             c = dbh.viewDataFoodM();
-            if(c.getCount() > 0){
-                foods.clear(); // clear the previous list
-                while(c.moveToNext()){
-                    HashMap<String, String> foodTableColumns = new HashMap<>();
-                    foodTableColumns.put("food_id", c.getString(0));
-                    foodTableColumns.put("account_id", c.getString(1));
-                    foodTableColumns.put("food_name", c.getString(2));
-                    foodTableColumns.put("food_discounted_price", c.getString(3));
-                    foodTableColumns.put("food_regular_price", c.getString(4));
-                    foodTableColumns.put("food_qty", c.getString(5));
-                    foods.add(foodTableColumns);
-                }
-                adapter.notifyDataSetChanged(); // update the adapter with the new list
-            }
-
-
+            updateRecycler(c);
         }
 
         if (spinner != null && spinner.getSelectedItem() != null && spinner.getSelectedItem().toString().equals("Vancouver")) {
@@ -144,6 +127,16 @@ public class CustomerHomeActivity extends AppCompatActivity {
 
         }
 
+
+    }
+
+    public void setupSearchByType(){
+        Button featured = findViewById(R.id.Featured);
+        Button mexican = findViewById(R.id.typeMexican);
+        Button Pastries = findViewById(R.id.Pastries);
+        Button Chinese = findViewById(R.id.typeChinese);
+        Button Chicken = findViewById(R.id.Chicken);
+        Button Veg = findViewById(R.id.Vegetarian);
 
         featured.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -211,7 +204,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
             }
         });
 
-       Chinese.setOnClickListener(new View.OnClickListener() {
+        Chinese.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Cursor c = dbh.viewDataFoodC();
@@ -277,5 +270,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
             }
         });
 
-    }}
+    }
+
+}
 

@@ -12,15 +12,16 @@ import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
-
-
     DBHelper dbh;
+    long acctId;
+    String acctName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         dbh = new DBHelper(this);
+        seedTable();
 
         EditText userEmail = findViewById(R.id.userEmail);
         EditText userPass = findViewById(R.id.userPass);
@@ -44,8 +45,11 @@ public class MainActivity extends AppCompatActivity {
                     String accountType;
                     if (c.moveToFirst()){
                         accountType = c.getString(2);
+                        acctName = c.getString(3);
+                        acctId = c.getLong(1);
+
                         if(accountType.equals("Customer")){
-                            Toast.makeText(MainActivity.this, "Customer", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(MainActivity.this, "Customer", Toast.LENGTH_SHORT).show();
                             goToCustomerHome()
 ;                        } else {
                             Toast.makeText(MainActivity.this, "Manager", Toast.LENGTH_SHORT).show();
@@ -71,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
     public void goToRestoHome()
     {
         Intent i = new Intent(getApplicationContext(),RestaurantHomeActivity.class);
+        i.putExtra("acctId", acctId);
+        i.putExtra("accName", acctName);
         startActivity(i);
     }
 
@@ -79,15 +85,19 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void goToCart()
-    {
-        Intent i = new Intent(getApplicationContext(), CartActivity.class);
-        startActivity(i);
-    }
-
     public void goToCustomerHome()
     {
         Intent i = new Intent(getApplicationContext(), CustomerHomeActivity.class);
+        i.putExtra("acctId", acctId);
+        i.putExtra("accName", acctName);
         startActivity(i);
+    }
+
+    public void seedTable(){
+        Cursor c = dbh.viewAccountByName("Golden Star");
+        StringBuilder str = new StringBuilder();
+        if(c.getCount() == 0){
+            dbh.seedTables();
+        }
     }
 }

@@ -4,94 +4,60 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RestaurantHomeActivity extends AppCompatActivity {
-    RecyclerView inventoryList;
+public class CustomerDisplayRestaurantActivity extends AppCompatActivity {
+
     DBHelper dbh;
+    RecyclerView inventoryList;
     ArrayList<HashMap<String, String>> inventoryMapper = new ArrayList<>();
     Button addItem;
-    Button generateReport;
-    TextView headline;
-    String restaurantName;
     ArrayList<HashMap> foods;
     long acctId;
+    long restaurantIdChosen;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurant_home);
+        setContentView(R.layout.activity_customer_display_restaurant);
 
         Bundle extras = getIntent().getExtras();
         acctId = extras.getInt("acctId");
-        restaurantName = extras.getString("acctName");
-
-        headline = findViewById(R.id.txtRestoHomeWelcome);
+        acctId = extras.getInt("restaurantIdChosen");
 
         dbh = new DBHelper(this);
-
+        if (dbh.viewDataFood().getCount() < 1) {
+            dbh.seedFoodTable();
+        }
         inventoryList = findViewById(R.id.recyclerInventory);
+
         int columnCount = 2;
         inventoryList.setLayoutManager(
                 new GridLayoutManager(this, columnCount));
 
-        displayFoodItemFromRecycler();
-
-        addItem = findViewById(R.id.btnAddItem);
-        addItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToAddItem();
-            }
-        });
-
-        generateReport = findViewById(R.id.btnRemind);
-        generateReport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-    }
-
-    public void goToAddItem(){
-        Intent i = new Intent(getApplicationContext(), RestaurantAddAnItemActivity.class);
-        i.putExtra("acctId", acctId);
-        startActivity(i);
-    }
-
-    public void displayFoodItemFromRecycler(){
-
-        // CREATE ARRAYLIST of HashMap FROM DB
         foods = new ArrayList<HashMap>();
-        Cursor c = dbh.viewDataFoodByRestaurant(acctId);
+        Cursor c = dbh.viewDataFoodByRestaurant(restaurantIdChosen);
 
-        if(c.getCount() > 0){
-            while(c.moveToNext()){ // while there is still line left
+        if (c.getCount() > 0) {
+            while (c.moveToNext()) { // while there is still line left
                 HashMap<String, String> foodTableColumns = new HashMap<>();
                 foodTableColumns.put("food_id", c.getString(0));
                 foodTableColumns.put("account_id", c.getString(1));
                 foodTableColumns.put("food_name", c.getString(2));
                 foodTableColumns.put("food_discounted_price", c.getString(3));
                 foodTableColumns.put("food_regular_price", c.getString(4));
-                foodTableColumns.put("food_qty", c.getString(5));
-                foodTableColumns.put("restaurant_name", restaurantName);
+                foodTableColumns.put("food_qty", c.getString(8));
                 foods.add(foodTableColumns);
             }
         }
-        Boolean isRestaurant = true;
         FoodItemAdapterClass adapter = new FoodItemAdapterClass(this, foods);
         inventoryList.setAdapter(adapter);
+
     }
-
-
-
 }

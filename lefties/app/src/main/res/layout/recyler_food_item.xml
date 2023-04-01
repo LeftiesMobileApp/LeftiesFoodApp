@@ -19,7 +19,7 @@
     <!--        app:srcCompat="@drawable/food_placeholder" />-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/tableRow"
+        android:id="@+id/rowAdminBtns"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -120,6 +120,13 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/itemRestaurantName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/labelRestoPlaceholder" />
+
+        <TextView
             android:id="@+id/itemFoodName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -195,6 +202,14 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/itemBtnGoToRestaurant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/maroon"
+        android:text="@string/btnGoToRestaurant"
+        android:textColor="@color/light" />
 
     <Button
         android:id="@+id/itemBtnAddToCart"

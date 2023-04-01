@@ -90,4 +90,6 @@
     </string-array>
 
     <string name="labelSearchCity">Search your city</string>
+    <string name="btnGoToRestaurant">Order from restaurant</string>
+    <string name="labelRestoPlaceholder">Good Restaurant</string>
 </resources>

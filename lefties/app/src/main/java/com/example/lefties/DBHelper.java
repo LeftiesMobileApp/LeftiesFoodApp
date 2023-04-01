@@ -151,6 +151,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+
+
     //Original addAccount
     /*
     public boolean addAccount(String aid, String aname, String atype, String aemail, String aphone,
@@ -174,7 +176,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }*/
 
     //Adding Restaurant
-    public boolean addRestaurant(String Rtype , String aid)
+    public boolean addRestaurant(String Rtype , long aid)
     {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -187,6 +189,67 @@ public class DBHelper extends SQLiteOpenHelper {
         else
             return false;
 
+    }
+
+    public void seedTables(){
+        // RESTAURANTS
+        long r1 = addAccount(
+                "Dragon City Garden",
+                "Restaurant",
+                "dragon@email.com",
+                "pass123",
+                "0987 654 321",
+                "123 Dragon St, Surrey",
+                "Surrey"
+        );
+        addRestaurant("CHINESE", r1 );
+        addFood(r1, "Fortune Cookies", 2.0, 5.0, 16);
+        long r2 = addAccount(
+                "Golden Star",
+                "Restaurant",
+                "golden@email.com",
+                "pass123",
+                "0987 654 321",
+                "123 Golden St, Surrey",
+                "Surrey"
+        );
+        addFood(r2, "Sweet and Sour", 4.0, 10.0, 16);
+        addFood(r2, "Wanton Noodles", 4.0, 10.0, 16);
+        addRestaurant("CHINESE", r2 );
+        long r3 = addAccount(
+                "Biryani City",
+                "Restaurant",
+                "biryani@email.com",
+                "pass123",
+                "0987 654 321",
+                "123 Biryani St, Surrey",
+                "Surrey"
+        );
+        addRestaurant("INDIAN", r3 );
+        addFood(r3, "Butter Chicken", 4.0, 10.0, 16);
+        addFood(r3, "Goat", 4.0, 10.0, 16);
+        addFood(r3, "Paneer", 4.0, 10.0, 16);
+        addFood(r3, "Dal Makhni", 4.0, 10.0, 16);
+
+        // CUSTOMERS
+        addAccount(
+                "John Smith",
+                "Customer",
+                "john@email.com",
+                "pass123",
+                "0987 654 321",
+                "123 Dragon St, Surrey",
+                "Surrey"
+        );
+        addAccount(
+                "Jane Darling",
+                "Customer",
+                "jane@email.com",
+                "pass123",
+                "0987 654 321",
+                "123 Dragon St, Surrey",
+                "Surrey"
+        );
     }
 
     public void seedRestaurant(){
@@ -223,12 +286,11 @@ public class DBHelper extends SQLiteOpenHelper {
         addFood(3, "Brownie Fudge", 4.0, 10.0, 16);
         addFood(4, "Kimchi", 4.0, 10.0, 16);
         addFood(4, "Manchurian", 4.0, 10.0, 16);
-        addFood(5, "Butter Chicken", 4.0, 10.0, 16);
-        addFood(5, "Goat", 4.0, 10.0, 16);
-        addFood(6, "Paneer", 4.0, 10.0, 16);
-        addFood(6, "Dal Makhni", 4.0, 10.0, 16);
 
     }
+
+
+
 
     //Adding cart
     public boolean addOrder(String ostatus, String odate, String otype, String ototal)
@@ -279,6 +341,14 @@ public class DBHelper extends SQLiteOpenHelper {
         //Cursor cursor = database.rawQuery(query,new String[]{"2"});
         return cursor;
     }
+    public Cursor viewAccountByName(String name) {
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE1_NAME +
+                " WHERE " + T1COL_2 + " = '" +name + "'";
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
 
     //Original viewDataAccount
     /* public Cursor viewDataAccount(){
@@ -302,6 +372,15 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor viewDataFood(){
         SQLiteDatabase database = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE3_NAME;
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+    public Cursor viewDataFoodWithRestaurantName(){
+        SQLiteDatabase database = this.getReadableDatabase();
+
+//        String query = "SELECT * FROM " + TABLE3_NAME +
+//                " LEFT OUTER JOIN " + TABLE2_NAME ;
+        String query = "SELECT * FROM  food_table LEFT OUTER JOIN account_table  WHERE food_table.account_Id = account_table.account_Id";
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }

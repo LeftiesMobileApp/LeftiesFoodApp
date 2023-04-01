@@ -7,6 +7,7 @@ import static android.view.View.GONE;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,13 +26,17 @@ import java.util.HashMap;
 public class FoodItemAdapterClass extends RecyclerView.Adapter {
     LayoutInflater layoutInflater;
     Context context;
+    String contextClass;
     String[] strArr;
     ArrayList<HashMap> foods;
     Boolean isRestaurant;
     DBHelper dbh;
+//    ConstraintSet.Layout rowAdminBtns;
 
-    public FoodItemAdapterClass(@NonNull Context context, ArrayList<HashMap> foods, Boolean isRestaurant ) {
+
+    public FoodItemAdapterClass(@NonNull Context context, ArrayList<HashMap> foods) {
         this.context = context;
+        Log.d("THIS IS YOUR CLASS", "FoodItemAdapterClass: " + contextClass);
         this.foods = foods;
         this.isRestaurant = isRestaurant;
         layoutInflater = LayoutInflater.from(context);
@@ -41,12 +46,16 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView imgCompanyLogo;
         TextView foodName;
+        TextView restaurantName;
         TextView discountedPrice;
         TextView regularPrice;
         ImageView foodImg;
         Button btnEdit;
         Button btnDelete;
         Button btnAddToCart;
+        Button btnGoToRestaurant;
+
+
 
         // THIS MAPS ATTRIBUTES PER ITEM
         public ViewHolder(@NonNull View itemView) {
@@ -56,9 +65,11 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
             regularPrice = itemView.findViewById(R.id.itemRegularPrice);
             regularPrice.setPaintFlags(regularPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             foodImg = itemView.findViewById(R.id.imgFood);
+            restaurantName = itemView.findViewById(R.id.itemRestaurantName);
 
             btnDelete = itemView.findViewById(R.id.itemBtnDelete);
             btnEdit= itemView.findViewById(R.id.itemBtnEdit);
+            btnGoToRestaurant = itemView.findViewById(R.id.itemBtnGoToRestaurant);
             btnAddToCart = itemView.findViewById(R.id.itemBtnAddToCart);
             return;
         }
@@ -76,24 +87,6 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int position) {
         View view =  layoutInflater.inflate(R.layout.recyler_food_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view); // viewHolder holds the layoutInflater
-
-//        Button edit = view.findViewById(R.id.itemBtnEdit);
-//        edit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(context.getApplicationContext(), RestaurantAddAnItemActivity.class);
-//                context.startActivity(i);
-//            }
-//        });
-//
-//        Button order = view.findViewById(R.id.itemBtnAddToCart);
-//        order.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(context.getApplicationContext(), Cart.class);
-//                context.startActivity(i);
-//            }
-//        });
         return viewHolder;
 
     }
@@ -107,8 +100,10 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
         String name = foodItem.get("food_name");
         String regularPrice = foodItem.get("food_regular_price");
         String discountPrice = foodItem.get("food_discounted_price");
+        String restaurantNameString = foodItem.get("restaurant_name");
 
         ((ViewHolder)holder).foodName.setText(name);
+        ((ViewHolder)holder).restaurantName.setText(restaurantNameString);
 
         ((ViewHolder)holder).discountedPrice.setText("$ "+discountPrice);
         ((ViewHolder)holder).regularPrice.setText("$ "+regularPrice);
@@ -117,11 +112,19 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
         int resID = context.getResources().getIdentifier("food_" + foodIdString , "drawable", context.getPackageName());
         ((ViewHolder)holder).foodImg.setImageResource(resID);
 
-        if(isRestaurant){
+        contextClass = context.getClass().getSimpleName();
+        if(contextClass.equals("RestaurantHomeActivity")){
             ((ViewHolder)holder).btnAddToCart.setVisibility(GONE);
+            ((ViewHolder)holder).btnGoToRestaurant.setVisibility(GONE);
+
         }else{
             ((ViewHolder)holder).btnEdit.setVisibility(GONE);
             ((ViewHolder)holder).btnDelete.setVisibility(GONE);
+            if(contextClass.equals("CustomerHomeActivity")){
+                ((ViewHolder)holder).btnAddToCart.setVisibility(GONE);
+            }else{
+                ((ViewHolder)holder).btnGoToRestaurant.setVisibility(GONE);
+            }
         }
 
         ((ViewHolder)holder).btnAddToCart.setOnClickListener(new View.OnClickListener() {
