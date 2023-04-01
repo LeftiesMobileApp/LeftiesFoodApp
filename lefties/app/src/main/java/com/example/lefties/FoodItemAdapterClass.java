@@ -123,7 +123,7 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
         ((ViewHolder)holder).btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addToCart(foodId);
+                addToCart(foodId, restaurantId, restaurantNameString);
             }
         });
 
@@ -161,12 +161,14 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
     public void createOrder(){
         // find all orders related to user Id
     }
-    public void addToCart(int foodId){
+    public void addToCart(int foodId, long restaurantId, String restaurantNameString){
         Log.i("add to cart acct id", "is "+acctId);
         dbh.addFoodToTempCart(foodId, acctId);
 
         Intent i = new Intent(context, CartActivity.class);
         i.putExtra("acctId", acctId);
+        i.putExtra("restaurantId", restaurantId);
+        i.putExtra("restaurantName", restaurantNameString);
         context.startActivity(i);
     }
 

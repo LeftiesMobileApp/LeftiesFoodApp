@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -52,8 +53,13 @@ public class CustomerHomeActivity extends AppCompatActivity {
                 new GridLayoutManager(this, columnCount));
 
         foods = new ArrayList<HashMap>();
+        adapter = new FoodItemAdapterClass(this, foods, acctId);
         c = dbh.viewDataFoodWithRestaurantName();
         updateRecycler(c);
+        inventoryList.setAdapter(adapter);
+
+        setupSearchByCity();
+        setupSearchByType();
 
         Button orderHistory = findViewById(R.id.btnGoToCart);
 
@@ -68,6 +74,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
 
     public void updateRecycler(Cursor c){
         if (c.getCount() > 0) {
+            foods.clear(); // clear the previous list
             while (c.moveToNext()) { // while there is still line left
                 HashMap<String, String> foodTableColumns = new HashMap<>();
                 foodTableColumns.put("food_id", c.getString(0));
@@ -76,12 +83,15 @@ public class CustomerHomeActivity extends AppCompatActivity {
                 foodTableColumns.put("food_discounted_price", c.getString(3));
                 foodTableColumns.put("food_regular_price", c.getString(4));
                 foodTableColumns.put("food_qty", c.getString(5));
-                foodTableColumns.put("restaurant_name", c.getString(7));
+                if(c.getColumnCount() > 6){
+                    foodTableColumns.put("restaurant_name", c.getString(7));
+                }else{
+                    foodTableColumns.put("restaurant_name", " ");
+                }
                 foods.add(foodTableColumns);
             }
         }
-        adapter = new FoodItemAdapterClass(this, foods, acctId);
-        inventoryList.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
 
@@ -90,22 +100,32 @@ public class CustomerHomeActivity extends AppCompatActivity {
     public void setupSearchByCity(){
         // Rajat - Enable city search
         Spinner spinner = findViewById(R.id.spinner3);
-        if (spinner != null && spinner.getSelectedItem() != null && spinner.getSelectedItem().toString().equals("Surrey")) {
-            // Macci - Create reusable function updateRecycler that accepts the cursor
-            c = dbh.viewDataFoodM();
-            updateRecycler(c);
-        }
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (spinner != null && spinner.getSelectedItem() != null && spinner.getSelectedItem().toString().equals("Surrey")) {
+                    // Macci - Create reusable function updateRecycler that accepts the cursor
+                    Cursor c = dbh.viewDataFoodM();
+                    updateRecycler(c);
+                }
 
-        if (spinner != null && spinner.getSelectedItem() != null && spinner.getSelectedItem().toString().equals("Vancouver")) {
-            c = dbh.viewDataFood();
-            updateRecycler(c);
-        }
+                if (spinner != null && spinner.getSelectedItem() != null && spinner.getSelectedItem().toString().equals("Vancouver")) {
+                    Cursor  c = dbh.viewDataFood();
+                    updateRecycler(c);
+                }
 
-        if (spinner != null && spinner.getSelectedItem() != null && spinner.getSelectedItem().toString().equals("Burnaby")) {
-            c = dbh.viewDataFoodP();
-            updateRecycler(c);
+                if (spinner != null && spinner.getSelectedItem() != null && spinner.getSelectedItem().toString().equals("Burnaby")) {
+                    Cursor c = dbh.viewDataFoodP();
+                    updateRecycler(c);
 
-        }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
     }
@@ -122,21 +142,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Cursor c = dbh.viewDataFoodF();
-
-                if(c.getCount() > 0){
-                    foods.clear(); // clear the previous list
-                    while(c.moveToNext()){
-                        HashMap<String, String> foodTableColumns = new HashMap<>();
-                        foodTableColumns.put("food_id", c.getString(0));
-                        foodTableColumns.put("account_id", c.getString(1));
-                        foodTableColumns.put("food_name", c.getString(2));
-                        foodTableColumns.put("food_discounted_price", c.getString(3));
-                        foodTableColumns.put("food_regular_price", c.getString(4));
-                        foodTableColumns.put("food_qty", c.getString(5));
-                        foods.add(foodTableColumns);
-                    }
-                    adapter.notifyDataSetChanged(); // update the adapter with the new list
-                }
+                updateRecycler(c);
             }
         });
 
@@ -144,21 +150,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Cursor c = dbh.viewDataFoodM();
-
-                if(c.getCount() > 0){
-                    foods.clear(); // clear the previous list
-                    while(c.moveToNext()){
-                        HashMap<String, String> foodTableColumns = new HashMap<>();
-                        foodTableColumns.put("food_id", c.getString(0));
-                        foodTableColumns.put("account_id", c.getString(1));
-                        foodTableColumns.put("food_name", c.getString(2));
-                        foodTableColumns.put("food_discounted_price", c.getString(3));
-                        foodTableColumns.put("food_regular_price", c.getString(4));
-                        foodTableColumns.put("food_qty", c.getString(5));
-                        foods.add(foodTableColumns);
-                    }
-                    adapter.notifyDataSetChanged(); // update the adapter with the new list
-                }
+                updateRecycler(c);
             }
         });
 
@@ -166,21 +158,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Cursor c = dbh.viewDataFoodP();
-
-                if(c.getCount() > 0){
-                    foods.clear(); // clear the previous list
-                    while(c.moveToNext()){
-                        HashMap<String, String> foodTableColumns = new HashMap<>();
-                        foodTableColumns.put("food_id", c.getString(0));
-                        foodTableColumns.put("account_id", c.getString(1));
-                        foodTableColumns.put("food_name", c.getString(2));
-                        foodTableColumns.put("food_discounted_price", c.getString(3));
-                        foodTableColumns.put("food_regular_price", c.getString(4));
-                        foodTableColumns.put("food_qty", c.getString(5));
-                        foods.add(foodTableColumns);
-                    }
-                    adapter.notifyDataSetChanged(); // update the adapter with the new list
-                }
+                updateRecycler(c);
             }
         });
 
@@ -188,21 +166,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Cursor c = dbh.viewDataFoodC();
-
-                if(c.getCount() > 0){
-                    foods.clear(); // clear the previous list
-                    while(c.moveToNext()){
-                        HashMap<String, String> foodTableColumns = new HashMap<>();
-                        foodTableColumns.put("food_id", c.getString(0));
-                        foodTableColumns.put("account_id", c.getString(1));
-                        foodTableColumns.put("food_name", c.getString(2));
-                        foodTableColumns.put("food_discounted_price", c.getString(3));
-                        foodTableColumns.put("food_regular_price", c.getString(4));
-                        foodTableColumns.put("food_qty", c.getString(5));
-                        foods.add(foodTableColumns);
-                    }
-                    adapter.notifyDataSetChanged(); // update the adapter with the new list
-                }
+                updateRecycler(c);
             }
         });
 
@@ -210,21 +174,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Cursor c = dbh.viewDataFoodCh();
-
-                if(c.getCount() > 0){
-                    foods.clear(); // clear the previous list
-                    while(c.moveToNext()){
-                        HashMap<String, String> foodTableColumns = new HashMap<>();
-                        foodTableColumns.put("food_id", c.getString(0));
-                        foodTableColumns.put("account_id", c.getString(1));
-                        foodTableColumns.put("food_name", c.getString(2));
-                        foodTableColumns.put("food_discounted_price", c.getString(3));
-                        foodTableColumns.put("food_regular_price", c.getString(4));
-                        foodTableColumns.put("food_qty", c.getString(5));
-                        foods.add(foodTableColumns);
-                    }
-                    adapter.notifyDataSetChanged(); // update the adapter with the new list
-                }
+                updateRecycler(c);
             }
         });
 
@@ -232,21 +182,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Cursor c = dbh.viewDataFoodVeg();
-
-                if(c.getCount() > 0){
-                    foods.clear(); // clear the previous list
-                    while(c.moveToNext()){
-                        HashMap<String, String> foodTableColumns = new HashMap<>();
-                        foodTableColumns.put("food_id", c.getString(0));
-                        foodTableColumns.put("account_id", c.getString(1));
-                        foodTableColumns.put("food_name", c.getString(2));
-                        foodTableColumns.put("food_discounted_price", c.getString(3));
-                        foodTableColumns.put("food_regular_price", c.getString(4));
-                        foodTableColumns.put("food_qty", c.getString(5));
-                        foods.add(foodTableColumns);
-                    }
-                    adapter.notifyDataSetChanged(); // update the adapter with the new list
-                }
+                updateRecycler(c);
             }
         });
 

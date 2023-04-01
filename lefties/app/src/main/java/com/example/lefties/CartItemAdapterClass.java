@@ -4,6 +4,7 @@ import static android.view.View.GONE;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,23 +27,30 @@ public class CartItemAdapterClass extends RecyclerView.Adapter {
     ArrayList cartItems;
     DBHelper dbh;
     long acctId;
+    String restaurantName;
+    long restaurantId;
 
 
-    public CartItemAdapterClass(@NonNull Context context, ArrayList cartItems , long acctId) {
+    public CartItemAdapterClass(@NonNull Context context, ArrayList cartItems , long acctId, String restaurantName) {
         this.context = context;
         this.cartItems = cartItems;
+        this.restaurantName = restaurantName;
         layoutInflater = LayoutInflater.from(context);
         dbh = new DBHelper(context);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-//        TextView foodName;
+        TextView restName, foodName, foodPrice, itemQty;
 
 
         // THIS MAPS ATTRIBUTES PER ITEM
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-//            foodName = itemView.findViewById(R.id.itemFoodName);
+            foodName = itemView.findViewById(R.id.txtFoodName);
+            restName = itemView.findViewById(R.id.txtRestName);
+            foodPrice = itemView.findViewById(R.id.txtIFoodPrice);
+            itemQty = itemView.findViewById(R.id.txtQty);
+
             return;
         }
 
@@ -60,11 +68,26 @@ public class CartItemAdapterClass extends RecyclerView.Adapter {
         View view =  layoutInflater.inflate(R.layout.recycler_cart_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view); // viewHolder holds the layoutInflater
         return viewHolder;
-
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        ((ViewHolder)holder).restName.setText(restaurantName);
+        long foodId = (long) cartItems.get(position);
+        Cursor c = dbh.viewDataFoodById(foodId);
+        if(c.getCount() > 0) {
+            if (c.moveToFirst()) {
+                ((ViewHolder) holder).foodName.setText(
+                        c.getString(2)
+                );
+                ((ViewHolder) holder).foodPrice.setText(
+                        "$ " + c.getString(3)
+                );
+            }
+        }
+
+
+
 //
 //        HashMap<String, String> foodItem = foods.get(position);
 //        String foodIdString = foodItem.get("food_id");
