@@ -18,11 +18,11 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
     ArrayList orderDetails;
     DBHelper dbh;
 
-    public OrderItemAdapterClass(@NonNull Context context, ArrayList orderDetails){
+    public OrderItemAdapterClass(@NonNull Context context, ArrayList orderDetails, long acctId){
         this.context = context;
         this.orderDetails = orderDetails;
         layoutInflater = LayoutInflater.from(context);
-      //  dbh = new DBHelper(context);
+        dbh = new DBHelper(context);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -52,6 +52,7 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return orderDetails.size();
+        return 1;
+        //return orderDetails.size();
     }
 }

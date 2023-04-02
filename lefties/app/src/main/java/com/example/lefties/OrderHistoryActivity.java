@@ -22,16 +22,17 @@ public class OrderHistoryActivity extends AppCompatActivity {
     ArrayList orderDetails;
     RecyclerView orderList;
     long acctId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
 
-      /*  Bundle extras = getIntent().getExtras();
-        acctId = extras.getLong("acctId"); */
+        Bundle extras = getIntent().getExtras();
+        acctId = extras.getLong("acctId");
 
-        //dbh = new DBHelper(this);
-        //orderDetails = new ArrayList<>();
+        dbh = new DBHelper(this);
+        orderDetails = new ArrayList<>();
 
         orderList = findViewById(R.id.orderHistRecycler);
 
@@ -41,10 +42,11 @@ public class OrderHistoryActivity extends AppCompatActivity {
         );
 
 
-       // getOrderDetails();
+        getOrderDetails();
 
     }
- /*   public void getOrderDetails() {
+
+    public void getOrderDetails() {
         Cursor c = dbh.viewCustomerCart(acctId);
 
         if (c.getCount() > 0) {
@@ -53,8 +55,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 orderDetails.add(orderDetail);
             }
 
-            adapter = new OrderItemAdapterClass(this, orderDetails , acctId);
+            adapter = new OrderItemAdapterClass(this, orderDetails, acctId);
             orderList.setAdapter(adapter);
         }
-    } */
+    }
 }
