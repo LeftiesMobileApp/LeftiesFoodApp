@@ -36,14 +36,10 @@ public class MainActivity extends AppCompatActivity {
                 StringBuilder str = new StringBuilder();
                 if(c.getCount() > 0){
                     if (c.moveToFirst()){
-<<<<<<< HEAD
                         String accountType = c.getString(2);
-=======
                         accountType = c.getString(2);
                         acctName = c.getString(3);
                         acctId = Long.parseLong(c.getString(0));
-
->>>>>>> d5272e18274e0f95cb8c4ca7c70eb82fd8267b0d
                         if(accountType.equals("Customer")){
                             Toast.makeText(MainActivity.this, "Welcome " + c.getString(1), Toast.LENGTH_SHORT).show();
                             goToCustomerHome()
