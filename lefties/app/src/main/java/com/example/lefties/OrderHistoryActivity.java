@@ -15,7 +15,7 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
 import java.util.ArrayList;
-
+// Guneet, let me fix it on mine quickly then will send u the code
 public class OrderHistoryActivity extends AppCompatActivity {
     OrderItemAdapterClass adapter;
     DBHelper dbh;
@@ -49,17 +49,17 @@ public class OrderHistoryActivity extends AppCompatActivity {
     }
 
     public void getOrderDetails() {
-        Cursor c = dbh.viewCustomerCart(acctId);
-
-        if (c.getCount() > 0) {
-            while (c.moveToNext()) {
-                long orderDetail = Long.parseLong(c.getString(0));
-                orderDetails.add(orderDetail);
-            }
-
-            adapter = new OrderItemAdapterClass(this, orderDetails);
-            orderList.setAdapter(adapter);
-        }
+//        Cursor c = dbh.viewCustomerCart(acctId);
+//
+//        if (c.getCount() > 0) {
+//            while (c.moveToNext()) {
+//                long orderDetail = Long.parseLong(c.getString(0));
+//                orderDetails.add(orderDetail);
+//            }
+//
+//            adapter = new OrderItemAdapterClass(this, orderDetails);
+//            orderList.setAdapter(adapter);
+//        }
 
     }
 
