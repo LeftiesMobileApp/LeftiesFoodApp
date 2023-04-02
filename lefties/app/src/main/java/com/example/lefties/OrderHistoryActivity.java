@@ -31,7 +31,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
         acctId = extras.getLong("acctId"); */
 
         //dbh = new DBHelper(this);
-        //orderDetails = new ArrayList<>();
+        orderDetails = new ArrayList<>();
 
         orderList = findViewById(R.id.orderHistRecycler);
 
@@ -40,21 +40,22 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 new GridLayoutManager(this, columnCount)
         );
 
-
+        adapter = new OrderItemAdapterClass(this, orderDetails);
+        orderList.setAdapter(adapter);
        // getOrderDetails();
 
     }
- /*   public void getOrderDetails() {
-        Cursor c = dbh.viewCustomerCart(acctId);
-
-        if (c.getCount() > 0) {
-            while (c.moveToNext()) {
-                long orderDetail = Long.parseLong(c.getString(0));
-                orderDetails.add(orderDetail);
-            }
-
-            adapter = new OrderItemAdapterClass(this, orderDetails , acctId);
-            orderList.setAdapter(adapter);
-        }
-    } */
+ public void getOrderDetails() {
+//        Cursor c = dbh.viewCustomerCart(acctId);
+//
+//        if (c.getCount() > 0) {
+//            while (c.moveToNext()) {
+//                long orderDetail = Long.parseLong(c.getString(0));
+//                orderDetails.add(orderDetail);
+//            }
+//
+//            adapter = new OrderItemAdapterClass(this, orderDetails , acctId);
+//            orderList.setAdapter(adapter);
+//        }
+    }
 }
