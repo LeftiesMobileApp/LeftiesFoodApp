@@ -15,6 +15,7 @@ public class RestaurantAddAnItemActivity extends AppCompatActivity {
 
     Button addItem;
     long acctId;
+    String acctName;
     int foodItemToEditId;
     DBHelper dbh;
 
@@ -31,6 +32,7 @@ public class RestaurantAddAnItemActivity extends AppCompatActivity {
         // Get account id
         Bundle extras = getIntent().getExtras();
         acctId = extras.getInt("acctId");
+        acctName = extras.getString("acctName");
 
         name = findViewById(R.id.editName);
         salePrice = findViewById(R.id.editSalePrice);
@@ -63,6 +65,8 @@ public class RestaurantAddAnItemActivity extends AppCompatActivity {
 
     public void goToRestaurantHome(){
         Intent i = new Intent(getApplicationContext(), RestaurantHomeActivity.class);
+        i.putExtra("acctId", acctId);
+        i.putExtra("acctName", acctName);
         startActivity(i);
     }
 }

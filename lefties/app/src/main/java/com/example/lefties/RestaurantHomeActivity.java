@@ -24,6 +24,7 @@ public class RestaurantHomeActivity extends AppCompatActivity {
     String restaurantName;
     ArrayList<HashMap> foods;
     long acctId;
+    FoodItemAdapterClass adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +38,17 @@ public class RestaurantHomeActivity extends AppCompatActivity {
         headline = findViewById(R.id.txtRestoHomeWelcome);
 
         dbh = new DBHelper(this);
+        foods = new ArrayList<HashMap>();
 
         inventoryList = findViewById(R.id.customerRestaurantRecycler);
         int columnCount = 2;
         inventoryList.setLayoutManager(
                 new GridLayoutManager(this, columnCount));
 
+        adapter = new FoodItemAdapterClass(this, foods, acctId);
+        inventoryList.setAdapter(adapter);
         displayFoodItemFromRecycler();
+
 
         addItem = findViewById(R.id.btnAddItem);
         addItem.setOnClickListener(new View.OnClickListener() {
@@ -65,14 +70,15 @@ public class RestaurantHomeActivity extends AppCompatActivity {
     public void goToAddItem(){
         Intent i = new Intent(getApplicationContext(), RestaurantAddAnItemActivity.class);
         i.putExtra("acctId", acctId);
+        i.putExtra("acctName", restaurantName);
         startActivity(i);
     }
 
     public void displayFoodItemFromRecycler(){
 
         // CREATE ARRAYLIST of HashMap FROM DB
-        foods = new ArrayList<HashMap>();
         Cursor c = dbh.viewDataFoodByRestaurant(acctId);
+        foods.clear();
 
         if(c.getCount() > 0){
             while(c.moveToNext()){ // while there is still line left
@@ -87,9 +93,8 @@ public class RestaurantHomeActivity extends AppCompatActivity {
                 foods.add(foodTableColumns);
             }
         }
-        Boolean isRestaurant = true;
-        FoodItemAdapterClass adapter = new FoodItemAdapterClass(this, foods, acctId);
-        inventoryList.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
     }
 
 
