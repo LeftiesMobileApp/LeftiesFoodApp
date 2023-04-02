@@ -134,6 +134,9 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
                 Boolean isDeleted = dbh.deleteRecFood(foodId);
                 System.out.println(isDeleted);
                 Intent i = new Intent(context, RestaurantHomeActivity.class);
+
+                i.putExtra("acctId", acctId);
+                i.putExtra("acctName", restaurantNameString);
                 context.startActivity(i);
             }
         });
