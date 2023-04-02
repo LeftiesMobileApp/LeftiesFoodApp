@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,8 +16,7 @@ public class CartAdapterClass extends RecyclerView.Adapter{
     LayoutInflater mInflator;
     Context context;
 
-
-    public CartAdapterClass(Context context){ //,  String[] strRest, Integer[] imgData, String[] strItem, String[] strPrice){
+    public CartAdapterClass(Context context, long[] cartItems, long acctId){ //,  String[] strRest, Integer[] imgData, String[] strItem, String[] strPrice){
         //img = imgData;
         this.context = context;
 //        restname = strRest;
@@ -35,7 +32,7 @@ public class CartAdapterClass extends RecyclerView.Adapter{
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflator.inflate(R.layout.cart_recycler_layout, parent, false);
+        View view = mInflator.inflate(R.layout.recycler_cart_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }

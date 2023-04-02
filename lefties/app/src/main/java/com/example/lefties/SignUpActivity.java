@@ -2,6 +2,7 @@ package com.example.lefties;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -36,26 +37,37 @@ public class SignUpActivity extends AppCompatActivity {
         EditText acnPass = findViewById(R.id.accountPassword);
         EditText acnPhoneNumber = findViewById(R.id.accountPhoneNumber);
         EditText acnAddress = findViewById(R.id.accountAddress);
-        EditText acnCity = findViewById(R.id.accountCity);
+        Spinner acnCity = findViewById(R.id.accountCity);
         Button btnSignUpConfirm = findViewById(R.id.btnSignUp);
 
         btnSignUpConfirm.setOnClickListener(new View.OnClickListener() {
-            boolean isInserted;
+            long acctId;
 //            String acnTypeText = acnType.getSelectedItem().toString();
             @Override
             public void onClick(View v) {
 
-                isInserted = dbh.addAccount(
+                String acctType = acnType.getSelectedItem().toString();
+
+                acctId = dbh.addAccount(
                         acnName.getText().toString(),
-                        acnType.getSelectedItem().toString(),
+                        acctType,
                         acnEmail.getText().toString(),
                         acnPass.getText().toString(),
                         acnPhoneNumber.getText().toString(),
                         acnAddress.getText().toString(),
-                        acnCity.getText().toString()
+                        acnCity.getSelectedItem().toString()
                 );
-                if (isInserted) {
+
+                if (acctId > 0) {
                     Toast.makeText(getApplicationContext(), "Account added successfully", Toast.LENGTH_LONG).show();
+                    Intent intent;
+                    if(acctType == "Restaurant"){
+                         intent = new Intent(SignUpActivity.this, RestaurantHomeActivity.class);
+                    } else {
+                        intent = new Intent(SignUpActivity.this, CustomerHomeActivity.class);
+                    }
+                    intent.putExtra("acctId", acctId);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Failed to add account", Toast.LENGTH_LONG).show();
                 }

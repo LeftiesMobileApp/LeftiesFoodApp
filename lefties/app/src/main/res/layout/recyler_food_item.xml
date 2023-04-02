@@ -10,7 +10,7 @@
     android:minWidth="240dp"
     android:minHeight="240dp"
     android:orientation="vertical"
-    android:padding="2dp">
+    android:padding="8dp">
 
     <!--    <ImageView-->
     <!--        android:id="@+id/img_food"-->
@@ -19,7 +19,7 @@
     <!--        app:srcCompat="@drawable/food_placeholder" />-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/tableRow"
+        android:id="@+id/rowAdminBtns"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -56,7 +56,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="-32px"
+        android:layout_marginBottom="0px"
         android:translationZ="2dp"
         tools:accessibilityLiveRegion="assertive">
 
@@ -118,6 +118,13 @@
         android:layout_marginTop="12dp"
         android:gravity="center_horizontal"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/itemRestaurantName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/labelRestoPlaceholder" />
 
         <TextView
             android:id="@+id/itemFoodName"
@@ -197,7 +204,15 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/itemBtnAddToCart"
+        android:id="@+id/itemBtnGoToRestaurant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/maroon"
+        android:text="@string/btnGoToRestaurant"
+        android:textColor="@color/light" />
+
+    <Button
+        android:id="@+id/btnPlaceOrder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/maroon"

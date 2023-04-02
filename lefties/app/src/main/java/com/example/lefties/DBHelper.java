@@ -10,10 +10,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class DBHelper extends SQLiteOpenHelper {
 
     final static  String  DATABASE_NAME = "Lefties.db";
-    final static int DATABASE_VERSION = 4;
+    final static int DATABASE_VERSION = 11;
 
 
     // TABLE 1: Account_Table
@@ -53,6 +57,9 @@ public class DBHelper extends SQLiteOpenHelper {
     final static String T4COL_3 = "order_date";
     final static String T4COL_4 = "order_type";
     final static String T4COL_5 = "order_total";
+    final static String T4COL_6 = "order_remind";
+    final static String T4COL_7 = "customer_Id";
+    final static String T4COL_8 = "restaurant_Id";
 
 
     //Table 5 : Cart Table
@@ -60,16 +67,15 @@ public class DBHelper extends SQLiteOpenHelper {
     final static String T5COL_1 = "cart_Id";  //PK
     final static String T5COL_2 = "order_Id";  //FK
     final static String T5COL_3 = "food_Id";  //FK
-    final static String T5COL_4 = "food_Qty_Ordered";
+    final static String T5COL_4 = "food_qty_ordered";
     final static String T5COL_5 = "checkout_status";
-
+    final static String T5COL_6 = "customer_Id";
 
 
     public DBHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         SQLiteDatabase database =this.getWritableDatabase();
     }
-
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
@@ -97,7 +103,9 @@ public class DBHelper extends SQLiteOpenHelper {
         // Order
         String query3 = "CREATE TABLE " + TABLE4_NAME + "(" + T4COL_1 +
                 " INTEGER PRIMARY KEY, "  + T4COL_2 + " TEXT, " +
-                T4COL_3 + " TEXT, "+ T4COL_4 + " TEXT, "+ T4COL_5 + " TEXT)";
+                T4COL_3 + " TEXT, "+ T4COL_4 + " TEXT, "
+                + T4COL_5 + " TEXT, " + T4COL_6 + " BOOLEAN, " +
+                T4COL_7 + " TEXT, " + T4COL_8 + " TEXT )";
 
         sqLiteDatabase.execSQL(query3);
 
@@ -105,7 +113,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String query4 = "CREATE TABLE " + TABLE5_NAME + "(" + T5COL_1 +
                 " INTEGER PRIMARY KEY, "  + T5COL_2 + " TEXT, " +
                 T5COL_3 + " TEXT, " +
-                T5COL_4 + " TEXT, " + T5COL_5 + " TEXT)";
+                T5COL_4 + " TEXT, " + T5COL_5 + " BOOLEAN, " + T5COL_6 + " TEXT)";
 
         sqLiteDatabase.execSQL(query4);
     }
@@ -128,7 +136,7 @@ public class DBHelper extends SQLiteOpenHelper {
     //Adding for account table
     //Minor Changes made by Raiyan, removing aid, it should be generated automatically
     //To see the original one look below
-    public boolean addAccount(String aname, String atype, String aemail, String apassword, String aphone,
+    public long addAccount(String aname, String atype, String aemail, String apassword, String aphone,
                               String aaddress, String acity)
     {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -143,57 +151,32 @@ public class DBHelper extends SQLiteOpenHelper {
 
         long l = sqLiteDatabase.insert(TABLE1_NAME,null,values);
         if(l > 0)
-            return true;
+            return l;
         else
-            return false;
+            return 0;
 
     }
 
-    //Original addAccount
-    /*
-    public boolean addAccount(String aid, String aname, String atype, String aemail, String aphone,
-                              String aaddress, String acity)
-    {
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(T1COL_2, aname);
-        values.put(T1COL_3, atype);
-        values.put(T1COL_4, aemail);
-        values.put(T1COL_5, aphone);
-        values.put(T1COL_6, aaddress);
-        values.put(T1COL_7, acity);
-
-        long l = sqLiteDatabase.insert(TABLE1_NAME,null,values);
-        if(l > 0)
-            return true;
-        else
-            return false;
-
-    }*/
 
     //Adding Restaurant
-    public boolean addRestaurant(String Rtype , String aid)
+    public boolean addRestaurant(String Rtype , long aid)
     {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(T2COL_2, Rtype);
-
+        values.put(T2COL_3, aid);
 
         long l = sqLiteDatabase.insert(TABLE2_NAME,null,values);
         if(l > 0)
             return true;
         else
             return false;
-
     }
 
-    public void seedRestaurant(){
-        //
-    }
+
 
     //Adding Food
-    public boolean addFood(Integer aid, String fname, Double fdiscountprice, Double fregularprice,
-                              Integer fqty)
+    public long addFood(long aid, String fname, Double fdiscountprice, Double fregularprice, Integer fqty)
     {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -204,25 +187,13 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(T3COL_6, fqty);
 
         long l = sqLiteDatabase.insert(TABLE3_NAME,null,values);
-        if(l > 0)
-            return true;
-        else
-            return false;
+        return l;
 
     }
 
-    public void seedFoodTable(){
-        addFood(1, "Tandoori Chicken", 30.0, 25.0, 3);
-        addFood(1, "Bread", 4.0, 10.0, 16);
-        addFood(1, "Iced Coffee", 3.0, 8.0, 160);
-        addFood(2, "Beef Stir-fry", 30.0, 25.0, 3);
-        addFood(2, "Cookies", 4.0, 10.0, 16);
-
-    }
-
-    //Adding cart
-
-    public boolean addOrder(String ostatus, String odate, String otype, String ototal)
+    public long addOrder(String ostatus, String odate, String otype,
+                         Double ototal, boolean oremind,
+                         Long custId, long restId)
     {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -231,33 +202,114 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(T4COL_3, odate);
         values.put(T4COL_4, otype);
         values.put(T4COL_5, ototal);
+        values.put(T4COL_6, oremind);;
+        values.put(T4COL_7, custId);
+        values.put(T4COL_8, restId);
 
 
         long l = sqLiteDatabase.insert(TABLE4_NAME,null,values);
-        if(l > 0)
-            return true;
-        else
-            return false;
-
+        return l;
     }
 
-    //Adding Order
+    public long createOrder(long custId, long restId, double total){
+        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        long orderId = addOrder(
+                "PENDING",
+                currentDate,
+                "DELIVERY",
+                total,
+                false,
+                custId,
+                restId
+        );
+        return orderId;
+    }
 
-    public boolean addCart(String foodqtyOrd, String checkoutstatus)
+    public void updateCartWithOrder(long orderId, long acctId){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String query = "UPDATE cart_table SET "
+                + " order_id=" + orderId + ", "
+                + " checkout_status=1"
+                + " WHERE "
+                + "( checkout_status=0 AND"
+                + " customer_Id=" + acctId + ")";
+        sqLiteDatabase.execSQL(query);
+    };
+
+    //  :: CART ::
+
+    public Cursor viewDataCart(){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE5_NAME;
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+    public Cursor viewCustomerCart(long acctId){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM cart_table WHERE customer_id=" + acctId + " AND NOT checkout_status";
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+
+
+    // Adding cart
+    public long addCart(long orderId, long foodId, int foodQty, boolean checkoutStatus, long acctId)
     {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(T5COL_3, foodqtyOrd);
-        values.put(T5COL_4,checkoutstatus);
+        values.put(T5COL_2, orderId);
+        values.put(T5COL_3, foodId);
+        values.put(T5COL_4, foodQty);
+        values.put(T5COL_5, checkoutStatus);
+        values.put(T5COL_6, acctId);
 
         long l = sqLiteDatabase.insert(TABLE5_NAME,null,values);
-        if(l > 0)
+        return l;
+    }
+
+    public boolean validateOnlyOneCart(){
+        return false;
+    }
+    public long addFoodToTempCart(int foodId, long acctId){
+        // validate
+
+        return addCart(0, foodId, 1, false,
+                Long.parseLong((String.valueOf(acctId))));
+    }
+    public void applyOrderId(Long orderId){
+        // apply order Id to all un-checked out items
+
+    }
+    public void editCartQty(){
+
+    }
+
+
+
+    // Cart: Delete
+    public Cursor resetCart(int id){
+        // if previous items are not from same restaurant
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "DELETE FROM " + TABLE5_NAME
+                + " WHERE checkout_status = false";
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+    public boolean deleteCart(int id){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        int d = sqLiteDatabase.delete(TABLE5_NAME,"food_Id=?",
+                new String[]{Integer.toString(id)});
+        if(d>0)
             return true;
         else
             return false;
     }
 
-    // Reading Data
+
+
+    // READING DATA
 
     //Account
     //Raiyan-making changes to viewDataAccount method
@@ -270,6 +322,14 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }
+    public Cursor viewAccountByName(String name) {
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE1_NAME +
+                " WHERE " + T1COL_2 + " = '" +name + "'";
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
 
     //Original viewDataAccount
     /* public Cursor viewDataAccount(){
@@ -290,20 +350,101 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //Food
+    public Cursor viewDataFoodById(long foodId){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE food_Id=" + foodId;
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
     public Cursor viewDataFood(){
         SQLiteDatabase database = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE3_NAME;
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }
+    public Cursor viewDataFoodWithRestaurantName(){
+        SQLiteDatabase database = this.getReadableDatabase();
 
-    public Cursor viewDataFoodByRestaurant(int acctId){
+//        String query = "SELECT * FROM " + TABLE3_NAME +
+//                " LEFT OUTER JOIN " + TABLE2_NAME ;
+        String query = "SELECT * FROM  food_table LEFT OUTER JOIN account_table  WHERE food_table.account_Id = account_table.account_Id";
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+    public Cursor viewDataFoodByAcctId(long acctId){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME
+                + " WHERE account_Id = " + String.valueOf(acctId);
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+    public Cursor viewDataFoodByOrderId(long orderId){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME
+                + " WHERE order_Id = " + String.valueOf(orderId);
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+    public Cursor viewDataFoodByRestaurant(long acctId){
         SQLiteDatabase database = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE3_NAME
                 + " WHERE " + T3COL_2 + "=" + acctId;
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }
+
+    public Cursor viewDataFoodF(){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 1";
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+    public Cursor viewDataFoodM(){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 2";
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+    public Cursor viewDataFoodP(){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 3";
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+    public Cursor viewDataFoodC(){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 4";
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+    public Cursor viewDataFoodCh(){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 5";
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+    public Cursor viewDataFoodVeg(){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 6";
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+//    public Cursor viewDataFoodByState(){
+//        SQLiteDatabase database = this.getReadableDatabase();
+//        String query = "SELECT * FROM " + TABLE3_NAME + " JOIN " +
+//                TABLE1_NAME + " ON " + TABLE3_NAME + ".account_Id = " + TABLE1_NAME + ".account_Id WHERE " +
+//                TABLE1_NAME + ".CITY = 'SURREY'";
+//        Cursor cursor = database.rawQuery(query, null);
+//        return cursor;
+//    }
+
+
     //Order
     public Cursor viewDataOrder(){
         SQLiteDatabase database = this.getReadableDatabase();
@@ -312,19 +453,9 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    //Cart
-    public Cursor viewDataCart(){
-        SQLiteDatabase database = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE5_NAME;
-        Cursor cursor = database.rawQuery(query,null);
-        return cursor;
-
-    }
-
     //Deleting the data
 
     //Account
-
     public boolean deleteRecAccount(int id){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         int d = sqLiteDatabase.delete(TABLE1_NAME,"account_Id=?",
@@ -368,16 +499,6 @@ public class DBHelper extends SQLiteOpenHelper {
             return false;
     }
 
-    //Cart
-    public boolean deleteCart(int id){
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        int d = sqLiteDatabase.delete(TABLE5_NAME,"food_Id=?",
-                new String[]{Integer.toString(id)});
-        if(d>0)
-            return true;
-        else
-            return false;
-    }
 
 
     ///Updating the tables

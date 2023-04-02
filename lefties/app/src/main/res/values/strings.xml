@@ -52,7 +52,7 @@
     <string name="AtD">AtD:</string>
     <string name="fooditem">Are you looking for food items or restaurants?</string>
     <string name="All">All</string>
-    <string name="Featured">Featured</string>
+    <string name="Featured">Indian</string>
     <string name="Pastries">Pastries</string>
     <string name="Chicken">Chicken</string>
     <string name="Vegetarian">Vegetarian</string>
@@ -90,4 +90,8 @@
     </string-array>
 
     <string name="labelSearchCity">Search your city</string>
+    <string name="btnGoToRestaurant">Order from restaurant</string>
+    <string name="labelRestoPlaceholder">Good Restaurant</string>
+    <string name="labelGoToCart">Go to cart</string>
+    <string name="labelBackToCustHome"><![CDATA[< Back To All]]></string>
 </resources>

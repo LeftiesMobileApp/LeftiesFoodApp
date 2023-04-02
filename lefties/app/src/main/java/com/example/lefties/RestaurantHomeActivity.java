@@ -17,27 +17,28 @@ import java.util.HashMap;
 public class RestaurantHomeActivity extends AppCompatActivity {
     RecyclerView inventoryList;
     DBHelper dbh;
-    Integer restaurantAcctId = 1;
     ArrayList<HashMap<String, String>> inventoryMapper = new ArrayList<>();
     Button addItem;
     Button generateReport;
     TextView headline;
+    String restaurantName;
     ArrayList<HashMap> foods;
+    long acctId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_home);
 
+        Bundle extras = getIntent().getExtras();
+        acctId = extras.getLong("acctId");
+        restaurantName = extras.getString("acctName");
+
         headline = findViewById(R.id.txtRestoHomeWelcome);
 
         dbh = new DBHelper(this);
-        if(dbh.viewDataFood().getCount() < 1){
-            dbh.seedFoodTable();
-        }
 
-
-        inventoryList = findViewById(R.id.recyclerInventory);
+        inventoryList = findViewById(R.id.customerRestaurantRecycler);
         int columnCount = 2;
         inventoryList.setLayoutManager(
                 new GridLayoutManager(this, columnCount));
@@ -63,7 +64,7 @@ public class RestaurantHomeActivity extends AppCompatActivity {
 
     public void goToAddItem(){
         Intent i = new Intent(getApplicationContext(), RestaurantAddAnItemActivity.class);
-        i.putExtra("restaurantAcctId", restaurantAcctId);
+        i.putExtra("acctId", acctId);
         startActivity(i);
     }
 
@@ -71,7 +72,7 @@ public class RestaurantHomeActivity extends AppCompatActivity {
 
         // CREATE ARRAYLIST of HashMap FROM DB
         foods = new ArrayList<HashMap>();
-        Cursor c = dbh.viewDataFoodByRestaurant(restaurantAcctId);
+        Cursor c = dbh.viewDataFoodByRestaurant(acctId);
 
         if(c.getCount() > 0){
             while(c.moveToNext()){ // while there is still line left
@@ -82,11 +83,12 @@ public class RestaurantHomeActivity extends AppCompatActivity {
                 foodTableColumns.put("food_discounted_price", c.getString(3));
                 foodTableColumns.put("food_regular_price", c.getString(4));
                 foodTableColumns.put("food_qty", c.getString(5));
+                foodTableColumns.put("restaurant_name", restaurantName);
                 foods.add(foodTableColumns);
             }
         }
         Boolean isRestaurant = true;
-        InventoryRecyclerAdapter adapter = new InventoryRecyclerAdapter(this, foods, isRestaurant);
+        FoodItemAdapterClass adapter = new FoodItemAdapterClass(this, foods, acctId);
         inventoryList.setAdapter(adapter);
     }
 
