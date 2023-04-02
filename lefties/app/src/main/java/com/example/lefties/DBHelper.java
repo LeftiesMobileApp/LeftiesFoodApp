@@ -369,7 +369,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
 //        String query = "SELECT * FROM " + TABLE3_NAME +
 //                " LEFT OUTER JOIN " + TABLE2_NAME ;
-        String query = "SELECT * FROM  food_table LEFT OUTER JOIN account_table  WHERE food_table.account_Id = account_table.account_Id";
+        String query = "SELECT * FROM  food_table LEFT OUTER JOIN account_table " +
+                " WHERE food_table.account_Id = account_table.account_Id";
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }
@@ -450,7 +451,13 @@ public class DBHelper extends SQLiteOpenHelper {
     //Order
     public Cursor viewDataOrder(){
         SQLiteDatabase database = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE4_NAME;
+       // String query = "SELECT * FROM " + TABLE4_NAME;
+        String query = "SELECT order_Id, order_date, " +
+                "order_status, order_total, customer_name, " +
+                "customer_address " +  //, account_table.restaurant_name
+                "FROM " + TABLE4_NAME +
+                "INNER JOIN " + TABLE1_NAME + " ON customer_Id = account_Id ";
+                //+ "INNER JOIN ?? ON restaurant_Id = account_Id"; to get restaurant name ??
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }

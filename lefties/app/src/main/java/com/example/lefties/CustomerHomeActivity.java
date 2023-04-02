@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
     Button addItem;
     FoodItemAdapterClass adapter;
     ArrayList<HashMap> foods;
+    Button orderHistory;
 
     Cursor c;
 
@@ -59,6 +61,15 @@ public class CustomerHomeActivity extends AppCompatActivity {
 
         setupSearchByCity();
         setupSearchByType();
+
+        orderHistory = findViewById(R.id.btnGoToCart);
+
+        orderHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CustomerHomeActivity.this, OrderHistoryActivity.class));
+            }
+        });
 
 
     }
