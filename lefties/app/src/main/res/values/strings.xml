@@ -45,11 +45,11 @@
     <string name="rest1">RESTAURANTS</string>
     <string name="Lefties">Lefties</string>
     <string name="From">From:</string>
-    <string name="FromD">FromData</string>
+    <string name="FromD"></string>
     <string name="To">To:</string>
-    <string name="ToD">ToData:</string>
+    <string name="ToD"></string>
     <string name="At">At:</string>
-    <string name="AtD">AtD:</string>
+    <string name="AtD"></string>
     <string name="fooditem">Are you looking for food items or restaurants?</string>
     <string name="All">All</string>
     <string name="Featured">Indian</string>
