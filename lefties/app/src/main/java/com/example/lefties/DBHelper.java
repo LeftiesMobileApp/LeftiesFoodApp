@@ -268,8 +268,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 " WHERE " + T1COL_4 + "=" + '"' + userEmail + '"' + " AND " +
                  T1COL_5 + "=" + '"' + userPass + '"';
         Cursor cursor = database.rawQuery(query,null);
-        //String query = "SELECT * FROM " + TABLE1_NAME + " WHERE Id = ?";
-        //Cursor cursor = database.rawQuery(query,new String[]{"2"});
         return cursor;
     }
 

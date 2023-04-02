@@ -44,21 +44,18 @@ public class MainActivity extends AppCompatActivity {
                 Cursor c = dbh.viewDataAccount(userEmail.getText().toString(), userPass.getText().toString());
                 StringBuilder str = new StringBuilder();
                 if(c.getCount() > 0){
-                    String accountType;
                     if (c.moveToFirst()){
-                        accountType = c.getString(2);
+                        String accountType = c.getString(2);
                         if(accountType.equals("Customer")){
-                            Toast.makeText(MainActivity.this, "Customer", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Welcome " + c.getString(1), Toast.LENGTH_SHORT).show();
                             goToCustomerHome()
 ;                        } else {
-                            Toast.makeText(MainActivity.this, "Manager", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Welcome " + c.getString(1), Toast.LENGTH_SHORT).show();
                             goToRestoHome();
                         }
                     }
-
                 } else {
                     Toast.makeText(MainActivity.this, "Please enter valid a Email or Password.", Toast.LENGTH_SHORT).show();
-
                 }
             }
         });
