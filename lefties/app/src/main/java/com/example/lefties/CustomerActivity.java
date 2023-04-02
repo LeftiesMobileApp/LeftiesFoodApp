@@ -3,8 +3,6 @@ package com.example.lefties;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -13,13 +11,14 @@ import java.util.HashMap;
 
 public class CustomerActivity extends AppCompatActivity {
 
-    String[] food = {"Paasta With Seafood", "Bruschetta"};
+    String[] food = {"Pasta With Seafood", "Bruschetta"};
     int[] images = {R.drawable.placeholder, R.drawable.bgimg};
+    long acctId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer);
+        setContentView(R.layout.deprecated_activity_customer);
 
         ArrayList<HashMap<String, String>> aList = new ArrayList<HashMap<String, String>>();
 
@@ -33,14 +32,11 @@ public class CustomerActivity extends AppCompatActivity {
 
         String[] from ={"images", "txt"};
         int[] to ={R.id.imageFood, R.id.FoodText};
-
         SimpleAdapter adapter = new SimpleAdapter(CustomerActivity.this,
                 aList,R.layout.listview_layout,from,to);
-
         ListView listView = findViewById(R.id.listView);
 
         listView.setAdapter(adapter);
-
 
 
 

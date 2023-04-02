@@ -3,19 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="wrap_content"
+        android:padding="8px">
 
         <ImageView
-            android:id="@+id/imgCart"
-            android:layout_width="127dp"
+            android:id="@+id/imgFood2"
+            android:layout_width="125dp"
             android:layout_height="140dp"
-            android:contentDescription="@string/imgCart"
-            tools:ignore="ImageContrastCheck"
-            tools:srcCompat="@drawable/food_placeholder" />
+            android:background="@color/gold"
+            android:scaleType="centerCrop"
+            android:src="@drawable/food_placeholder" />
 
         <LinearLayout
             android:layout_width="152dp"
@@ -24,14 +25,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtRest"
+                android:id="@+id/txtRestName"
                 android:layout_width="match_parent"
                 android:layout_height="31dp"
                 android:layout_marginTop="20dp"
                 android:text="Rest Name" />
 
             <TextView
-                android:id="@+id/txtItem"
+                android:id="@+id/txtFoodName"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:text="Item"
@@ -39,7 +40,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txtItemPrice"
+                android:id="@+id/txtIFoodPrice"
                 android:layout_width="match_parent"
                 android:layout_height="41dp"
                 android:text="$ 0.00"
@@ -52,7 +53,7 @@
             android:layout_height="53dp"
             android:layout_marginStart="285dp"
             android:layout_marginTop="30dp"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnMinus"
@@ -64,11 +65,11 @@
                 tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
             <TextView
-                android:id="@+id/txtNumOfItem"
+                android:id="@+id/txtQty"
                 android:layout_width="57dp"
                 android:layout_height="37dp"
                 android:layout_weight="1"
-                android:text="2"
+                android:text="1"
                 android:textAlignment="center"
                 android:textSize="16sp"
                 android:textStyle="bold" />

@@ -181,8 +181,31 @@
             app:layout_constraintTop_toBottomOf="@+id/accountPhoneNumber"
             android:importantForAutofill="no" />
 
-        <EditText
+<!--        <EditText-->
+<!--            android:id="@+id/accountCity"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="45dp"-->
+<!--            android:layout_marginStart="30dp"-->
+<!--            android:layout_marginEnd="30dp"-->
+<!--            android:layout_marginBottom="17dp"-->
+<!--            android:background="@drawable/my_spinner_background"-->
+<!--            android:hint="@string/acnCity"-->
+<!--            android:inputType="text"-->
+<!--            android:padding="10dp"-->
+<!--            android:textColorHint="#757575"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/btnSignUp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/accountAddress"-->
+<!--            tools:ignore="TouchTargetSizeCheck"-->
+<!--            android:importantForAutofill="no" />-->
+        <Spinner
             android:id="@+id/accountCity"
+
+            android:contentDescription="@string/labelSearchCity"
+            android:entries="@array/cities"
+            android:prompt="@string/labelSearchCity"
+
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_marginStart="30dp"
@@ -197,8 +220,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/accountAddress"
-            tools:ignore="TouchTargetSizeCheck"
-            android:importantForAutofill="no" />
+            />
 
         <Button
             android:id="@+id/btnSignUp"
