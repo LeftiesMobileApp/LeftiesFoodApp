@@ -41,8 +41,10 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 new GridLayoutManager(this, columnCount)
         );
 
+        adapter = new OrderItemAdapterClass(this, orderDetails);
+        orderList.setAdapter(adapter);
 
-        getOrderDetails();
+//        getOrderDetails();
 
     }
 
@@ -55,8 +57,10 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 orderDetails.add(orderDetail);
             }
 
-            adapter = new OrderItemAdapterClass(this, orderDetails, acctId);
+            adapter = new OrderItemAdapterClass(this, orderDetails);
             orderList.setAdapter(adapter);
         }
+
     }
+
 }
