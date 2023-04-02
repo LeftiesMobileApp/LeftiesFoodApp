@@ -24,7 +24,7 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
     ArrayList<HashMap> orderDetails;
     DBHelper dbh;
 
-    public OrderItemAdapterClass(@NonNull Context context, ArrayList<HashMap> orderDetails, long acctId){
+    public OrderItemAdapterClass(@NonNull Context context, ArrayList<HashMap> orderDetails){
         this.context = context;
         this.orderDetails = orderDetails;
         layoutInflater = LayoutInflater.from(context);
@@ -58,7 +58,6 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
             btnOrderComplete = itemView.findViewById(R.id.btnOrderComplete);
             btnOrderRemind = itemView.findViewById(R.id.btnOrderRemind);
             btnViewOrderItems = itemView.findViewById(R.id.btnViewOrderDetails);
-            return;
         }
 
         @Override
@@ -78,23 +77,23 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        /*HashMap<String, String> orders = orderDetails.get(position);
+        HashMap<String, String> orders = orderDetails.get(position);
         //String restaurantNameString = orders.get("restaurant_name");
+        String orderId = orders.get("order_id");
         String odate = orders.get("order_date");
         String ostatus = orders.get("order_status");
-        //String custAddress = orders.get("customer_address");
-        //String custname = orders.get("customer_name");
-        String orderId = orders.get("order_id");
         String orderTotal = orders.get("total_order");
+        String account_name = orders.get("account_name");
+        String account_Address = orders.get("account_address");
 
-        ((ViewHolder)holder).orderDate.setText(odate);
         ((ViewHolder)holder).orderId.setText(orderId);
+        ((ViewHolder)holder).orderDate.setText(odate);
         ((ViewHolder)holder).orderStatus.setText(ostatus);
         ((ViewHolder)holder).orderTotal.setText(String.format("$ %.2f", Double.parseDouble(orderTotal)));
 
         //((ViewHolder)holder).restName.setText(restaurantNameString);
-        //((ViewHolder)holder).custAdd.setText(custAddress);
-        //((ViewHolder)holder).custName.setText(custname);*/
+        ((ViewHolder)holder).custName.setText(account_name);
+        ((ViewHolder)holder).custAdd.setText(account_Address);
 
         showCorrectBtns(holder);
 
@@ -116,7 +115,7 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-       return 2;
-       //return orderDetails.size();
+       //return 2;
+       return orderDetails.size();
     }
 }

@@ -19,6 +19,7 @@ public class RestaurantHomeActivity extends AppCompatActivity {
     DBHelper dbh;
     ArrayList<HashMap<String, String>> inventoryMapper = new ArrayList<>();
     Button addItem;
+    Button sendReminder;
     Button generateReport;
     TextView headline;
     String restaurantName;
@@ -53,8 +54,16 @@ public class RestaurantHomeActivity extends AppCompatActivity {
             }
         });
 
-        generateReport = findViewById(R.id.btnRemind);
+        generateReport = findViewById(R.id.btnGenerate);
         generateReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RestaurantHomeActivity.this, OrderHistoryActivity.class));
+            }
+        });
+
+        sendReminder = findViewById(R.id.btnRemind);
+        sendReminder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -91,7 +100,4 @@ public class RestaurantHomeActivity extends AppCompatActivity {
         FoodItemAdapterClass adapter = new FoodItemAdapterClass(this, foods, acctId);
         inventoryList.setAdapter(adapter);
     }
-
-
-
 }

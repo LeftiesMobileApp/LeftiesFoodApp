@@ -94,5 +94,5 @@
     <string name="labelRestoPlaceholder">Good Restaurant</string>
     <string name="labelGoToCart">Go to cart</string>
     <string name="labelBackToCustHome"><![CDATA[< Back To All]]></string>
-    <string name="titleYourOrders">Here are your orders</string>
+    <string name="titleYourOrders">Order History:</string>
 </resources>

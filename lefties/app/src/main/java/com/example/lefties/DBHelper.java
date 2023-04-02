@@ -453,11 +453,10 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase database = this.getReadableDatabase();
        // String query = "SELECT * FROM " + TABLE4_NAME;
         String query = "SELECT order_Id, order_date, " +
-                "order_status, order_total, customer_name, " +
-                "customer_address " +  //, account_table.restaurant_name
-                "FROM " + TABLE4_NAME +
+                "order_status, order_total, account_name, " +
+                "account_address " +
+                "FROM " + TABLE4_NAME + " " + // added space here
                 "INNER JOIN " + TABLE1_NAME + " ON customer_Id = account_Id ";
-                //+ "INNER JOIN ?? ON restaurant_Id = account_Id"; to get restaurant name ??
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }

@@ -23,8 +23,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
     ArrayList<HashMap> orderDetails;
     RecyclerView orderList;
     long acctId;
-    long restaurantId;
-    String restaurantName;
+    //long restaurantId;
+    //String restaurantName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +48,9 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 new GridLayoutManager(this, columnCount)
         );
 
-        adapter = new OrderItemAdapterClass(this, orderDetails, acctId);
-        orderList.setAdapter(adapter);
-        //getOrderDetails();
+        //adapter = new OrderItemAdapterClass(this, orderDetails, acctId);
+        //orderList.setAdapter(adapter);
+        getOrderDetails();
 
     }
     public void getOrderDetails() {
@@ -65,13 +65,13 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 orderTableColumns.put("order_date", c.getString(1));
                 orderTableColumns.put("order_status", c.getString(2));
                 orderTableColumns.put("order_total", c.getString(3));
-                //orderTableColumns.put("customer_name", c.getString(4));
-                //orderTableColumns.put("cutomer_address", c.getString(5));
+                orderTableColumns.put("account_name", c.getString(4));
+                orderTableColumns.put("account_address", c.getString(5));
                // orderTableColumns.put("restaurant_name", restaurantName);
                 orderDetails.add(orderTableColumns);
             }
         }
-        adapter = new OrderItemAdapterClass(this, orderDetails, acctId);
+        adapter = new OrderItemAdapterClass(this, orderDetails);
         orderList.setAdapter(adapter);
     }
 }
