@@ -39,7 +39,7 @@ public class CustomerActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
 
-
+//
 
 
     }
