@@ -85,19 +85,20 @@ public class CustomerHomeActivity extends AppCompatActivity {
             }
         });
 
-
-    }
-
         //Raiyan-Logout Button Functionality
         logOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(CustomerHomeActivity.this, MainActivity.class);
                 editor.clear();
                 editor.apply();
                 startActivity(intent);
             }
         });
+    }
+
+
     public void name()
     {
         TextView name = findViewById(R.id.FromD);
