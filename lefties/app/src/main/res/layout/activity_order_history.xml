@@ -5,38 +5,110 @@
     android:id="@+id/layoutOrderHistory"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DF8D8D"
+    android:background="#4A4646"
     android:padding="16dp"
     tools:context=".OrderHistoryActivity">
 
     <TextView
         android:id="@+id/titleYourOrders"
-        android:layout_width="239dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="43dp"
+        android:layout_width="229dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="4dp"
         android:text="@string/titleYourOrders"
+        android:textColor="@color/light"
         android:textSize="24sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toTopOf="@+id/orderHistory"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout6"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/orderHistory"
-        android:layout_width="347dp"
-        android:layout_height="459dp"
-        android:layout_marginStart="21dp"
-        android:layout_marginEnd="21dp"
-        android:layout_marginBottom="59dp"
-        android:background="#E3D1D1"
-        android:text="@string/orderHistory"
-        android:textColor="#0B0A0A"
-        android:textSize="20sp"
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="346dp"
+        android:layout_height="556dp"
+        android:layout_marginBottom="38dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleYourOrders" />
+        app:layout_constraintTop_toBottomOf="@+id/titleYourOrders">
+
+        <TextView
+            android:id="@+id/orderHistory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#514A4A"
+            android:textColor="#F8F5F5"
+            android:textSize="20sp" />
+
+        <ScrollView
+            android:id="@+id/scrollView3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/orderHistory" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnBackHome"
+        android:layout_width="209dp"
+        android:layout_height="48dp"
+        android:background="#4A4646"
+        android:text="@string/backHome"
+        android:textColor="#FDFBFB"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintEnd_toEndOf="@+id/titleYourOrders"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:id="@+id/layoutOrderHistory"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:background="#DF8D8D"-->
+<!--    android:padding="16dp"-->
+<!--    tools:context=".OrderHistoryActivity">-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/titleYourOrders"-->
+<!--        android:layout_width="239dp"-->
+<!--        android:layout_height="37dp"-->
+<!--        android:layout_marginStart="52dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginBottom="43dp"-->
+<!--        android:text="@string/titleYourOrders"-->
+<!--        android:textSize="24sp"-->
+<!--        android:textStyle="bold|italic"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/orderHistory"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/orderHistory"-->
+<!--        android:layout_width="347dp"-->
+<!--        android:layout_height="459dp"-->
+<!--        android:layout_marginStart="21dp"-->
+<!--        android:layout_marginEnd="21dp"-->
+<!--        android:layout_marginBottom="59dp"-->
+<!--        android:background="#E3D1D1"-->
+<!--        android:text="@string/orderHistory"-->
+<!--        android:textColor="#0B0A0A"-->
+<!--        android:textSize="20sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/titleYourOrders" />-->
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+

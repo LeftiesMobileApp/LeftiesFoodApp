@@ -24,38 +24,98 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_history);
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_order_history);
+//
+//        dbh = new DBHelper(this);
+//        TextView name = findViewById(R.id.orderHistory);
+//
+//        Cursor c = dbh.viewDataOrder();
+//        StringBuilder str = new StringBuilder();
+//        if(c.getCount() > 0){
+//            while(c.moveToNext()){
+//                str.append("1. Restaurant_name: " + c.getString(0) + "\n");
+//                str.append("\n");
+//                str.append("2. Restaurant_address: " + c.getString(1) + "\n");
+//                str.append("\n");
+//                str.append("3. order_status: " + c.getString(2) + "\n");
+//                str.append("\n");
+//                str.append("4. order_date: " + c.getString(3) + "\n");
+//                str.append("\n");
+//                str.append("5. order_type: " + c.getString(4) + "\n");
+//                str.append("\n");
+//                str.append("6. order_total: " + c.getString(5));
+//
+//
+//
+//                str.append("\n");
+//            }
+//            name.setText(str);
+//        } else {
+//            Toast.makeText(OrderHistoryActivity.this, "Nothing to display", Toast.LENGTH_LONG).show();
+//        }
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_order_history);
 
-        dbh = new DBHelper(this);
-        TextView name = findViewById(R.id.orderHistory);
+    //problem is here
+    //Bundle extras = getIntent().getExtras();
+    //acctId = extras.getLong("acctId");
 
-        Cursor c = dbh.viewDataOrder();
-        StringBuilder str = new StringBuilder();
-        if(c.getCount() > 0){
-            while(c.moveToNext()){
-                str.append("1. Restaurant_name: " + c.getString(0) + "\n");
-                str.append("\n");
-                str.append("2. Restaurant_address: " + c.getString(1) + "\n");
-                str.append("\n");
-                str.append("3. order_status: " + c.getString(2) + "\n");
-                str.append("\n");
-                str.append("4. order_date: " + c.getString(3) + "\n");
-                str.append("\n");
-                str.append("5. order_type: " + c.getString(4) + "\n");
-                str.append("\n");
-                str.append("6. order_total: " + c.getString(5));
+    //restaurantId = extras.getLong("restaurantId");
+    //restaurantName = extras.getString("acctName");
+    Button btn = findViewById(R.id.btnBackHome);
 
+    dbh = new DBHelper(this);
+    TextView name = findViewById(R.id.orderHistory);
 
+    Cursor c = dbh.viewDataOrder();
+    StringBuilder str = new StringBuilder();
+    if(c.getCount() > 0){
+        while(c.moveToNext()){
+            str.append("To: " + c.getString(0) + " ");
+            str.append(" ");
+            str.append(" Address: " + c.getString(1) + "\n");
+            str.append("\n");
+            str.append("Status: " + c.getString(2) + " ");
+            str.append(" ");
+            str.append(" Date: " + c.getString(3) + "\n");
+            str.append("\n");
+            str.append("Mode: " + c.getString(4) + " ");
+            str.append(" ");
+            str.append(" Total: $" + c.getString(5));
+            str.append("\n\n");
 
-                str.append("\n");
-            }
-            name.setText(str);
-        } else {
-            Toast.makeText(OrderHistoryActivity.this, "Nothing to display", Toast.LENGTH_LONG).show();
+            str.append("\n");
         }
+        name.setText(str);
+    } else {
+        Toast.makeText(OrderHistoryActivity.this, "Nothing to display", Toast.LENGTH_LONG).show();
+    }
+    //orderDetails = new ArrayList<>();
+
+    //orderList = findViewById(R.id.orderHistRecycler);
+
+    //int columnCount = 1;
+    //orderList.setLayoutManager(
+    //        new GridLayoutManager(this, columnCount)
+    //);
+
+    //adapter = new OrderItemAdapterClass(this, orderDetails);
+    //orderList.setAdapter(adapter);
+    //getOrderDetails();
+
+    btn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            startActivity(new Intent(OrderHistoryActivity.this, CustomerHomeActivity.class));
+        }
+    });
+
+}
 
 
 
@@ -77,7 +137,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
 
 
-}
+
 
 
 

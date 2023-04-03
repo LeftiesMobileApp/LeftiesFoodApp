@@ -71,6 +71,7 @@ public class CartActivity extends AppCompatActivity {
         getCartContent();
 
         //Cursor c = dbh.
+
         totalAmount.setText("$" + total);
 
         btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
@@ -104,30 +105,7 @@ public class CartActivity extends AppCompatActivity {
 
     }
 
-//    public void getCartContent() {
-//        cartItems.clear();
-//        Cursor c = dbh.viewCustomerCart(acctId);
-//
-//        if (c.getCount() > 0) {
-//            while (c.moveToNext()) {
-//                long cartItem = Long.parseLong(c.getString(0));
-//                int itemQty = Integer.parseInt(c.getString(3));
-//
-//
-//                Cursor foodCursor = dbh.viewDataFoodById(cartItem);
-//                if (foodCursor.moveToFirst()){
-//                    Double itemPrice = foodCursor.getDouble(3);
-//                  //  Double  = foodCursor.getDouble()
-//                    total += itemPrice * itemQty;
-//                }
-//
-//
-//
-//                cartItems.add(cartItem);
-//            }
-//        adapter.notifyDataSetChanged();
-//        }
-//    }
+
 
     public void getCartContent() {
         cartItems.clear();
@@ -151,6 +129,8 @@ public class CartActivity extends AppCompatActivity {
             }
             adapter.notifyDataSetChanged();
         }
+
+
     }
 
 
@@ -177,26 +157,5 @@ public class CartActivity extends AppCompatActivity {
     };
 
 
-//    public void applyListView(){
-////        ArrayList<HashMap<String, String>> aList = new ArrayList<HashMap<String, String>>();
-////
-////        for(int i=0; i<food.length; i++)
-////        {
-////            HashMap<String, String> hashMap =new HashMap<>();
-////            hashMap.put("txt", food[i]);
-////            hashMap.put("images", Integer.toString(images[i]));
-////            aList.add(hashMap);
-////        }
-//
-//        String[] from ={"images", "txt"};
-//        int[] to ={R.id.imageFood, R.id.FoodText};
-//
-//        SimpleAdapter adapter = new SimpleAdapter(CartActivity.this,
-//                aList,R.layout.recycler_cart_item,from,to);
-//
-//        ListView listView = findViewById(R.id.listViewSummary);
-//
-//        listView.setAdapter(adapter);
-//    }
 
 }
