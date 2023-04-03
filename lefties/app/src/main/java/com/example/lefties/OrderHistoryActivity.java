@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +35,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
         //restaurantId = extras.getLong("restaurantId");
         //restaurantName = extras.getString("acctName");
+        Button btn = findViewById(R.id.btnBackHome);
 
         dbh = new DBHelper(this);
         TextView name = findViewById(R.id.orderHistory);
@@ -71,6 +75,13 @@ public class OrderHistoryActivity extends AppCompatActivity {
         //adapter = new OrderItemAdapterClass(this, orderDetails);
         //orderList.setAdapter(adapter);
         //getOrderDetails();
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(OrderHistoryActivity.this, CustomerHomeActivity.class));
+            }
+        });
 
     }
     /*public void getOrderDetails() {
