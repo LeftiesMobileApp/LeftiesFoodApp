@@ -17,7 +17,7 @@ import java.util.Locale;
 public class DBHelper extends SQLiteOpenHelper {
 
     final static  String  DATABASE_NAME = "Lefties.db";
-    final static int DATABASE_VERSION = 11;
+    final static int DATABASE_VERSION = 12;
 
 
     // TABLE 1: Account_Table
@@ -245,6 +245,47 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public Cursor viewDataIn(){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT " + T1COL_2 +
+                " FROM " + TABLE1_NAME + " AS a " +
+                " JOIN " + TABLE5_NAME + " AS c " +
+                " ON a." + T1COL_1 + " = c." + T5COL_6 + " " +
+                " WHERE c." + T5COL_5 + " = 1 " +
+                " LIMIT 1";
+
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+    public Cursor viewAt()
+    {
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT " + T1COL_7 +
+                " FROM " + TABLE1_NAME + " AS a " +
+                " JOIN " + TABLE5_NAME + " AS c " +
+                " ON a." + T1COL_1 + " = c." + T5COL_6 + " " +
+                " WHERE c." + T5COL_5 + " = 1 " +
+                " LIMIT 1";
+
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+    public Cursor viewTo()
+    {
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT " + T1COL_8 +
+                " FROM " + TABLE1_NAME + " AS a " +
+                " JOIN " + TABLE5_NAME + " AS c " +
+                " ON a." + T1COL_1 + " = c." + T5COL_6 + " " +
+                " WHERE c." + T5COL_5 + " = 1 " +
+                " LIMIT 1";
+
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
     public Cursor viewCustomerCart(long acctId){
         SQLiteDatabase database = this.getReadableDatabase();
         String query = "SELECT * FROM cart_table WHERE customer_id=" + acctId + " AND NOT checkout_status";
@@ -367,7 +408,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
 //        String query = "SELECT * FROM " + TABLE3_NAME +
 //                " LEFT OUTER JOIN " + TABLE2_NAME ;
-        String query = "SELECT * FROM  food_table LEFT OUTER JOIN account_table  WHERE food_table.account_Id = account_table.account_Id";
+        String query = "SELECT * FROM  food_table LEFT OUTER JOIN account_table " +
+                " WHERE food_table.account_Id = account_table.account_Id";
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }
@@ -448,7 +490,13 @@ public class DBHelper extends SQLiteOpenHelper {
     //Order
     public Cursor viewDataOrder(){
         SQLiteDatabase database = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE4_NAME;
+       // String query = "SELECT * FROM " + TABLE4_NAME;
+        String query = "SELECT order_Id, order_date, " +
+                "order_status, order_total, customer_name, " +
+                "customer_address " +  //, account_table.restaurant_name
+                "FROM " + TABLE4_NAME +
+                "INNER JOIN " + TABLE1_NAME + " ON customer_Id = account_Id ";
+                //+ "INNER JOIN ?? ON restaurant_Id = account_Id"; to get restaurant name ??
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }

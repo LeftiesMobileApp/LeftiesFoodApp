@@ -35,7 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
         Spinner acnType = findViewById(R.id.accontType);
         EditText acnEmail = findViewById(R.id.accountEmail);
         EditText acnPass = findViewById(R.id.accountPassword);
-        EditText acnPhoneNumber = findViewById(R.id.accountPhoneNumber);
+        EditText acnPhoneNumber = findViewById(R.id.txtorderStatus);
         EditText acnAddress = findViewById(R.id.accountAddress);
         Spinner acnCity = findViewById(R.id.accountCity);
         Button btnSignUpConfirm = findViewById(R.id.btnSignUp);
@@ -69,6 +69,7 @@ public class SignUpActivity extends AppCompatActivity {
                         intent = new Intent(SignUpActivity.this, CustomerHomeActivity.class);
                     }
                     intent.putExtra("acctId", acctId);
+                    intent.putExtra("acctName", acnName.getText().toString());
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Failed to add account", Toast.LENGTH_LONG).show();

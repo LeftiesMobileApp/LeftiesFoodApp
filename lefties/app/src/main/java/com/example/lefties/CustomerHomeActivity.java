@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +27,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
     Button addItem;
     FoodItemAdapterClass adapter;
     ArrayList<HashMap> foods;
+    Button orderHistory;
 
     Cursor c;
 
@@ -51,9 +53,15 @@ public class CustomerHomeActivity extends AppCompatActivity {
 
         Button logOutBtn = findViewById(R.id.btnCusLogout);
 
+      // name();
+
+
         dbh = new DBHelper(this);
 
         inventoryList = findViewById(R.id.customerRestaurantRecycler);
+        name();
+        At();
+        To();
 
         int columnCount = 2;
         inventoryList.setLayoutManager(
@@ -68,6 +76,17 @@ public class CustomerHomeActivity extends AppCompatActivity {
         setupSearchByCity();
         setupSearchByType();
 
+        orderHistory = findViewById(R.id.btnGoToCart);
+
+        orderHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CustomerHomeActivity.this, OrderHistoryActivity.class));
+            }
+        });
+
+
+    }
 
         //Raiyan-Logout Button Functionality
         logOutBtn.setOnClickListener(new View.OnClickListener() {
@@ -79,8 +98,52 @@ public class CustomerHomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    public void name()
+    {
+        TextView name = findViewById(R.id.FromD);
+        Cursor c = dbh.viewDataIn();
+        StringBuilder str = new StringBuilder();
+        if(c.getCount() > 0) {
+            while (c.moveToNext()) {
+                str.append(c.getString(0));
+                str.append("\n");
+            }
+            name.setText(str.toString());
+        } else {
+            name.setText("No data found");
+        }
+    }
 
+    public void At()
+    {
+        TextView name = findViewById(R.id.AtD);
+        Cursor c = dbh.viewAt();
+        StringBuilder str = new StringBuilder();
+        if(c.getCount() > 0) {
+            while (c.moveToNext()) {
+                str.append(c.getString(0));
+                str.append("\n");
+            }
+            name.setText(str.toString());
+        } else {
+            name.setText("No data found");
+        }
+    }
 
+    public void To()
+    {
+        TextView name = findViewById(R.id.ToD);
+        Cursor c = dbh.viewTo();
+        StringBuilder str = new StringBuilder();
+        if(c.getCount() > 0) {
+            while (c.moveToNext()) {
+                str.append(c.getString(0));
+                str.append("\n");
+            }
+            name.setText(str.toString());
+        } else {
+            name.setText("No data found");
+        }
     }
 
     public void updateRecycler(Cursor c){
