@@ -77,8 +77,8 @@
 
         <TextView
             android:id="@+id/txtAddress"
-            android:layout_width="359dp"
-            android:layout_height="107dp"
+            android:layout_width="357dp"
+            android:layout_height="98dp"
             android:layout_marginStart="35dp"
             android:layout_marginTop="11dp"
             android:layout_marginEnd="32dp"

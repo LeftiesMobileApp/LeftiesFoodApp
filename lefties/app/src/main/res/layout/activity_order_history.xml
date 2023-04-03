@@ -5,30 +5,55 @@
     android:id="@+id/layoutOrderHistory"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#4A4646"
     android:padding="16dp"
     tools:context=".OrderHistoryActivity">
 
     <TextView
         android:id="@+id/titleYourOrders"
-        android:layout_width="243dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="24dp"
+        android:layout_width="237dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
         android:text="@string/titleYourOrders"
+        android:textColor="@color/light"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/orderHistRecycler"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/orderHistRecycler"
-        android:layout_width="376dp"
-        android:layout_height="560dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="23dp"
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="30dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleYourOrders" />
+        app:layout_constraintTop_toBottomOf="@+id/titleYourOrders">
+
+        <TextView
+            android:id="@+id/orderHistory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#514A4A"
+            android:textColor="#F8F5F5"
+            android:textSize="20sp" />
+
+        <ScrollView
+            android:id="@+id/scrollView3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/orderHistory" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -37,8 +37,8 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
         TextView orderStatus;
         TextView restName;
         TextView orderTotal;
-        TextView custName;
-        TextView custAdd;
+        TextView accountName;
+        TextView accountAddress;
         TextView orderId;
         Button btnViewOrderItems;
         Button btnOrderRemind;
@@ -52,12 +52,13 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
             restName = itemView.findViewById(R.id.textOrderRestaurantName);
             orderId = itemView.findViewById(R.id.textOrderId);
             orderTotal = itemView.findViewById(R.id.textOrderTotal);
-            custAdd = itemView.findViewById(R.id.textOrderAddress);
-            custName = itemView.findViewById(R.id.textOrderCustomerName);
+            accountAddress = itemView.findViewById(R.id.textOrderAddress);
+            accountName = itemView.findViewById(R.id.textOrderCustomerName);
             btnOrderCancel = itemView.findViewById(R.id.btnOrderCancel);
             btnOrderComplete = itemView.findViewById(R.id.btnOrderComplete);
             btnOrderRemind = itemView.findViewById(R.id.btnOrderRemind);
             btnViewOrderItems = itemView.findViewById(R.id.btnViewOrderDetails);
+            return;
         }
 
         @Override
@@ -82,9 +83,9 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
         String orderId = orders.get("order_id");
         String odate = orders.get("order_date");
         String ostatus = orders.get("order_status");
+        String account_name = orders.get("customer_name");
+        String account_address = orders.get("customer_address");
         String orderTotal = orders.get("total_order");
-        String account_name = orders.get("account_name");
-        String account_Address = orders.get("account_address");
 
         ((ViewHolder)holder).orderId.setText(orderId);
         ((ViewHolder)holder).orderDate.setText(odate);
@@ -92,8 +93,8 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
         ((ViewHolder)holder).orderTotal.setText(String.format("$ %.2f", Double.parseDouble(orderTotal)));
 
         //((ViewHolder)holder).restName.setText(restaurantNameString);
-        ((ViewHolder)holder).custName.setText(account_name);
-        ((ViewHolder)holder).custAdd.setText(account_Address);
+        ((ViewHolder)holder).accountAddress.setText(account_address);
+        ((ViewHolder)holder).accountName.setText(account_name);
 
         showCorrectBtns(holder);
 

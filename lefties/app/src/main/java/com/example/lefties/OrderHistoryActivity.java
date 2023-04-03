@@ -4,24 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class OrderHistoryActivity extends AppCompatActivity {
-    OrderItemAdapterClass adapter;
+    //OrderItemAdapterClass adapter;
     DBHelper dbh;
-    ArrayList<HashMap> orderDetails;
-    RecyclerView orderList;
+    //ArrayList<HashMap> orderDetails;
+    //RecyclerView orderList;
     long acctId;
     //long restaurantId;
     //String restaurantName;
@@ -32,28 +27,53 @@ public class OrderHistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order_history);
 
         //problem is here
-        Bundle extras = getIntent().getExtras();
+        //Bundle extras = getIntent().getExtras();
         //acctId = extras.getLong("acctId");
 
         //restaurantId = extras.getLong("restaurantId");
         //restaurantName = extras.getString("acctName");
 
         dbh = new DBHelper(this);
-        orderDetails = new ArrayList<>();
+        TextView name = findViewById(R.id.orderHistory);
 
-        orderList = findViewById(R.id.orderHistRecycler);
+        Cursor c = dbh.viewDataOrder();
+        StringBuilder str = new StringBuilder();
+        if(c.getCount() > 0){
+            while(c.moveToNext()){
+                str.append("To: " + c.getString(0) + " ");
+                str.append(" ");
+                str.append(" Address: " + c.getString(1) + "\n");
+                str.append("\n");
+                str.append("Status: " + c.getString(2) + " ");
+                str.append(" ");
+                str.append(" Date: " + c.getString(3) + "\n");
+                str.append("\n");
+                str.append("Mode: " + c.getString(4) + " ");
+                str.append(" ");
+                str.append(" Total: $" + c.getString(5));
+                str.append("\n\n");
 
-        int columnCount = 1;
-        orderList.setLayoutManager(
-                new GridLayoutManager(this, columnCount)
-        );
+                str.append("\n");
+            }
+            name.setText(str);
+        } else {
+            Toast.makeText(OrderHistoryActivity.this, "Nothing to display", Toast.LENGTH_LONG).show();
+        }
+        //orderDetails = new ArrayList<>();
 
-        //adapter = new OrderItemAdapterClass(this, orderDetails, acctId);
+        //orderList = findViewById(R.id.orderHistRecycler);
+
+        //int columnCount = 1;
+        //orderList.setLayoutManager(
+        //        new GridLayoutManager(this, columnCount)
+        //);
+
+        //adapter = new OrderItemAdapterClass(this, orderDetails);
         //orderList.setAdapter(adapter);
-        getOrderDetails();
+        //getOrderDetails();
 
     }
-    public void getOrderDetails() {
+    /*public void getOrderDetails() {
         orderDetails = new ArrayList<HashMap>();
         Cursor c = dbh.viewDataOrder();
 
@@ -73,5 +93,5 @@ public class OrderHistoryActivity extends AppCompatActivity {
         }
         adapter = new OrderItemAdapterClass(this, orderDetails);
         orderList.setAdapter(adapter);
-    }
+    } */
 }

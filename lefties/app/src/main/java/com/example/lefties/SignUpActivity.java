@@ -67,6 +67,7 @@ public class SignUpActivity extends AppCompatActivity {
                         intent = new Intent(SignUpActivity.this, CustomerHomeActivity.class);
                     }
                     intent.putExtra("acctId", acctId);
+                    intent.putExtra("acctName", acnName.getText().toString());
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Failed to add account", Toast.LENGTH_LONG).show();
