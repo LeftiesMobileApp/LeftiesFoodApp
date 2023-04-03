@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutOrderHistory"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DF8D8D"
+    android:padding="16dp"
+    tools:context=".OrderHistoryActivity">
+
+    <TextView
+        android:id="@+id/titleYourOrders"
+        android:layout_width="239dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="43dp"
+        android:text="@string/titleYourOrders"
+        android:textSize="24sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/orderHistory"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/orderHistory"
+        android:layout_width="347dp"
+        android:layout_height="459dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="59dp"
+        android:background="#E3D1D1"
+        android:text="@string/orderHistory"
+        android:textColor="#0B0A0A"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleYourOrders" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
