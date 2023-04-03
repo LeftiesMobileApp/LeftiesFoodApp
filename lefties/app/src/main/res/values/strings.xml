@@ -28,6 +28,7 @@
     BC,Ca
     </string>
     <string-array name="cities">
+        <item>Please select city</item>
         <item>Vancouver</item>
         <item>Surrey</item>
         <item>Burnaby</item>
@@ -85,6 +86,7 @@
     <string name="signUpRes1">imgOne</string>
     <string name="signUpTwo">resTwo</string>
     <string-array name="accountType">
+        <item>Please select account type</item>
         <item>Customer</item>
         <item>Restaurant</item>
     </string-array>

@@ -48,6 +48,8 @@ public class SignUpActivity extends AppCompatActivity {
 
                 String acctType = acnType.getSelectedItem().toString();
 
+//                if()
+
                 acctId = dbh.addAccount(
                         acnName.getText().toString(),
                         acctType,
