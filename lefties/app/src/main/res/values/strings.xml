@@ -90,6 +90,12 @@
         <item>Customer</item>
         <item>Restaurant</item>
     </string-array>
+    <string-array name="restaurantType">
+        <item>Please select restaurant type</item>
+        <item>Indian</item>
+        <item>Chinese</item>
+        <item>Mexican</item>
+    </string-array>
 
     <string name="labelSearchCity">Search your city</string>
     <string name="btnGoToRestaurant">Order from restaurant</string>

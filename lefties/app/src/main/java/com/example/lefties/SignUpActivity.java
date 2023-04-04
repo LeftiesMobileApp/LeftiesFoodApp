@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,14 +47,35 @@ public class SignUpActivity extends AppCompatActivity {
         EditText acnPhoneNumber = findViewById(R.id.txtorderStatus);
         EditText acnAddress = findViewById(R.id.accountAddress);
         Spinner acnCity = findViewById(R.id.accountCity);
+        Spinner restaurantType = findViewById(R.id.restaurantType);
         Button btnSignUpConfirm = findViewById(R.id.btnSignUp);
         TextView formName = findViewById(R.id.formName);
+        restaurantType.setVisibility(View.GONE);
 
         if (extraData.getString("formType", "").equals("signUp")) {
 
             //Raiyan-Form Name sign up or edit account
             formName.setText(extraData.getString("formName", ""));
             Toast.makeText(getApplicationContext(), "Sign Up", Toast.LENGTH_LONG).show();
+
+            acnType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    //acnType.getSelectedItem().toString().equals("Restaurant")
+                    if(position == 2){
+                        restaurantType.setVisibility(View.VISIBLE);
+                    }
+                    if(position == 1){
+                        restaurantType.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
 
 
             btnSignUpConfirm.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +99,10 @@ public class SignUpActivity extends AppCompatActivity {
                         Intent intent;
                         //Raiyan-Fixed if logic check bug
                         if (acnType.getSelectedItem().toString().equals("Restaurant")) {
+//                            boolean restBool;
+                            dbh.addRestaurant(restaurantType.getSelectedItem().toString(), acctId);
                             intent = new Intent(SignUpActivity.this, RestaurantHomeActivity.class);
+
                         } else {
                             intent = new Intent(SignUpActivity.this, CustomerHomeActivity.class);
                         }
@@ -136,7 +161,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     intent.putExtra("acctName", acnName.getText().toString());
                                     startActivity(intent);
                                 } else {
-                                    Toast.makeText(getApplicationContext(), "Failed to edit account", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "Failed to update account", Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
