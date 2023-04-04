@@ -134,8 +134,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     //Adding for account table
-    //Minor Changes made by Raiyan, removing aid, it should be generated automatically
-    //To see the original one look below
+    //Raiyan-Made minor Changes, removing aid, it should be generated automatically
     public long addAccount(String aname, String atype, String aemail, String apassword, String aphone,
                               String aaddress, String acity)
     {
@@ -155,6 +154,33 @@ public class DBHelper extends SQLiteOpenHelper {
         else
             return 0;
 
+    }
+
+    //Raiyan-Retrieve account information
+    public Cursor getAccountInfo(long acctId){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM account_table WHERE account_Id=" + acctId;
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+    //Raiyan-Edit Account Information
+    public long updateAccountInfo(long accountID, String acnName,  String acnPhoneNumber, String acnAddress) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(T1COL_2, acnName);
+        values.put(T1COL_6, acnPhoneNumber);
+        values.put(T1COL_7, acnAddress);
+
+        String selection = "account_Id = ?";
+        String[] selectionArgs = { String.valueOf(accountID) };
+        int count = sqLiteDatabase.update(TABLE1_NAME, values, selection, selectionArgs);
+
+        if(count > 0)
+            return count;
+        else
+            return 0;
     }
 
 

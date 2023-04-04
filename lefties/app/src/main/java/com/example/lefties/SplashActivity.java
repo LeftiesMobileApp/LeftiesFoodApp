@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
 
         //Raiyan-Keep user logged in with shared preferences
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
+//        Toast.makeText(getApplicationContext(), sharedPreferences.getString("acctName",""), Toast.LENGTH_LONG).show();
 
         TimerTask task = new TimerTask() {
             @Override
@@ -44,8 +45,7 @@ public class SplashActivity extends AppCompatActivity {
         opening.schedule(task,5000);
     }
 
-    public void goToRestoHome()
-    {
+    public void goToRestoHome() {
         //Raiyan-Keep user logged in with shared preferences
         final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         Intent i = new Intent(getApplicationContext(),RestaurantHomeActivity.class);
@@ -55,14 +55,12 @@ public class SplashActivity extends AppCompatActivity {
     }
 
 
-    public void goToCustomerHome()
-    {
-
+    public void goToCustomerHome() {
         //Raiyan-Keep user logged in with shared preferences
         final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         Intent i = new Intent(getApplicationContext(), CustomerHomeActivity.class);
         i.putExtra("acctId", sharedPref.getLong("acctID",0));
-        i.putExtra("accName", sharedPref.getString("accName",""));
+        i.putExtra("accName", sharedPref.getString("acctName",""));
         startActivity(i);
     }
 }

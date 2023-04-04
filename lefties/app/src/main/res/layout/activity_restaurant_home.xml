@@ -12,7 +12,33 @@
         android:layout_height="match_parent"
         android:background="#2F2F37"
         android:minHeight="1200dip"
+        android:padding="12dp"
         tools:context=".RestaurantHomeActivity">
+
+        <LinearLayout
+            android:id="@+id/navBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/editAccnBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:text="Edit Account"
+                android:textColor="@color/loginBtn" />
+
+            <Button
+                android:id="@+id/logOutBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:text="Log out"
+                android:textColor="@color/loginBtn" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layoutLogo"
