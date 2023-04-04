@@ -33,8 +33,14 @@ public class RestaurantHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_home);
 
+        //Hi Manager! Welcome to Restaurant Name’s Dashboard
+
         final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPref.edit();
+
+        //Raiyan-Dynamic Names for Accounts
+        TextView helloManager = findViewById(R.id.txtRestoHomeWelcome);
+        helloManager.setText("Hi Manager! Welcome to " + sharedPref.getString("acctName", "") + "'s Dashboard");
 
         Button editAccnBtn = findViewById(R.id.editAccnBtn);
         Button logOutBtn = findViewById(R.id.logOutBtn);

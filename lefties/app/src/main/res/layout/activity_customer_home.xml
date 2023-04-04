@@ -80,6 +80,7 @@
             android:backgroundTint="@color/maroon"
             android:orientation="vertical"
             android:padding="12dp"
+            android:visibility="gone"
             app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toTopOf="@+id/linearLogoAndSearch"
             app:layout_constraintEnd_toStartOf="parent"
