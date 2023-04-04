@@ -22,11 +22,13 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
     String contextClass;
     ArrayList<HashMap> orderDetails;
     DBHelper dbh;
+    Boolean isRestaurant = false;
 
-    public OrderItemAdapterClass(@NonNull Context context, ArrayList<HashMap> orderDetails){
+    public OrderItemAdapterClass(@NonNull Context context, ArrayList<HashMap> orderDetails, Boolean isRestaurant){
         this.context = context;
         this.orderDetails = orderDetails;
         layoutInflater = LayoutInflater.from(context);
+        this.isRestaurant = isRestaurant;
         //Log.i("acct id long is ", ""+acctId);
         dbh = new DBHelper(context);
     }
@@ -53,10 +55,10 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
             orderTotal = itemView.findViewById(R.id.textOrderTotal);
             accountAddress = itemView.findViewById(R.id.textOrderAddress);
             accountName = itemView.findViewById(R.id.textOrderCustomerName);
-            btnOrderCancel = itemView.findViewById(R.id.btnOrderCancel);
-            btnOrderComplete = itemView.findViewById(R.id.btnOrderComplete);
-            btnOrderRemind = itemView.findViewById(R.id.btnOrderRemind);
-            btnViewOrderItems = itemView.findViewById(R.id.btnViewOrderDetails);
+//            btnOrderCancel = itemView.findViewById(R.id.btnOrderCancel);
+//            btnOrderComplete = itemView.findViewById(R.id.btnOrderComplete);
+//            btnOrderRemind = itemView.findViewById(R.id.btnOrderRemind);
+//            btnViewOrderItems = itemView.findViewById(R.id.btnViewOrderDetails);
             return;
         }
 
@@ -79,21 +81,21 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         HashMap<String, String> orders = orderDetails.get(position);
         //String restaurantNameString = orders.get("restaurant_name");
-        String orderId = orders.get("order_id");
-        String odate = orders.get("order_date");
-        String ostatus = orders.get("order_status");
-        String account_name = orders.get("customer_name");
-        String account_address = orders.get("customer_address");
-        String orderTotal = orders.get("total_order");
-
-        ((ViewHolder)holder).orderId.setText(orderId);
-        ((ViewHolder)holder).orderDate.setText(odate);
-        ((ViewHolder)holder).orderStatus.setText(ostatus);
-        ((ViewHolder)holder).orderTotal.setText(String.format("$ %.2f", Double.parseDouble(orderTotal)));
-
-        //((ViewHolder)holder).restName.setText(restaurantNameString);
-        ((ViewHolder)holder).accountAddress.setText(account_address);
-        ((ViewHolder)holder).accountName.setText(account_name);
+        String orderIdData = orders.get("order_id");
+        String odateData = orders.get("order_date");
+        String ostatusData = orders.get("order_status");
+        String customerNameData = orders.get("customer_name");
+        String customerAddressData= orders.get("customer_address");
+        String orderTotalData = orders.get("order_total");
+//
+        ((ViewHolder)holder).orderId.setText("#00"+orderIdData);
+        ((ViewHolder)holder).orderDate.setText(odateData);
+        ((ViewHolder)holder).orderStatus.setText(ostatusData);
+        ((ViewHolder)holder).orderTotal.setText("$ " + orderTotalData);
+//
+//        //((ViewHolder)holder).restName.setText(restaurantNameString);
+//        ((ViewHolder)holder).accountAddress.setText(account_address);
+//        ((ViewHolder)holder).accountName.setText(account_name);
 
         showCorrectBtns(holder);
 
@@ -103,10 +105,9 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
     //"cancel, complete, remind order" only in restaurant
     public void showCorrectBtns(RecyclerView.ViewHolder holder){
         contextClass = context.getClass().getSimpleName();
-        if(contextClass.equals("RestaurantHomeActivity")){
+        if(!isRestaurant){
             ((ViewHolder)holder).btnViewOrderItems.setVisibility(GONE);
-        }
-        else if(contextClass.equals("CustomerHomeActivity")){
+        } else {
             ((ViewHolder)holder).btnOrderCancel.setVisibility(GONE);
             ((ViewHolder)holder).btnOrderRemind.setVisibility(GONE);
             ((ViewHolder)holder).btnOrderComplete.setVisibility(GONE);
