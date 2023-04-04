@@ -47,14 +47,15 @@ public class CustomerHomeActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         acctId = extras.getLong("acctId");
 
+
+        Toast.makeText(getApplicationContext(), sharedPref.getString("accountType", ""), Toast.LENGTH_LONG).show();
+
         TextView name = findViewById(R.id.FromD);
         TextView address = findViewById(R.id.AtD);
         TextView city = findViewById(R.id.ToD);
 
         Button logOutBtn = findViewById(R.id.btnCusLogout);
-
-      // name();
-
+        Button editCustomerAccount = findViewById(R.id.btnEditCustomerAccount);
 
         dbh = new DBHelper(this);
 
@@ -82,6 +83,20 @@ public class CustomerHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(CustomerHomeActivity.this, OrderHistoryActivity.class));
+            }
+        });
+//        Toast.makeText(getApplicationContext(), extras.getString("accName", ""), Toast.LENGTH_LONG).show();
+
+        //Raiyan-Edit Customer Account Functionality
+        editCustomerAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CustomerHomeActivity.this, SignUpActivity.class);
+                intent.putExtra("formType", "editAccount");
+                intent.putExtra("accountType", sharedPref.getString("accountType", ""));
+                intent.putExtra("formName", "Edit " + sharedPref.getString("acctName", "") +" Account");
+                intent.putExtra("accountId", acctId);
+                startActivity(intent);
             }
         });
 

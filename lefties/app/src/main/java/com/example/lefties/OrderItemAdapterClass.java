@@ -3,7 +3,6 @@ package com.example.lefties;
 import static android.view.View.GONE;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +49,7 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
             orderDate = itemView.findViewById(R.id.textOrderDateTime);
             orderStatus = itemView.findViewById(R.id.txtorderStatus);
             restName = itemView.findViewById(R.id.textOrderRestaurantName);
-            orderId = itemView.findViewById(R.id.textOrderId);
+            orderId = itemView.findViewById(R.id.textBrandName);
             orderTotal = itemView.findViewById(R.id.textOrderTotal);
             accountAddress = itemView.findViewById(R.id.textOrderAddress);
             accountName = itemView.findViewById(R.id.textOrderCustomerName);
