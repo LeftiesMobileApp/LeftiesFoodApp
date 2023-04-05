@@ -207,8 +207,8 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(T3COL_2, aid);
         values.put(T3COL_3, fname);
-        values.put(T3COL_4, fregularprice);
-        values.put(T3COL_5, fdiscountprice);
+        values.put(T3COL_4, fdiscountprice);
+        values.put(T3COL_5, fregularprice);
         values.put(T3COL_6, fqty);
 
         long l = sqLiteDatabase.insert(TABLE3_NAME,null,values);
@@ -259,6 +259,34 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "( checkout_status=0 AND"
                 + " customer_Id=" + acctId + ")";
         sqLiteDatabase.execSQL(query);
+    };
+
+    public String updateQty(long foodId, long acctId, boolean add){
+        SQLiteDatabase readDB = this.getReadableDatabase();
+        SQLiteDatabase updateDB = this.getWritableDatabase();
+
+        String queryFindFood = "SELECT * FROM cart_table WHERE "
+                + "(food_Id=" + foodId
+                + " AND NOT checkout_status)";
+        Cursor cursor = readDB.rawQuery(queryFindFood,null);
+        cursor.moveToFirst();
+        int qty = Integer.parseInt(cursor.getString(3));
+        if(qty<=0){
+            return "ZERO";
+        }
+        if(add){
+            qty = qty+1;
+        }else{
+            qty = qty-1;
+        }
+        String querySetQty = "UPDATE cart_table SET "
+                + " food_qty_ordered=" + qty
+                + " WHERE "
+                + "(food_Id=" + foodId
+                + " AND customer_Id=" + acctId
+                + " AND NOT checkout_status)";
+        updateDB.execSQL(querySetQty);
+        return "SUCCESS";
     };
 
     public void updateOrderStatus(long orderId, String newStatus){
@@ -328,6 +356,13 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public boolean checkIfOrderExistsInCart (long acctId, long foodId){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM cart_table WHERE customer_id=" + acctId + " AND NOT checkout_status AND food_Id=" + foodId;
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor.getCount() > 0;
+    }
+
     public Cursor viewFoodItemByOrder(long orderId){
         SQLiteDatabase database = this.getReadableDatabase();
         String query = "SELECT * FROM food_table LEFT OUTER JOIN cart_table ON food_table.food_id = cart_table.food_Id WHERE cart_table.order_id = " + orderId;
@@ -361,6 +396,8 @@ public class DBHelper extends SQLiteOpenHelper {
         // apply order Id to all un-checked out items
 
     }
+
+
     public void editCartQty(){
 
     }
@@ -433,9 +470,23 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor viewDataFoodById(long foodId){
         SQLiteDatabase database = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE3_NAME + " WHERE food_Id=" + foodId;
+
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }
+
+    public Cursor viewDataFoodWithCartByFoodId(long foodId){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM food_table LEFT OUTER JOIN  cart_table ON food_table.food_Id=cart_table.food_Id"
+                + " WHERE (cart_table.food_Id=" + foodId
+                + " AND NOT cart_table.checkout_status)";
+
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+
+
     public Cursor viewDataFood(){
         SQLiteDatabase database = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE3_NAME;

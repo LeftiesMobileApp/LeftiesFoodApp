@@ -88,6 +88,7 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
         String restaurantNameString = orders.get("restaurant_name");
         long orderIdData = Long.parseLong(orders.get("order_id"));
         String odateData = orders.get("order_date");
+        String oqtyData = orders.get("order_qty");
         String ostatusData = orders.get("order_status");
         String customerNameData = orders.get("customer_name");
         String customerAddressData= orders.get("customer_address");

@@ -27,8 +27,6 @@ import java.util.Locale;
 public class CartActivity extends AppCompatActivity {
 
     CartItemAdapterClass adapter;
-//    String[] food = {"Paasta With Seafood", "Bruschetta"};
-//    int[] images = {R.drawable.placeholder, R.drawable.bgimg};
     DBHelper dbh;
     ArrayList cartItems;
     long acctId;
@@ -36,6 +34,7 @@ public class CartActivity extends AppCompatActivity {
     String restaurantName;
     long restaurantId;
     Double total;
+    TextView totalAmount;
 
 
     @Override
@@ -100,7 +99,7 @@ public class CartActivity extends AppCompatActivity {
         Chip chipDelivery = findViewById(R.id.chipDelivery);
         Chip chipPickup = findViewById(R.id.chipPickup);
         TextView address = findViewById(R.id.txtAddress);
-        TextView totalAmount = findViewById(R.id.txtAmount);
+        totalAmount = findViewById(R.id.txtAmount);
         Button btnPlaceOrder = findViewById(R.id.btnPlaceOrder);
         Button btnOrderMoreFood = findViewById(R.id.btnOrderMore);
 
@@ -115,7 +114,6 @@ public class CartActivity extends AppCompatActivity {
         adapter = new CartItemAdapterClass(this, cartItems , acctId, restaurantName);
         cartList.setAdapter(adapter);
         getCartContent();
-        totalAmount.setText("$" + total);
 
         btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,6 +163,7 @@ public class CartActivity extends AppCompatActivity {
             }
         adapter.notifyDataSetChanged();
         }
+        totalAmount.setText("$" + total);
     }
 
     public long placeOrder(){
