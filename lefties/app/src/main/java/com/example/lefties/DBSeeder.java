@@ -2,7 +2,7 @@ package com.example.lefties;
 
 public class DBSeeder {
     DBHelper dbh;
-    long r1,r2,r3;
+    long r1,r2,r3,r4,r5,r6;
     long c1,c2, c3;
     long f1,f2,f3,f4,f5,f6,f7, f8, f9, f10;
     long o1,o2,o3, o4;
@@ -51,6 +51,20 @@ public class DBSeeder {
                 "Burnaby"
         );
         dbh.addRestaurant("INDIAN", r3 );
+
+
+
+        r3 = dbh.addAccount(
+                "Biryani City",
+                "Restaurant",
+                "biryani@gmail.com",
+                "pass123",
+                "0987 654 321",
+                "123 Biryani St, Surrey",
+                "Burnaby"
+        );
+        dbh.addRestaurant("INDIAN", r3 );
+
 
         // CUSTOMERS
         c1 = dbh.addAccount(
