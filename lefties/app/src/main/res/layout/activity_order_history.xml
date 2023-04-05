@@ -8,27 +8,34 @@
     android:padding="16dp"
     tools:context=".OrderHistoryActivity">
 
-    <TextView
-        android:id="@+id/titleYourOrders"
-        android:layout_width="243dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="24dp"
-        android:text="@string/titleYourOrders"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/orderHistRecycler"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/orderHistRecycler"
-        android:layout_width="376dp"
-        android:layout_height="560dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="23dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleYourOrders" />
+        <Button
+            android:id="@+id/btnBackToHomeOrderHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/labelBackToCustHome" />
+
+        <TextView
+            android:id="@+id/titleYourOrders"
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/titleYourOrders"
+            android:textSize="24sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/orderHistRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="23dp" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

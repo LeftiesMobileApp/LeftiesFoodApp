@@ -9,7 +9,7 @@ import android.widget.SimpleAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CustomerActivity extends AppCompatActivity {
+public class XCustomerActivity extends AppCompatActivity {
 
     String[] food = {"Pasta With Seafood", "Bruschetta"};
     int[] images = {R.drawable.placeholder, R.drawable.bgimg};
@@ -32,7 +32,7 @@ public class CustomerActivity extends AppCompatActivity {
 
         String[] from ={"images", "txt"};
         int[] to ={R.id.imageFood, R.id.FoodText};
-        SimpleAdapter adapter = new SimpleAdapter(CustomerActivity.this,
+        SimpleAdapter adapter = new SimpleAdapter(XCustomerActivity.this,
                 aList,R.layout.listview_layout,from,to);
         ListView listView = findViewById(R.id.listView);
 

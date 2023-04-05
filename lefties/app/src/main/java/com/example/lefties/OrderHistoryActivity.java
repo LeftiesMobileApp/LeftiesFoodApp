@@ -41,6 +41,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Button btnBack = findViewById(R.id.btnBackToHomeOrderHistory);
 
         // rajat / guneet: problem is here
         // macci: thanks
@@ -76,7 +77,17 @@ public class OrderHistoryActivity extends AppCompatActivity {
         adapter = new OrderItemAdapterClass(this, orderDetails, isRestaurant);
         orderList.setAdapter(adapter);
         getOrderDetails(acctId);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(OrderHistoryActivity.this, CustomerHomeActivity.class));
+            }
+        });
+
+
     }
+
     public void getOrderDetails(long acctId) {
         Log.i("acct id is", acctId+" ");
         Log.i("is res is", isRestaurant +" ");

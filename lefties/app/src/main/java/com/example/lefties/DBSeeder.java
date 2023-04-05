@@ -26,8 +26,8 @@ public class DBSeeder {
                 "dragon@gmail.com",
                 "pass123",
                 "0987 654 321",
-                "123 Dragon St, Surrey",
-                "Surrey"
+                "123 Dragon St, Vancouver",
+                "Vancouver"
         );
         dbh.addRestaurant("CHINESE", r1 );
         r2 = dbh.addAccount(
@@ -36,8 +36,8 @@ public class DBSeeder {
                 "golden@gmail.com",
                 "pass123",
                 "0987 654 321",
-                "123 Golden St, Surrey",
-                "Surrey"
+                "123 Golden St, Burnaby",
+                "Burnaby"
         );
 
         dbh.addRestaurant("CHINESE", r2 );
@@ -60,7 +60,7 @@ public class DBSeeder {
                 "pass123",
                 "0987 654 321",
                 "123 Everywhere St, Burnaby",
-                "Surrey"
+                "Burnaby"
         );
         c2 = dbh.addAccount(
                 "Jane Darling",
@@ -68,8 +68,8 @@ public class DBSeeder {
                 "jane@email.com",
                 "pass123",
                 "0987 654 321",
-                "123 Sweetheaty St, Vancouver",
-                "Surrey"
+                "123 Sweetheart St, Vancouver",
+                "Vancouver"
         );
         c3 = dbh.addAccount(
                 "Dua Lipa",
@@ -148,15 +148,15 @@ public class DBSeeder {
     }
 
     public void seedFoodInit(){
-        dbh.addFood(1, "Tandoori Chicken", 30.0, 25.0, 3);
-        dbh.addFood(2, "Bread", 4.0, 10.0, 16);
-        dbh.addFood(3, "Iced Coffee", 3.0, 8.0, 160);
-        dbh.addFood(4, "Beef Stir-fry", 30.0, 25.0, 3);
-        dbh.addFood(2, "Burito", 20.0, 25.0, 4);
-        dbh.addFood(3, "Cookies", 4.0, 10.0, 16);
-        dbh.addFood(3, "Brownie Fudge", 4.0, 10.0, 16);
-        dbh.addFood(4, "Kimchi", 4.0, 10.0, 16);
-        dbh.addFood(4, "Manchurian", 4.0, 10.0, 16);
+//        dbh.addFood(1, "Tandoori Chicken", 30.0, 25.0, 3);
+//        dbh.addFood(2, "Bread", 4.0, 10.0, 16);
+//        dbh.addFood(3, "Iced Coffee", 3.0, 8.0, 160);
+//        dbh.addFood(4, "Beef Stir-fry", 30.0, 25.0, 3);
+//        dbh.addFood(2, "Burito", 20.0, 25.0, 4);
+//        dbh.addFood(3, "Cookies", 4.0, 10.0, 16);
+//        dbh.addFood(3, "Brownie Fudge", 4.0, 10.0, 16);
+//        dbh.addFood(4, "Kimchi", 4.0, 10.0, 16);
+//        dbh.addFood(4, "Manchurian", 4.0, 10.0, 16);
     }
 
 }

@@ -19,7 +19,6 @@ public class DBHelper extends SQLiteOpenHelper {
     final static  String  DATABASE_NAME = "Lefties.db";
     final static int DATABASE_VERSION = 17;
 
-
     // TABLE 1: Account_Table
     //Raiyan-added password field
     final static String TABLE1_NAME = "account_table";
@@ -240,7 +239,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public long createOrder(long custId, long restId, double total){
         String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         long orderId = addOrder(
-                "PENDING",
+                "ONGOING",
                 currentDate,
                 "DELIVERY",
                 total,
@@ -261,6 +260,16 @@ public class DBHelper extends SQLiteOpenHelper {
                 + " customer_Id=" + acctId + ")";
         sqLiteDatabase.execSQL(query);
     };
+
+    public void updateOrderStatus(long orderId, String newStatus){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String query = "UPDATE order_table SET "
+                + " order_status='" + newStatus
+                + "' WHERE "
+                + " order_Id=" + orderId ;
+        sqLiteDatabase.execSQL(query);
+    }
+
 
     //  :: CART ::
 
@@ -527,18 +536,10 @@ public class DBHelper extends SQLiteOpenHelper {
 //        return cursor;
 //    }
 
-//    public Cursor viewDataOrderAll(){
-//        SQLiteDatabase database = this.getReadableDatabase();
-//
-//        String query = "SELECT order_Id, order_date, order_status, order_total FROM  order_table INNER JOIN account_table  ON customer_Id = account_Id ";
-//        Cursor cursor = database.rawQuery(query,null);
-//        return cursor;
-//    }
-
     // Macci: This shows the restaurant details the customer ordered in
     public Cursor viewDataOrderByCustomerId(long custId){
         SQLiteDatabase database = this.getReadableDatabase();
-        String query = "SELECT order_table.order_id, order_table.order_date, order_table.order_status, order_table.order_total, account_table.account_id, account_table.account_name, account_table.account_email, account_table.account_address FROM order_table INNER JOIN account_table ON order_table.customer_id = account_table.account_id WHERE order_table.customer_Id=" + custId;
+        String query = "SELECT order_table.order_id, order_table.order_date, order_table.order_status, order_table.order_total, account_table.account_id, account_table.account_name, account_table.account_email, account_table.account_address FROM order_table INNER JOIN account_table ON order_table.customer_id = account_table.account_id WHERE order_table.customer_Id=" + custId + " ORDER BY order_table.order_Id DESC";
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }
@@ -546,7 +547,7 @@ public class DBHelper extends SQLiteOpenHelper {
     // Macci: This shows the customer details of the restaurant
     public Cursor viewDataOrderByRestaurantId(long restId){
         SQLiteDatabase database = this.getReadableDatabase();
-        String query = "SELECT order_table.order_id, order_table.order_date, order_table.order_status, order_table.order_total, account_table.account_id, account_table.account_name, account_table.account_email, account_table.account_address FROM order_table INNER JOIN account_table ON order_table.customer_id = account_table.account_id WHERE order_table.restaurant_Id=" + restId;
+        String query = "SELECT order_table.order_id, order_table.order_date, order_table.order_status, order_table.order_total, account_table.account_id, account_table.account_name, account_table.account_email, account_table.account_address FROM order_table INNER JOIN account_table ON order_table.customer_id = account_table.account_id WHERE order_table.restaurant_Id=" + restId + " ORDER BY order_table.order_Id DESC";
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }
