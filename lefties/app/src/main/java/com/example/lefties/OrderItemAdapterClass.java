@@ -11,6 +11,7 @@ import android.content.Context;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.os.Build;
 import android.telephony.SmsManager;
 //import android.telephony.gsm.SmsManager;

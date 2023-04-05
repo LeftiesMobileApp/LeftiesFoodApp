@@ -17,7 +17,7 @@ import java.util.Locale;
 public class DBHelper extends SQLiteOpenHelper {
 
     final static  String  DATABASE_NAME = "Lefties.db";
-    final static int DATABASE_VERSION = 18;
+    final static int DATABASE_VERSION = 20;
 
     // TABLE 1: Account_Table
     //Raiyan-added password field
@@ -73,7 +73,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public DBHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-
         SQLiteDatabase database = this.getWritableDatabase();
     }
 

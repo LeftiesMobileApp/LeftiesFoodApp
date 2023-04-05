@@ -47,8 +47,6 @@ public class CartItemAdapterClass extends RecyclerView.Adapter {
 
         Integer qty;
 
-        Button btnMinus, btnPlus;
-
 
         // THIS MAPS ATTRIBUTES PER ITEM
         public ViewHolder(@NonNull View itemView) {
