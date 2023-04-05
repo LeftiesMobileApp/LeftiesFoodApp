@@ -81,7 +81,12 @@ public class OrderHistoryActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(OrderHistoryActivity.this, CustomerHomeActivity.class));
+                if(isRestaurant){
+                    startActivity(new Intent(OrderHistoryActivity.this, RestaurantHomeActivity.class));
+                }else{
+                    startActivity(new Intent(OrderHistoryActivity.this, CustomerHomeActivity.class));
+                }
+
             }
         });
 
