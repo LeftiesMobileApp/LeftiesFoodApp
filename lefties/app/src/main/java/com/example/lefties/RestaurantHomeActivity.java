@@ -20,8 +20,8 @@ public class RestaurantHomeActivity extends AppCompatActivity {
     RecyclerView inventoryList;
     DBHelper dbh;
     ArrayList<HashMap<String, String>> inventoryMapper = new ArrayList<>();
-    Button addItem;
-    Button generateReport;
+    Button btnAddItem;
+    Button btnOrderHistory;
     TextView headline;
     String restaurantName;
     ArrayList<HashMap> foods;
@@ -59,19 +59,19 @@ public class RestaurantHomeActivity extends AppCompatActivity {
         displayFoodItemFromRecycler();
 
 
-        addItem = findViewById(R.id.btnAddItem);
-        addItem.setOnClickListener(new View.OnClickListener() {
+        btnAddItem = findViewById(R.id.btnAddItem);
+        btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToAddItem();
             }
         });
 
-        generateReport = findViewById(R.id.btnRemind);
-        generateReport.setOnClickListener(new View.OnClickListener() {
+        btnOrderHistory = findViewById(R.id.btnOrderHistoryRest);
+        btnOrderHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(RestaurantHomeActivity.this, OrderHistoryActivity.class));
             }
         });
 

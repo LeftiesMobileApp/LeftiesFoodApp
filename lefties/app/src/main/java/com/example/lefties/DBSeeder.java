@@ -4,8 +4,8 @@ public class DBSeeder {
     DBHelper dbh;
     long r1,r2,r3;
     long c1,c2, c3;
-    long f1,f2,f3,f4,f5,f6,f7;
-    long o1,o2,o3;
+    long f1,f2,f3,f4,f5,f6,f7, f8, f9, f10;
+    long o1,o2,o3, o4;
 
     public DBSeeder(DBHelper dbh){
         this.dbh = dbh;
@@ -90,6 +90,7 @@ public class DBSeeder {
         // CHINESE 2
         f2 = dbh.addFood(r2, "Sweet and Sour", 4.0, 10.0, 16);
         f3 =dbh.addFood(r2, "Wanton Noodles", 4.0, 10.0, 16);
+        f8 =dbh.addFood(r2, "Roast Chicken", 14.0, 20.0, 16);
 
         // INDIAN
         f4 = dbh.addFood(r3, "Butter Chicken", 4.0, 10.0, 16);
@@ -121,6 +122,29 @@ public class DBSeeder {
                 18.0
         );
         dbh.updateCartWithOrder(o2, c2);
+
+        //ORDER 3
+        dbh.addFoodToTempCart((int)f2,c1);
+        dbh.addFoodToTempCart((int)f3,c1);
+        dbh.addFoodToTempCart((int)f8,c1);
+        o3 = dbh.createOrder(
+                c2,
+                r3,
+                8.0
+        );
+        dbh.updateCartWithOrder(o3, c1);
+
+        dbh.addFoodToTempCart((int)f3,c1);
+        dbh.addFoodToTempCart((int)f8,c1);
+        dbh.addFoodToTempCart((int)f2,c1);
+
+        o4 = dbh.createOrder(
+                c1,
+                r2,
+                22.0
+        );
+        dbh.updateCartWithOrder(o1, c1);
+
     }
 
     public void seedFoodInit(){
