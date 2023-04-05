@@ -17,7 +17,7 @@ import java.util.Locale;
 public class DBHelper extends SQLiteOpenHelper {
 
     final static  String  DATABASE_NAME = "Lefties.db";
-    final static int DATABASE_VERSION = 17;
+    final static int DATABASE_VERSION = 18;
 
     // TABLE 1: Account_Table
     //Raiyan-added password field

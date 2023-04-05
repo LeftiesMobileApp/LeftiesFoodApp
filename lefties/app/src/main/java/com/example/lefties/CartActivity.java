@@ -154,14 +154,14 @@ public class CartActivity extends AppCompatActivity {
 
         if (c.getCount() > 0) {
             while (c.moveToNext()) {
-                long cartItem = Long.parseLong(c.getString(0));
-
-                Cursor foodCursor = dbh.viewDataFoodById(cartItem);
+                // macci: please use food_id not cart_id
+                long foodId = Long.parseLong(c.getString(2));
+                Cursor foodCursor = dbh.viewDataFoodById(foodId);
                 if (foodCursor.moveToFirst()){
                     Double itemPrice = foodCursor.getDouble(3);
                     total += itemPrice;
                 }
-                cartItems.add(cartItem);
+                cartItems.add(foodId);
             }
         adapter.notifyDataSetChanged();
         }

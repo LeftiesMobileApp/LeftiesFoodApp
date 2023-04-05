@@ -14,7 +14,6 @@ public class DBSeeder {
     public void seedTables(){
         seedAccounts();
         seedFood();
-        seedFoodInit();
         seedOrders();
     }
 
@@ -147,16 +146,5 @@ public class DBSeeder {
 
     }
 
-    public void seedFoodInit(){
-//        dbh.addFood(1, "Tandoori Chicken", 30.0, 25.0, 3);
-//        dbh.addFood(2, "Bread", 4.0, 10.0, 16);
-//        dbh.addFood(3, "Iced Coffee", 3.0, 8.0, 160);
-//        dbh.addFood(4, "Beef Stir-fry", 30.0, 25.0, 3);
-//        dbh.addFood(2, "Burito", 20.0, 25.0, 4);
-//        dbh.addFood(3, "Cookies", 4.0, 10.0, 16);
-//        dbh.addFood(3, "Brownie Fudge", 4.0, 10.0, 16);
-//        dbh.addFood(4, "Kimchi", 4.0, 10.0, 16);
-//        dbh.addFood(4, "Manchurian", 4.0, 10.0, 16);
-    }
 
 }

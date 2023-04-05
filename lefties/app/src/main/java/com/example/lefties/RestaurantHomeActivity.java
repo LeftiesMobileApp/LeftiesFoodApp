@@ -122,6 +122,7 @@ public class RestaurantHomeActivity extends AppCompatActivity {
         if(c.getCount() > 0){
             while(c.moveToNext()){ // while there is still line left
                 HashMap<String, String> foodTableColumns = new HashMap<>();
+//                foodTableColumns.put("food_id", c.getString());
                 foodTableColumns.put("food_id", c.getString(0));
                 foodTableColumns.put("account_id", c.getString(1));
                 foodTableColumns.put("food_name", c.getString(2));
