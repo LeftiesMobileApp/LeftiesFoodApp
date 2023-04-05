@@ -32,9 +32,8 @@ public class CustomerHomeActivity extends AppCompatActivity {
     Cursor c;
 
     long acctId;
+    String acctType;
     long restaurantIdChosen;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +43,8 @@ public class CustomerHomeActivity extends AppCompatActivity {
         final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPref.edit();
 
-        Bundle extras = getIntent().getExtras();
-        acctId = extras.getLong("acctId");
-
-
-        Toast.makeText(getApplicationContext(), sharedPref.getString("accountType", ""), Toast.LENGTH_LONG).show();
+        acctId = sharedPref.getLong("acctID", 0);
+        acctType = sharedPref.getString("accountType", "");
 
         TextView name = findViewById(R.id.FromD);
         TextView address = findViewById(R.id.AtD);
