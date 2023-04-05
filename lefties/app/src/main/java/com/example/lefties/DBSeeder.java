@@ -59,7 +59,7 @@ public class DBSeeder {
                 "john@email.com",
                 "pass123",
                 "0987 654 321",
-                "123 Dragon St, Surrey",
+                "123 Everywhere St, Burnaby",
                 "Surrey"
         );
         c2 = dbh.addAccount(
@@ -68,7 +68,7 @@ public class DBSeeder {
                 "jane@email.com",
                 "pass123",
                 "0987 654 321",
-                "123 Dragon St, Surrey",
+                "123 Sweetheaty St, Vancouver",
                 "Surrey"
         );
         c3 = dbh.addAccount(
@@ -77,7 +77,7 @@ public class DBSeeder {
                 "dua@email.com",
                 "pass123",
                 "0987 654 321",
-                "123 Dragon St, Surrey",
+                "123 Sodapop St, Surrey",
                 "Surrey"
         );
     }

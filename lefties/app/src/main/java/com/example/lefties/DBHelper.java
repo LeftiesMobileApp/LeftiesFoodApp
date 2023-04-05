@@ -17,7 +17,7 @@ import java.util.Locale;
 public class DBHelper extends SQLiteOpenHelper {
 
     final static  String  DATABASE_NAME = "Lefties.db";
-    final static int DATABASE_VERSION = 14;
+    final static int DATABASE_VERSION = 15;
 
 
     // TABLE 1: Account_Table
