@@ -54,15 +54,6 @@
                         android:textColor="@color/salmon" />
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/orderHistoryBtn"
-                    android:layout_width="fill_parent"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/gold_darker"
-                    android:text="@string/labelGoToCart"
-                    android:textColor="@color/light" />
-
             </LinearLayout>
 
             <LinearLayout

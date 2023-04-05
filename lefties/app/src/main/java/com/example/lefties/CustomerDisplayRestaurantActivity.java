@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
@@ -33,6 +34,14 @@ public class CustomerDisplayRestaurantActivity extends AppCompatActivity {
         acctId = extras.getLong("acctId");
         restaurantId = extras.getLong("restaurantId");
         restaurantName = extras.getString("restaurantName");
+
+        Button backToHome = findViewById(R.id.btnEditCustomerAccount);
+        backToHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
         dbh = new DBHelper(this);
