@@ -28,7 +28,7 @@ public class DBSeeder {
                 "123 Dragon St, Vancouver",
                 "Vancouver"
         );
-        dbh.addRestaurant("CHINESE", r1 );
+        dbh.addRestaurant("MEXICAN", r1 );
         r2 = dbh.addAccount(
                 "Golden Star",
                 "Restaurant",

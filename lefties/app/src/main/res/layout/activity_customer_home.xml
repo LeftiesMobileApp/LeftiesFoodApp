@@ -277,24 +277,9 @@
                 android:layout_height="wrap_content">
 
                 <Button
-                    android:id="@+id/All"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_margin="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_weight="1"
-                    android:background="#FBF6F6"
-                    android:gravity="center"
-                    android:minWidth="48dp"
-                    android:text="@string/All"
-                    android:textColor="#8E0144"
-                    tools:layout_weight="1" />
-
-                <Button
                     android:id="@+id/Featured"
                     style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="124dp"
                     android:layout_height="48dp"
                     android:layout_margin="8dp"
                     android:layout_marginEnd="16dp"
@@ -309,7 +294,7 @@
                 <Button
                     android:id="@+id/typeMexican"
                     style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="131dp"
                     android:layout_height="48dp"
                     android:layout_margin="8dp"
                     android:layout_marginEnd="16dp"
@@ -324,7 +309,7 @@
                 <Button
                     android:id="@+id/typeChinese"
                     style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="88dp"
                     android:layout_height="48dp"
                     android:layout_margin="8dp"
                     android:layout_marginEnd="16dp"
@@ -333,50 +318,6 @@
                     android:gravity="center"
                     android:minWidth="24dp"
                     android:text="Chinese"
-                    android:textColor="#8E0144"
-                    tools:layout_weight="1" />
-
-                <Button
-                    android:id="@+id/Pastries"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_margin="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:minWidth="24dp"
-                    android:text="@string/Pastries"
-                    android:textColor="#8E0144"
-                    tools:layout_weight="1" />
-
-                <Button
-                    android:id="@+id/Chicken"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_margin="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_weight="1"
-                    android:background="#FAF9F9"
-                    android:gravity="center"
-                    android:minWidth="24dp"
-                    android:text="@string/Chicken"
-                    android:textColor="#8E0144"
-                    tools:layout_weight="1" />
-
-                <Button
-                    android:id="@+id/Vegetarian"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_margin="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_weight="1"
-                    android:background="#FAF6F6"
-                    android:gravity="center"
-                    android:minWidth="24dp"
-                    android:text="@string/Vegetarian"
                     android:textColor="#8E0144"
                     tools:layout_weight="1" />
 

@@ -241,10 +241,8 @@ public class CustomerHomeActivity extends AppCompatActivity {
     public void setupSearchByType(){
         Button featured = findViewById(R.id.Featured);
         Button mexican = findViewById(R.id.typeMexican);
-        Button Pastries = findViewById(R.id.Pastries);
         Button Chinese = findViewById(R.id.typeChinese);
-        Button Chicken = findViewById(R.id.Chicken);
-        Button Veg = findViewById(R.id.Vegetarian);
+
 
         featured.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -257,28 +255,14 @@ public class CustomerHomeActivity extends AppCompatActivity {
         mexican.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Cursor c = dbh.viewDataFoodM();
-                updateRecycler(c);
-            }
-        });
-
-        Pastries.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Cursor c = dbh.viewDataFoodP();
-                updateRecycler(c);
-            }
-        });
-
-        Chinese.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 Cursor c = dbh.viewDataFoodC();
                 updateRecycler(c);
             }
         });
 
-        Chicken.setOnClickListener(new View.OnClickListener() {
+
+
+        Chinese.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Cursor c = dbh.viewDataFoodCh();
@@ -286,13 +270,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
             }
         });
 
-        Veg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Cursor c = dbh.viewDataFoodVeg();
-                updateRecycler(c);
-            }
-        });
+
 
     }
 

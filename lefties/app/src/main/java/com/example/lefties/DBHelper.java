@@ -17,7 +17,7 @@ import java.util.Locale;
 public class DBHelper extends SQLiteOpenHelper {
 
     final static  String  DATABASE_NAME = "Lefties.db";
-    final static int DATABASE_VERSION = 18;
+    final static int DATABASE_VERSION = 19;
 
     // TABLE 1: Account_Table
     //Raiyan-added password field
@@ -485,10 +485,29 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Cursor viewDataFoodF(){
         SQLiteDatabase database = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 1";
+        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 3";
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }
+
+//    public Cursor viewDataFoodF(){
+//        SQLiteDatabase database = this.getReadableDatabase();
+//        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 1";
+//        Cursor cursor = database.rawQuery(query,null);
+//        return cursor;
+//    }
+
+//    public Cursor viewDataFoodF() {
+//        SQLiteDatabase database = this.getReadableDatabase();
+//        String query = "SELECT f.food_Id, f.food_name, f.food_discount_price, f.food_regular_price, f.food_qty " +
+//                "FROM restaurant_table r " +
+//                "JOIN food_table f ON r.account_Id = f.account_Id " +
+//                "WHERE r.restaurant_type = 'INDIAN'";
+//        Cursor cursor = database.rawQuery(query, null);
+//        return cursor;
+//    }
+
+
 
 
 
@@ -529,14 +548,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Cursor viewDataFoodC(){
         SQLiteDatabase database = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 4";
+        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 2";
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }
 
     public Cursor viewDataFoodCh(){
         SQLiteDatabase database = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 5";
+        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 1";
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }
