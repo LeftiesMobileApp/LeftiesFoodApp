@@ -3,6 +3,7 @@ package com.example.lefties;
 import static android.view.View.GONE;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,40 +82,57 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         HashMap<String, String> orders = orderDetails.get(position);
         String restaurantNameString = orders.get("restaurant_name");
-        String orderIdData = orders.get("order_id");
+        long orderIdData = Long.parseLong(orders.get("order_id"));
         String odateData = orders.get("order_date");
         String ostatusData = orders.get("order_status");
         String customerNameData = orders.get("customer_name");
         String customerAddressData= orders.get("customer_address");
         String orderTotalData = orders.get("order_total");
         String restName = orders.get("restaurant_name");
-//
         ((ViewHolder)holder).orderId.setText("#00"+orderIdData);
         ((ViewHolder)holder).orderDate.setText(odateData);
         ((ViewHolder)holder).orderStatus.setText(ostatusData);
         ((ViewHolder)holder).orderTotal.setText("$ " + orderTotalData);
-//
         ((ViewHolder)holder).restName.setText(restName);
         ((ViewHolder)holder).accountAddress.setText(customerAddressData);
         ((ViewHolder)holder).accountName.setText(customerNameData);
+        showCorrectBtns(holder, ostatusData);
 
-        showCorrectBtns(holder);
+        ((ViewHolder)holder).btnOrderCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dbh.updateOrderStatus(orderIdData, "CANCELLED");
+                context.startActivity(new Intent(context, OrderHistoryActivity.class));
+            }
+        });
+
+        ((ViewHolder)holder).btnOrderComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dbh.updateOrderStatus(orderIdData, "COMPLETE");
+                context.startActivity(new Intent(context, OrderHistoryActivity.class));
+            }
+        });
 
     }
 
     //to display "view order items" only in customer;
-    //"cancel, complete, remind order" only in restaurant
-    public void showCorrectBtns(RecyclerView.ViewHolder holder){
+    //"remind order" only in restaurant
+    public void showCorrectBtns(RecyclerView.ViewHolder holder, String ostatusData){
         if(!isRestaurant){
-            ((ViewHolder)holder).btnOrderCancel.setVisibility(GONE);
             ((ViewHolder)holder).btnOrderRemind.setVisibility(GONE);
-            ((ViewHolder)holder).btnOrderComplete.setVisibility(GONE);
         }
+
+        if(ostatusData.equals("CANCELLED") || ostatusData.equals("COMPLETE") ){
+            ((ViewHolder)holder).btnOrderCancel.setVisibility(GONE);
+            ((ViewHolder)holder).btnOrderComplete.setVisibility(GONE);
+            ((ViewHolder)holder).btnOrderRemind.setVisibility(GONE);
+        }
+
     }
 
     @Override
     public int getItemCount() {
-       //return 2;
        return orderDetails.size();
     }
 }

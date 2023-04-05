@@ -240,7 +240,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public long createOrder(long custId, long restId, double total){
         String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         long orderId = addOrder(
-                "PENDING",
+                "ONGOING",
                 currentDate,
                 "DELIVERY",
                 total,
@@ -261,6 +261,16 @@ public class DBHelper extends SQLiteOpenHelper {
                 + " customer_Id=" + acctId + ")";
         sqLiteDatabase.execSQL(query);
     };
+
+    public void updateOrderStatus(long orderId, String newStatus){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String query = "UPDATE order_table SET "
+                + " order_status='" + newStatus
+                + "' WHERE "
+                + " order_Id=" + orderId ;
+        sqLiteDatabase.execSQL(query);
+    }
+
 
     //  :: CART ::
 
@@ -523,14 +533,6 @@ public class DBHelper extends SQLiteOpenHelper {
 //                "FROM " + TABLE4_NAME +
 //                "INNER JOIN " + TABLE1_NAME + " ON customer_Id = account_Id ";
 //                //+ "INNER JOIN ?? ON restaurant_Id = account_Id"; to get restaurant name ??
-//        Cursor cursor = database.rawQuery(query,null);
-//        return cursor;
-//    }
-
-//    public Cursor viewDataOrderAll(){
-//        SQLiteDatabase database = this.getReadableDatabase();
-//
-//        String query = "SELECT order_Id, order_date, order_status, order_total FROM  order_table INNER JOIN account_table  ON customer_Id = account_Id ";
 //        Cursor cursor = database.rawQuery(query,null);
 //        return cursor;
 //    }
