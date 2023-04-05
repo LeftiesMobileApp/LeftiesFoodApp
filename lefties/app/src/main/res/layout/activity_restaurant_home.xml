@@ -12,7 +12,33 @@
         android:layout_height="match_parent"
         android:background="#2F2F37"
         android:minHeight="1200dip"
+        android:padding="12dp"
         tools:context=".RestaurantHomeActivity">
+
+        <LinearLayout
+            android:id="@+id/navBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/editAccnBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:text="Edit Account"
+                android:textColor="@color/loginBtn" />
+
+            <Button
+                android:id="@+id/logOutBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:text="Log out"
+                android:textColor="@color/loginBtn" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layoutLogo"
@@ -49,7 +75,7 @@
             android:id="@+id/restoHomeHolderBtns"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="220dp"
+            android:layout_marginTop="200dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,26 +91,12 @@
                 android:backgroundTint="@color/salmon"
                 android:letterSpacing="0.12"
                 android:minHeight="48dip"
-                android:text="Add item"
+                android:text="@string/labelAddFoodItem"
                 android:textColor="@color/light"
                 android:textSize="10sp" />
 
             <Button
-                android:id="@+id/btnRemind"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginEnd="48dp"
-                android:layout_marginBottom="4dp"
-                android:backgroundTint="@color/gold"
-                android:letterSpacing="0.12"
-                android:minHeight="48dip"
-                android:text="Send Reminder For Pending Orders"
-                android:textColor="@color/light"
-                android:textSize="10sp" />
-
-            <Button
-                android:id="@+id/btnGenerate"
+                android:id="@+id/btnOrderHistoryRest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
@@ -94,7 +106,7 @@
                 android:backgroundTint="@color/maroon"
                 android:letterSpacing="0.12"
                 android:minHeight="48dip"
-                android:text="Generate Report of historicial Orders"
+                android:text="@string/labelYourOrders"
                 android:textColor="@color/light"
                 android:textSize="10sp" />
         </LinearLayout>
@@ -105,10 +117,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_marginStart="1dp"
-            android:layout_marginTop="600dp"
+            android:layout_marginTop="200dp"
             android:layout_marginEnd="1dp"
             android:minHeight="600dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"

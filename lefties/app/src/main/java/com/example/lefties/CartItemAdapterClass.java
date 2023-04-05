@@ -39,11 +39,12 @@ public class CartItemAdapterClass extends RecyclerView.Adapter {
         dbh = new DBHelper(context);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        TextView foodName, restName, foodPrice, itemQty;
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        TextView restName, foodName, foodPrice, itemQty;
         Button btnMinus, btnPlus;
 
+
+        // THIS MAPS ATTRIBUTES PER ITEM
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             foodName = itemView.findViewById(R.id.txtFoodName);
@@ -55,6 +56,8 @@ public class CartItemAdapterClass extends RecyclerView.Adapter {
 
             btnMinus.setOnClickListener(this);
             btnPlus.setOnClickListener(this);
+
+            return;
         }
 
         @Override
@@ -75,10 +78,7 @@ public class CartItemAdapterClass extends RecyclerView.Adapter {
             itemQty.setText(String.valueOf(quantity));
 
         }
-
-
     }
-
 
 
 
@@ -108,9 +108,13 @@ public class CartItemAdapterClass extends RecyclerView.Adapter {
 
 
 
-
-
-
+//
+//        HashMap<String, String> foodItem = foods.get(position);
+//        String foodIdString = foodItem.get("food_id");
+//        long restaurantId = Long.parseLong(foodItem.get("account_id"));
+//        int foodId = Integer.parseInt(foodIdString);
+//
+//        ((ViewHolder)holder).foodName.setText(name);
 
 
     }

@@ -5,8 +5,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -39,27 +41,21 @@ public class CustomerHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_home);
 
+        final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
         Bundle extras = getIntent().getExtras();
         acctId = extras.getLong("acctId");
 
-        Button btn = findViewById(R.id.btnGoToCart);
-       TextView name = findViewById(R.id.FromD);
-       TextView address = findViewById(R.id.AtD);
-       TextView city = findViewById(R.id.ToD);
 
+        Toast.makeText(getApplicationContext(), sharedPref.getString("accountType", ""), Toast.LENGTH_LONG).show();
 
+        TextView name = findViewById(R.id.FromD);
+        TextView address = findViewById(R.id.AtD);
+        TextView city = findViewById(R.id.ToD);
 
-       btn.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               startActivity(new Intent(CustomerHomeActivity.this, OrderHistoryActivity.class));
-           }
-       });
-
-
-
-      // name();
-
+        Button logOutBtn = findViewById(R.id.btnCusLogout);
+        Button editCustomerAccount = findViewById(R.id.btnEditCustomerAccount);
 
         dbh = new DBHelper(this);
 
@@ -89,10 +85,33 @@ public class CustomerHomeActivity extends AppCompatActivity {
                 startActivity(new Intent(CustomerHomeActivity.this, OrderHistoryActivity.class));
             }
         });
+//        Toast.makeText(getApplicationContext(), extras.getString("accName", ""), Toast.LENGTH_LONG).show();
 
+        //Raiyan-Edit Customer Account Functionality
+        editCustomerAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CustomerHomeActivity.this, SignUpActivity.class);
+                intent.putExtra("formType", "editAccount");
+                intent.putExtra("accountType", sharedPref.getString("accountType", ""));
+                intent.putExtra("formName", "Edit " + sharedPref.getString("acctName", "") +" Account");
+                intent.putExtra("accountId", acctId);
+                startActivity(intent);
+            }
+        });
 
+        //Raiyan-Logout Button Functionality
+        logOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(CustomerHomeActivity.this, MainActivity.class);
+                editor.clear();
+                editor.apply();
+                startActivity(intent);
+            }
+        });
     }
-
 
 
     public void name()

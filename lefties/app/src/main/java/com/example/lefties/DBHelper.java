@@ -17,7 +17,7 @@ import java.util.Locale;
 public class DBHelper extends SQLiteOpenHelper {
 
     final static  String  DATABASE_NAME = "Lefties.db";
-    final static int DATABASE_VERSION = 12;
+    final static int DATABASE_VERSION = 18;
 
 
     // TABLE 1: Account_Table
@@ -134,8 +134,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     //Adding for account table
-    //Minor Changes made by Raiyan, removing aid, it should be generated automatically
-    //To see the original one look below
+    //Raiyan-Made minor Changes, removing aid, it should be generated automatically
     public long addAccount(String aname, String atype, String aemail, String apassword, String aphone,
                               String aaddress, String acity)
     {
@@ -155,6 +154,33 @@ public class DBHelper extends SQLiteOpenHelper {
         else
             return 0;
 
+    }
+
+    //Raiyan-Retrieve account information
+    public Cursor getAccountInfo(long acctId){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM account_table WHERE account_Id=" + acctId;
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+    //Raiyan-Edit Account Information
+    public long updateAccountInfo(long accountID, String acnName,  String acnPhoneNumber, String acnAddress) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(T1COL_2, acnName);
+        values.put(T1COL_6, acnPhoneNumber);
+        values.put(T1COL_7, acnAddress);
+
+        String selection = "account_Id = ?";
+        String[] selectionArgs = { String.valueOf(accountID) };
+        int count = sqLiteDatabase.update(TABLE1_NAME, values, selection, selectionArgs);
+
+        if(count > 0)
+            return count;
+        else
+            return 0;
     }
 
 
@@ -361,8 +387,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 " WHERE " + T1COL_4 + "=" + '"' + userEmail + '"' + " AND " +
                  T1COL_5 + "=" + '"' + userPass + '"';
         Cursor cursor = database.rawQuery(query,null);
-        //String query = "SELECT * FROM " + TABLE1_NAME + " WHERE Id = ?";
-        //Cursor cursor = database.rawQuery(query,new String[]{"2"});
         return cursor;
     }
     public Cursor viewAccountByName(String name) {
@@ -401,7 +425,16 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     public Cursor viewDataFood(){
         SQLiteDatabase database = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE3_NAME;
+        String query = "SELECT " + TABLE3_NAME + "." + T3COL_1 + ", " +
+                TABLE3_NAME + "." + T3COL_2 + ", " +
+                TABLE3_NAME + "." + T3COL_3 + ", " +
+                TABLE3_NAME + "." + T3COL_4 + ", " +
+                TABLE3_NAME + "." + T3COL_5 + ", " +
+                TABLE3_NAME + "." + T3COL_6 +
+                " FROM " + TABLE3_NAME +
+                " INNER JOIN " + TABLE1_NAME +
+                " ON " + TABLE3_NAME + "." + T3COL_2 + " = " + TABLE1_NAME + "." + T1COL_1 +
+                " WHERE " + TABLE1_NAME + "." + T1COL_8 + " = 'Vancouver'";
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }
@@ -444,16 +477,57 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Cursor viewDataFoodM(){
+//        public Cursor viewDataFoodM(){
+//            SQLiteDatabase database = this.getReadableDatabase();
+//            String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 2";
+//            Cursor cursor = database.rawQuery(query,null);
+//            return cursor;
+//        }
+
+//    public Cursor viewDataFoodM() {
+//        SQLiteDatabase database = this.getReadableDatabase();
+//        String query = "SELECT " + TABLE3_NAME + "." + T3COL_1 + ", " + TABLE3_NAME + "." + T3COL_3 + ", " +
+//                TABLE3_NAME + "." + T3COL_4 + ", " + TABLE3_NAME + "." + T3COL_5 + ", " +
+//                TABLE3_NAME + "." + T3COL_6 +
+//                " FROM " + TABLE3_NAME +
+//                " INNER JOIN " + TABLE1_NAME +
+//                " ON " + TABLE3_NAME + "." + T3COL_2 + " = " + TABLE1_NAME + "." + T1COL_1 +
+//                " WHERE " + TABLE1_NAME + "." + T1COL_8 + " = 'surrey'"; // Replace 'surrey' with the desired value for account_city
+//        Cursor cursor = database.rawQuery(query, null);
+//        return cursor;
+//    }
+
+    public Cursor viewDataFoodM() {
         SQLiteDatabase database = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 2";
-        Cursor cursor = database.rawQuery(query,null);
+        String query = "SELECT " + TABLE3_NAME + "." + T3COL_1 + ", " +
+                TABLE3_NAME + "." + T3COL_2 + ", " +
+                TABLE3_NAME + "." + T3COL_3 + ", " +
+                TABLE3_NAME + "." + T3COL_4 + ", " +
+                TABLE3_NAME + "." + T3COL_5 + ", " +
+                TABLE3_NAME + "." + T3COL_6 +
+                " FROM " + TABLE3_NAME +
+                " INNER JOIN " + TABLE1_NAME +
+                " ON " + TABLE3_NAME + "." + T3COL_2 + " = " + TABLE1_NAME + "." + T1COL_1 +
+                " WHERE " + TABLE1_NAME + "." + T1COL_8 + " = 'Surrey'"; // Replace 'surrey' with the desired value for account_city
+        Cursor cursor = database.rawQuery(query, null);
         return cursor;
     }
 
+
+
+
     public Cursor viewDataFoodP(){
         SQLiteDatabase database = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 3";
+        String query = "SELECT " + TABLE3_NAME + "." + T3COL_1 + ", " +
+                TABLE3_NAME + "." + T3COL_2 + ", " +
+                TABLE3_NAME + "." + T3COL_3 + ", " +
+                TABLE3_NAME + "." + T3COL_4 + ", " +
+                TABLE3_NAME + "." + T3COL_5 + ", " +
+                TABLE3_NAME + "." + T3COL_6 +
+                " FROM " + TABLE3_NAME +
+                " INNER JOIN " + TABLE1_NAME +
+                " ON " + TABLE3_NAME + "." + T3COL_2 + " = " + TABLE1_NAME + "." + T1COL_1 +
+                " WHERE " + TABLE1_NAME + "." + T1COL_8 + " = 'Burnaby'";
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }
@@ -490,24 +564,39 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     //Order
-    public Cursor viewDataOrder(){
+//    public Cursor viewDataOrder(){
+//        SQLiteDatabase database = this.getReadableDatabase();
+//       // String query = "SELECT * FROM " + TABLE4_NAME;
+//        String query = "SELECT order_Id, order_date, " +
+//                "order_status, order_total, customer_name, " +
+//                "customer_address " +  //, account_table.restaurant_name
+//                "FROM " + TABLE4_NAME +
+//                "INNER JOIN " + TABLE1_NAME + " ON customer_Id = account_Id ";
+//                //+ "INNER JOIN ?? ON restaurant_Id = account_Id"; to get restaurant name ??
+//        Cursor cursor = database.rawQuery(query,null);
+//        return cursor;
+//    }
+
+//    public Cursor viewDataOrderAll(){
+//        SQLiteDatabase database = this.getReadableDatabase();
+//
+//        String query = "SELECT order_Id, order_date, order_status, order_total FROM  order_table INNER JOIN account_table  ON customer_Id = account_Id ";
+//        Cursor cursor = database.rawQuery(query,null);
+//        return cursor;
+//    }
+
+    // Macci: This shows the restaurant details the customer ordered in
+    public Cursor viewDataOrderByCustomerId(long custId){
         SQLiteDatabase database = this.getReadableDatabase();
-       // String query = "SELECT * FROM " + TABLE4_NAME;
-//        String query = "SELECT " + T4COL_2 + ", " + T4COL_3 + ", " + T4COL_4 + ", " + T4COL_5 +
-//                " FROM " + TABLE4_NAME;
+        String query = "SELECT order_table.order_id, order_table.order_date, order_table.order_status, order_table.order_total, account_table.account_id, account_table.account_name, account_table.account_email, account_table.account_address FROM order_table INNER JOIN account_table ON order_table.customer_id = account_table.account_id WHERE order_table.customer_Id=" + custId;
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
 
-//        String query = "SELECT a.account_name, a.account_address, o.order_status, o.order_date, o.order_type, o.order_total " +
-//                "FROM order_table o " +
-//                "JOIN account_table a ON o.customer_Id = a.account_Id";
-
-        String query = "SELECT a.account_name, a.account_address, o.order_status, o.order_date, o.order_type, o.order_total " +
-                "FROM order_table o " +
-                "JOIN account_table a ON o.customer_Id = a.account_Id " +
-                "LIMIT 1";
-
-
-
-        //+ "INNER JOIN ?? ON restaurant_Id = account_Id"; to get restaurant name ??
+    // Macci: This shows the customer details of the restaurant
+    public Cursor viewDataOrderByRestaurantId(long restId){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT order_table.order_id, order_table.order_date, order_table.order_status, order_table.order_total, account_table.account_id, account_table.account_name, account_table.account_email, account_table.account_address FROM order_table INNER JOIN account_table ON order_table.customer_id = account_table.account_id WHERE order_table.restaurant_Id=" + restId;
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }
