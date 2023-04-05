@@ -65,7 +65,6 @@
                 android:layout_marginEnd="36dp"
                 android:fontFamily="@font/mulish"
                 android:gravity="center|left"
-                android:text="Hi Manager! Welcome to Restaurant Name’s Dashboard"
                 android:textColor="#fff"
                 app:flow_wrapMode="chain" />
 
