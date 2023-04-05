@@ -328,6 +328,12 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public Cursor viewFoodItemByOrder(long orderId){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM food_table LEFT OUTER JOIN cart_table ON food_table.food_id = cart_table.food_Id WHERE cart_table.order_id = " + orderId;
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
 
 
     // Adding cart
@@ -345,9 +351,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return l;
     }
 
-    public boolean validateOnlyOneCart(){
-        return false;
-    }
     public long addFoodToTempCart(int foodId, long acctId){
         // validate
 
@@ -442,8 +445,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor viewDataFoodWithRestaurantName(){
         SQLiteDatabase database = this.getReadableDatabase();
 
-//        String query = "SELECT * FROM " + TABLE3_NAME +
-//                " LEFT OUTER JOIN " + TABLE2_NAME ;
         String query = "SELECT * FROM  food_table LEFT OUTER JOIN account_table " +
                 " WHERE food_table.account_Id = account_table.account_Id";
         Cursor cursor = database.rawQuery(query,null);
