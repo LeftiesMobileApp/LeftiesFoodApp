@@ -365,6 +365,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     // Cart: Delete
+    // raiyan: use for clearing
     public Cursor resetCart(int id){
         // if previous items are not from same restaurant
         SQLiteDatabase database = this.getReadableDatabase();

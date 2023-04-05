@@ -142,7 +142,7 @@ public class CartActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(CartActivity.this, MainActivity.class));
+                    finish();
             }
         });
 
