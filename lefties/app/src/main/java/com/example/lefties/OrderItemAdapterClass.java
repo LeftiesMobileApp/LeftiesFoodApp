@@ -3,6 +3,7 @@ package com.example.lefties;
 import static android.view.View.GONE;
 
 import android.content.Context;
+
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,16 +84,19 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
         HashMap<String, String> orders = orderDetails.get(position);
         String restaurantNameString = orders.get("restaurant_name");
         long orderIdData = Long.parseLong(orders.get("order_id"));
+
         String odateData = orders.get("order_date");
         String ostatusData = orders.get("order_status");
         String customerNameData = orders.get("customer_name");
         String customerAddressData= orders.get("customer_address");
         String orderTotalData = orders.get("order_total");
         String restName = orders.get("restaurant_name");
+
         ((ViewHolder)holder).orderId.setText("#00"+orderIdData);
         ((ViewHolder)holder).orderDate.setText(odateData);
         ((ViewHolder)holder).orderStatus.setText(ostatusData);
         ((ViewHolder)holder).orderTotal.setText("$ " + orderTotalData);
+
         ((ViewHolder)holder).restName.setText(restName);
         ((ViewHolder)holder).accountAddress.setText(customerAddressData);
         ((ViewHolder)holder).accountName.setText(customerNameData);
@@ -113,6 +117,7 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
                 context.startActivity(new Intent(context, OrderHistoryActivity.class));
             }
         });
+
 
     }
 

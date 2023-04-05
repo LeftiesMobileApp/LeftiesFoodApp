@@ -47,7 +47,7 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
         Log.i("acct id long is ", ""+acctId);
         layoutInflater = LayoutInflater.from(context);
         dbh = new DBHelper(context);
-       sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
     }
 

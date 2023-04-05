@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class XCartAdapterClass extends RecyclerView.Adapter{
+public class CartAdapterClass extends RecyclerView.Adapter{
 //    Integer[] img;
 //    String[] restname;
 //    String[] item;
@@ -16,7 +16,7 @@ public class XCartAdapterClass extends RecyclerView.Adapter{
     LayoutInflater mInflator;
     Context context;
 
-    public XCartAdapterClass(Context context, long[] cartItems, long acctId){ //,  String[] strRest, Integer[] imgData, String[] strItem, String[] strPrice){
+    public CartAdapterClass(Context context, long[] cartItems, long acctId){ //,  String[] strRest, Integer[] imgData, String[] strItem, String[] strPrice){
         //img = imgData;
         this.context = context;
 //        restname = strRest;

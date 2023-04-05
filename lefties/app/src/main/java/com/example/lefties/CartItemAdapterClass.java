@@ -42,6 +42,8 @@ public class CartItemAdapterClass extends RecyclerView.Adapter {
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView restName, foodName, foodPrice, itemQty;
 
+        Button btnMinus, btnPlus;
+
 
         // THIS MAPS ATTRIBUTES PER ITEM
         public ViewHolder(@NonNull View itemView) {
@@ -51,12 +53,32 @@ public class CartItemAdapterClass extends RecyclerView.Adapter {
             foodPrice = itemView.findViewById(R.id.txtIFoodPrice);
             itemQty = itemView.findViewById(R.id.txtQty);
 
+            btnMinus = itemView.findViewById(R.id.btnMinus);
+            btnPlus = itemView.findViewById(R.id.btnPlus);
+
+            btnMinus.setOnClickListener(this);
+            btnPlus.setOnClickListener(this);
+
             return;
         }
 
         @Override
         public void onClick(View v) {
 
+            int quantity = Integer.parseInt(itemQty.getText().toString());
+            switch (v.getId()) {
+                case R.id.btnMinus:
+                    if (quantity > 1) {
+                        quantity--;
+
+
+                    }
+                    break;
+                case R.id.btnPlus:
+                    quantity++;
+                    break;
+            }
+            itemQty.setText(String.valueOf(quantity));
         }
     }
 

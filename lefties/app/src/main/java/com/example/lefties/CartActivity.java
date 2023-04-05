@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -89,7 +90,6 @@ public class CartActivity extends AppCompatActivity {
 
 //        }
 
-
         total = 0.0;
 
         dbh = new DBHelper(this);
@@ -169,7 +169,6 @@ public class CartActivity extends AppCompatActivity {
 
     public long placeOrder(){
         long orderId = 0;
-
         // create order
         orderId = dbh.createOrder(
                 acctId,

@@ -73,6 +73,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public DBHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
         SQLiteDatabase database = this.getWritableDatabase();
     }
 
@@ -270,7 +271,6 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(query);
     }
 
-
     //  :: CART ::
 
     public Cursor viewDataCart(){
@@ -365,6 +365,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     // Cart: Delete
+
     // raiyan: use for clearing
     public Cursor resetCart(int id){
         // if previous items are not from same restaurant
@@ -435,7 +436,18 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     public Cursor viewDataFood(){
         SQLiteDatabase database = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE3_NAME;
+
+
+        String query = "SELECT " + TABLE3_NAME + "." + T3COL_1 + ", " +
+                TABLE3_NAME + "." + T3COL_2 + ", " +
+                TABLE3_NAME + "." + T3COL_3 + ", " +
+                TABLE3_NAME + "." + T3COL_4 + ", " +
+                TABLE3_NAME + "." + T3COL_5 + ", " +
+                TABLE3_NAME + "." + T3COL_6 +
+                " FROM " + TABLE3_NAME +
+                " INNER JOIN " + TABLE1_NAME +
+                " ON " + TABLE3_NAME + "." + T3COL_2 + " = " + TABLE1_NAME + "." + T1COL_1 +
+                " WHERE " + TABLE1_NAME + "." + T1COL_8 + " = 'Vancouver'";
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }
@@ -478,16 +490,39 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Cursor viewDataFoodM(){
+
+
+    public Cursor viewDataFoodM() {
         SQLiteDatabase database = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 2";
-        Cursor cursor = database.rawQuery(query,null);
+        String query = "SELECT " + TABLE3_NAME + "." + T3COL_1 + ", " +
+                TABLE3_NAME + "." + T3COL_2 + ", " +
+                TABLE3_NAME + "." + T3COL_3 + ", " +
+                TABLE3_NAME + "." + T3COL_4 + ", " +
+                TABLE3_NAME + "." + T3COL_5 + ", " +
+                TABLE3_NAME + "." + T3COL_6 +
+                " FROM " + TABLE3_NAME +
+                " INNER JOIN " + TABLE1_NAME +
+                " ON " + TABLE3_NAME + "." + T3COL_2 + " = " + TABLE1_NAME + "." + T1COL_1 +
+                " WHERE " + TABLE1_NAME + "." + T1COL_8 + " = 'Surrey'"; // Replace 'surrey' with the desired value for account_city
+        Cursor cursor = database.rawQuery(query, null);
         return cursor;
     }
 
+
+
+
     public Cursor viewDataFoodP(){
         SQLiteDatabase database = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE account_Id = 3";
+        String query = "SELECT " + TABLE3_NAME + "." + T3COL_1 + ", " +
+                TABLE3_NAME + "." + T3COL_2 + ", " +
+                TABLE3_NAME + "." + T3COL_3 + ", " +
+                TABLE3_NAME + "." + T3COL_4 + ", " +
+                TABLE3_NAME + "." + T3COL_5 + ", " +
+                TABLE3_NAME + "." + T3COL_6 +
+                " FROM " + TABLE3_NAME +
+                " INNER JOIN " + TABLE1_NAME +
+                " ON " + TABLE3_NAME + "." + T3COL_2 + " = " + TABLE1_NAME + "." + T1COL_1 +
+                " WHERE " + TABLE1_NAME + "." + T1COL_8 + " = 'Burnaby'";
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }
@@ -537,6 +572,7 @@ public class DBHelper extends SQLiteOpenHelper {
 //        return cursor;
 //    }
 
+
     // Macci: This shows the restaurant details the customer ordered in
     public Cursor viewDataOrderByCustomerId(long custId){
         SQLiteDatabase database = this.getReadableDatabase();
@@ -548,6 +584,7 @@ public class DBHelper extends SQLiteOpenHelper {
     // Macci: This shows the customer details of the restaurant
     public Cursor viewDataOrderByRestaurantId(long restId){
         SQLiteDatabase database = this.getReadableDatabase();
+
         String query = "SELECT order_table.order_id, order_table.order_date, order_table.order_status, order_table.order_total, account_table.account_id, account_table.account_name, account_table.account_email, account_table.account_address FROM order_table INNER JOIN account_table ON order_table.customer_id = account_table.account_id WHERE order_table.restaurant_Id=" + restId + " ORDER BY order_table.order_Id DESC";
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
