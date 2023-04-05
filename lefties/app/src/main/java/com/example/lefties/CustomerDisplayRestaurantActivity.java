@@ -66,7 +66,6 @@ public class CustomerDisplayRestaurantActivity extends AppCompatActivity {
                 foodTableColumns.put("food_name", c.getString(2));
                 foodTableColumns.put("food_discounted_price", c.getString(3));
                 foodTableColumns.put("food_regular_price", c.getString(4));
-//                foodTableColumns.put("food_qty", c.getString(5));
                 foodTableColumns.put("restaurant_name", restaurantName);
                 foods.add(foodTableColumns);
             }
