@@ -101,10 +101,10 @@ public class SignUpActivity extends AppCompatActivity {
                         if (acnType.getSelectedItem().toString().equals("Restaurant")) {
 //                            boolean restBool;
                             dbh.addRestaurant(restaurantType.getSelectedItem().toString(), acctId);
-                            intent = new Intent(SignUpActivity.this, RestaurantHomeActivity.class);
+                            intent = new Intent(SignUpActivity.this, MainActivity.class);
 
                         } else {
-                            intent = new Intent(SignUpActivity.this, CustomerHomeActivity.class);
+                            intent = new Intent(SignUpActivity.this, MainActivity.class);
                         }
                         intent.putExtra("acctId", acctId);
                         intent.putExtra("acctName", acnName.getText().toString());

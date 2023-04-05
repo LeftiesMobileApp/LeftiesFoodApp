@@ -17,7 +17,7 @@ import java.util.Locale;
 public class DBHelper extends SQLiteOpenHelper {
 
     final static  String  DATABASE_NAME = "Lefties.db";
-    final static int DATABASE_VERSION = 15;
+    final static int DATABASE_VERSION = 17;
 
 
     // TABLE 1: Account_Table
@@ -74,7 +74,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public DBHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        SQLiteDatabase database =this.getWritableDatabase();
+        SQLiteDatabase database = this.getWritableDatabase();
     }
 
     @Override

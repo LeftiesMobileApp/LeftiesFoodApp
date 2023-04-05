@@ -109,11 +109,16 @@ public class MainActivity extends AppCompatActivity {
 
     // Macci - Populate with data. If "Golden Star" restaurant does not exist, populate the tables
     public void seedTable(){
+
         Cursor c = dbh.viewAccountByName("Golden Star");
         StringBuilder str = new StringBuilder();
         if(c.getCount() == 0){
             DBSeeder dbs = new DBSeeder(dbh);
             dbs.seedTables();
+            final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.clear();
+            editor.apply();
         }
     }
 }
