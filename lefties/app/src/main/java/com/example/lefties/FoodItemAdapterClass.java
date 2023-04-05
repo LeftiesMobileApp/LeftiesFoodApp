@@ -201,10 +201,20 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
         Log.i("add to cart acct id", "is "+acctId);
 
 //      final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        // Macci: Order will be added to cart_table with order_id of 0 and checkout_status = 0;
-        dbh.addFoodToTempCart(foodId, acctId);
+        // Macci: Validate if we can add to cart or just update
+        Boolean itemAlreadyInCart = dbh.checkIfOrderExistsInCart(acctId, foodId);
+        Log.i("item found in cart", "is "+itemAlreadyInCart);
+        if(itemAlreadyInCart){
+            boolean add = true;
+            dbh.updateQty(foodId, acctId, add);
+        }else{
+            // Macci: Order will be added to cart_table with order_id of 0 and checkout_status = 0;
+            dbh.addFoodToTempCart(foodId, acctId);
+        }
+
 
         Intent i = new Intent(context, CartActivity.class);
         i.putExtra("acctId", acctId);

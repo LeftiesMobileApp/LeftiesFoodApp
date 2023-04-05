@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.telephony.SmsManager;
 //import android.telephony.gsm.SmsManager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,7 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
         Button btnOrderRemind;
         Button btnOrderComplete;
         Button btnOrderCancel;
+        TextView txtOrderItems;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,6 +79,8 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
             btnOrderComplete = itemView.findViewById(R.id.btnOrderComplete);
             btnOrderRemind = itemView.findViewById(R.id.btnOrderRemind);
             btnViewOrderItems = itemView.findViewById(R.id.btnViewOrderDetails);
+
+            txtOrderItems = itemView.findViewById(R.id.orderItems);
             return;
         }
 
@@ -103,6 +107,7 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
         long orderIdData = Long.parseLong(orders.get("order_id"));
 
         String odateData = orders.get("order_date");
+        String oqtyData = orders.get("order_qty");
         String ostatusData = orders.get("order_status");
         String customerNameData = orders.get("customer_name");
         String customerAddressData= orders.get("customer_address");
@@ -118,6 +123,21 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
         ((ViewHolder)holder).accountAddress.setText(customerAddressData);
         ((ViewHolder)holder).accountName.setText(customerNameData);
         showCorrectBtns(holder, ostatusData);
+
+        String strOrderItems = "Order item/s: \n";
+
+        Cursor c = dbh.viewFoodItemByOrder(orderIdData);
+
+        if (c.getCount() > 0) {
+            while (c.moveToNext()) { // while there is still line left
+                HashMap<String, String> foodTableColumns = new HashMap<>();
+                strOrderItems += "  - " + c.getString(2)
+                        + " x " + c.getString(9)+ " \n";
+            }
+        }
+
+        ((ViewHolder)holder).txtOrderItems.setText(strOrderItems);
+
 
         ((ViewHolder)holder).btnOrderCancel.setOnClickListener(new View.OnClickListener() {
             @Override
