@@ -109,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
 
     // Macci - Populate with data. If "Golden Star" restaurant does not exist, populate the tables
     public void seedTable(){
-
         Cursor c = dbh.viewAccountByName("Golden Star");
         StringBuilder str = new StringBuilder();
         if(c.getCount() == 0){

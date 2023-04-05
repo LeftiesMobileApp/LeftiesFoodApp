@@ -42,6 +42,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
 
         final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPref.edit();
+
         acctId = sharedPref.getLong("acctID", 0);
         acctType = sharedPref.getString("accountType", "Customer");
 
@@ -51,8 +52,8 @@ public class CustomerHomeActivity extends AppCompatActivity {
 
         Button logOutBtn = findViewById(R.id.btnCusLogout);
         Button editCustomerAccount = findViewById(R.id.btnEditCustomerAccount);
+
         Button btnGoToCart = findViewById(R.id.goToCartBtn);
-//        Button btnOrderHistory = findViewById(R.id.orderHistoryBtn);
 
         dbh = new DBHelper(this);
 

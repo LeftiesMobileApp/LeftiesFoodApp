@@ -43,6 +43,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Button btnBack = findViewById(R.id.btnBackToHomeOrderHistory);
 
+
         // rajat / guneet: problem is here
         // macci: thanks
 
@@ -77,7 +78,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
         adapter = new OrderItemAdapterClass(this, orderDetails, isRestaurant);
         orderList.setAdapter(adapter);
         getOrderDetails(acctId);
-
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

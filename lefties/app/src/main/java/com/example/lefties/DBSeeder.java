@@ -47,10 +47,10 @@ public class DBSeeder {
                 "pass123",
                 "0987 654 321",
                 "123 Biryani St, Surrey",
+
                 "Surrey"
         );
         dbh.addRestaurant("INDIAN", r3 );
-
         // CUSTOMERS
         c1 = dbh.addAccount(
                 "John Smith",

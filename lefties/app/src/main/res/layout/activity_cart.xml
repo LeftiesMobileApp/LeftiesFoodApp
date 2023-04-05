@@ -25,6 +25,7 @@
             android:layout_marginEnd="203dp"
             android:backgroundTint="#FFFFFF"
             android:text="@string/btnBackToRestaurant"
+
             android:textAlignment="textStart"
             android:textColor="#EF6E6C"
             android:textSize="12sp"
