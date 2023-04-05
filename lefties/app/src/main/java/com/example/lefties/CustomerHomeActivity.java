@@ -48,7 +48,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
         acctId = extras.getLong("acctId");
 
 
-        Toast.makeText(getApplicationContext(), sharedPref.getString("accountType", ""), Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), sharedPref.getString("accountType", ""), Toast.LENGTH_LONG).show();
 
         TextView name = findViewById(R.id.FromD);
         TextView address = findViewById(R.id.AtD);
@@ -56,6 +56,8 @@ public class CustomerHomeActivity extends AppCompatActivity {
 
         Button logOutBtn = findViewById(R.id.btnCusLogout);
         Button editCustomerAccount = findViewById(R.id.btnEditCustomerAccount);
+        Button btnGoToCart = findViewById(R.id.goToCartBtn);
+//        Button btnOrderHistory = findViewById(R.id.orderHistoryBtn);
 
         dbh = new DBHelper(this);
 
@@ -77,12 +79,32 @@ public class CustomerHomeActivity extends AppCompatActivity {
         setupSearchByCity();
         setupSearchByType();
 
-        orderHistory = findViewById(R.id.btnGoToCart);
+        //Raiyan-Got to Cart
+        btnGoToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                if (sharedPref.contains("itemAddedInCart")){
+                    Intent intent = new Intent(CustomerHomeActivity.this, CartActivity.class);
+                    intent.putExtra("acctId", sharedPref.getLong("acctId", 0));
+                    intent.putExtra("restaurantId", sharedPref.getLong("restaurantId", 0));
+                    intent.putExtra("restaurantName", sharedPref.getString("restaurantName", "Jalil"));
+                    intent.putExtra("fromCart", "false");
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(),  "No Items in Cart", Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+        });
+
+        //Order History
+        orderHistory = findViewById(R.id.orderHistoryBtn);
         orderHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CustomerHomeActivity.this, OrderHistoryActivity.class));
+                    startActivity(new Intent(CustomerHomeActivity.this, OrderHistoryActivity.class));
             }
         });
 //        Toast.makeText(getApplicationContext(), extras.getString("accName", ""), Toast.LENGTH_LONG).show();

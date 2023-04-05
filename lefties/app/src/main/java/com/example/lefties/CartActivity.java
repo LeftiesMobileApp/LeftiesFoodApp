@@ -5,8 +5,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -38,12 +40,56 @@ public class CartActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         Bundle extras = getIntent().getExtras();
-        acctId = extras.getLong("acctId");
-        restaurantName = extras.getString("restaurantName");
-        restaurantId = extras.getLong("restaurantId");
+//        acctId = extras.getLong("acctId");
+//        restaurantName = extras.getString("restaurantName");
+//        restaurantId = extras.getLong("restaurantId");
+
+        if (extras.getString("fromCart").equals("true")){
+//            Toast.makeText(CartActivity.this, "Error with your order", Toast.LENGTH_SHORT).show();
+            acctId = extras.getLong("acctId");
+            restaurantName = extras.getString("restaurantName");
+            restaurantId = extras.getLong("restaurantId");
+        } else if (sharedPref.getString("itemAddedInCart", "false").equals("true") && extras.getString("fromCart").equals("false")) {
+//            Toast.makeText(CartActivity.this, "I got you", Toast.LENGTH_SHORT).show();
+            acctId = extras.getLong("acctId");
+            restaurantName = extras.getString("restaurantName");
+            restaurantId = extras.getLong("restaurantId");
+        }
+
+//        if (sharedPref.getString("itemAddedInCart", "false").equals("true") && extras.containsKey("fromCart") != true){
+//            Toast.makeText(CartActivity.this, "Error with your order", Toast.LENGTH_SHORT).show();
+
+//            acctId = sharedPref.getLong("acctId", 0);
+//            restaurantName = sharedPref.getString("restaurantName", "Jalil");
+//            restaurantId = sharedPref.getLong("restaurantId", 0);
+
+
+//            if(extras.containsKey("acctId")){
+//                acctId = extras.getLong("acctId");
+//            } else {
+//                acctId = sharedPref.getLong("acctId", 0);
+//            }
+//
+//            if(extras.containsKey("restaurantName")){
+//                restaurantName = extras.getString("restaurantName");
+//            } else {
+//                restaurantName = sharedPref.getString("restaurantName", "");
+//            }
+//
+//            if(extras.containsKey("restaurantId")){
+//                restaurantId = extras.getLong("restaurantId");
+//            } else {
+//                restaurantId = sharedPref.getLong("restaurantId", 0);
+//            }
+
+//        }
+
+
         total = 0.0;
 
         dbh = new DBHelper(this);
@@ -123,6 +169,7 @@ public class CartActivity extends AppCompatActivity {
 
     public long placeOrder(){
         long orderId = 0;
+
         // create order
         orderId = dbh.createOrder(
                 acctId,
