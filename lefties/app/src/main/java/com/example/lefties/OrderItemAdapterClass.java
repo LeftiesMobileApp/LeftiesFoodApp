@@ -43,7 +43,6 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
     Boolean isRestaurant = false;
 
 
-
     public OrderItemAdapterClass(@NonNull Context context, ArrayList<HashMap> orderDetails, Boolean isRestaurant){
         this.context = context;
         this.orderDetails = orderDetails;
