@@ -2,17 +2,31 @@ package com.example.lefties;
 
 import static android.view.View.GONE;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 
 import android.content.Intent;
-import android.database.Cursor;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.telephony.SmsManager;
+//import android.telephony.gsm.SmsManager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -26,6 +40,8 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
     ArrayList<HashMap> orderDetails;
     DBHelper dbh;
     Boolean isRestaurant = false;
+
+
 
     public OrderItemAdapterClass(@NonNull Context context, ArrayList<HashMap> orderDetails, Boolean isRestaurant){
         this.context = context;
@@ -67,6 +83,7 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
             txtOrderItems = itemView.findViewById(R.id.orderItems);
             return;
         }
+
 
         @Override
         public void onClick(View v) {
@@ -135,6 +152,20 @@ public class OrderItemAdapterClass extends RecyclerView.Adapter {
             public void onClick(View v) {
                 dbh.updateOrderStatus(orderIdData, "COMPLETE");
                 context.startActivity(new Intent(context, OrderHistoryActivity.class));
+            }
+        });
+
+        ((ViewHolder)holder).btnOrderRemind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Please enter valid a Email or Password.", Toast.LENGTH_SHORT).show();
+//              Number has to be changed based on emulator number
+                String phoneNumber = "5554";
+                String message = "Your order is ready for delivery";
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(phoneNumber, null, message, null, null);
+
+
             }
         });
 

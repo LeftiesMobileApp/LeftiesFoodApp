@@ -134,28 +134,28 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
             public void onClick(View v) {
                 addToCart(foodId, restaurantId, restaurantNameString);
 
-//                String channelId = "cart_notification";
-//                String channelName = "Cart Notification";
-//                String contentTitle = "New Item Added to Cart";
-//                String contentText = "A new item has been added to your cart.";
-//
-//                // Create the notification channel
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                    NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT);
-//                    NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-//                    manager.createNotificationChannel(channel);
-//                }
-//
-//                // Set the notification properties
-//                NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId)
-//                        .setSmallIcon(R.drawable.bg_blob)
-//                        .setContentTitle(contentTitle)
-//                        .setContentText(contentText)
-//                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-//
-//                // Show the notification
-//                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-//                notificationManager.notify(1, builder.build());
+                String channelId = "cart_notification";
+                String channelName = "Cart Notification";
+                String contentTitle = "New Item Added to Cart";
+                String contentText = "A new item has been added to your cart.";
+
+                // Create the notification channel
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT);
+                    NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                    manager.createNotificationChannel(channel);
+                }
+
+                // Set the notification properties
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId)
+                        .setSmallIcon(R.drawable.bg_blob)
+                        .setContentTitle(contentTitle)
+                        .setContentText(contentText)
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+                // Show the notification
+                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+                notificationManager.notify(1, builder.build());
             }
         });
 
@@ -199,6 +199,9 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
     }
     public void addToCart(int foodId, long restaurantId, String restaurantNameString){
         Log.i("add to cart acct id", "is "+acctId);
+
+//      final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         // Macci: Validate if we can add to cart or just update
@@ -220,7 +223,7 @@ public class FoodItemAdapterClass extends RecyclerView.Adapter {
         i.putExtra("fromCart", "true");
 
         editor.putString("itemAddedInCart", "true");
-//        editor.putLong("acctId", acctId);
+//      editor.putLong("acctId", acctId);
         editor.putLong("restaurantId", restaurantId);
         editor.putString("restaurantName", restaurantNameString);
         editor.apply();
