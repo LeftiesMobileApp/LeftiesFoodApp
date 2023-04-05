@@ -103,4 +103,6 @@
     <string name="labelGoToCart">Go to cart</string>
     <string name="labelBackToCustHome"><![CDATA[< Back To All]]></string>
     <string name="titleYourOrders">Here are your orders</string>
+    <string name="labelYourOrders">Your Orders</string>
+    <string name="labelAddFoodItem">Add Food Item</string>
 </resources>

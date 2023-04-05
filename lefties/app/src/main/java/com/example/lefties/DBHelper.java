@@ -17,7 +17,7 @@ import java.util.Locale;
 public class DBHelper extends SQLiteOpenHelper {
 
     final static  String  DATABASE_NAME = "Lefties.db";
-    final static int DATABASE_VERSION = 12;
+    final static int DATABASE_VERSION = 15;
 
 
     // TABLE 1: Account_Table
@@ -514,15 +514,39 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     //Order
-    public Cursor viewDataOrder(){
+//    public Cursor viewDataOrder(){
+//        SQLiteDatabase database = this.getReadableDatabase();
+//       // String query = "SELECT * FROM " + TABLE4_NAME;
+//        String query = "SELECT order_Id, order_date, " +
+//                "order_status, order_total, customer_name, " +
+//                "customer_address " +  //, account_table.restaurant_name
+//                "FROM " + TABLE4_NAME +
+//                "INNER JOIN " + TABLE1_NAME + " ON customer_Id = account_Id ";
+//                //+ "INNER JOIN ?? ON restaurant_Id = account_Id"; to get restaurant name ??
+//        Cursor cursor = database.rawQuery(query,null);
+//        return cursor;
+//    }
+
+//    public Cursor viewDataOrderAll(){
+//        SQLiteDatabase database = this.getReadableDatabase();
+//
+//        String query = "SELECT order_Id, order_date, order_status, order_total FROM  order_table INNER JOIN account_table  ON customer_Id = account_Id ";
+//        Cursor cursor = database.rawQuery(query,null);
+//        return cursor;
+//    }
+
+    // Macci: This shows the restaurant details the customer ordered in
+    public Cursor viewDataOrderByCustomerId(long custId){
         SQLiteDatabase database = this.getReadableDatabase();
-       // String query = "SELECT * FROM " + TABLE4_NAME;
-        String query = "SELECT order_Id, order_date, " +
-                "order_status, order_total, customer_name, " +
-                "customer_address " +  //, account_table.restaurant_name
-                "FROM " + TABLE4_NAME +
-                "INNER JOIN " + TABLE1_NAME + " ON customer_Id = account_Id ";
-                //+ "INNER JOIN ?? ON restaurant_Id = account_Id"; to get restaurant name ??
+        String query = "SELECT order_table.order_id, order_table.order_date, order_table.order_status, order_table.order_total, account_table.account_id, account_table.account_name, account_table.account_email, account_table.account_address FROM order_table INNER JOIN account_table ON order_table.customer_id = account_table.account_id WHERE order_table.customer_Id=" + custId;
+        Cursor cursor = database.rawQuery(query,null);
+        return cursor;
+    }
+
+    // Macci: This shows the customer details of the restaurant
+    public Cursor viewDataOrderByRestaurantId(long restId){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT order_table.order_id, order_table.order_date, order_table.order_status, order_table.order_total, account_table.account_id, account_table.account_name, account_table.account_email, account_table.account_address FROM order_table INNER JOIN account_table ON order_table.customer_id = account_table.account_id WHERE order_table.restaurant_Id=" + restId;
         Cursor cursor = database.rawQuery(query,null);
         return cursor;
     }
